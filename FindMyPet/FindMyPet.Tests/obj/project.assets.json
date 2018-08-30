@@ -10378,11 +10378,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Asus\\SoftUni\\9.C# Web\\C# Web MVC Frameworks ASP.NET\\24.Exam Project\\FindMyPet\\FindMyPet.Tests\\FindMyPet.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\Asus\\Desktop\\FindMyPet\\FindMyPet\\FindMyPet.Tests\\FindMyPet.Tests.csproj",
       "projectName": "FindMyPet.Tests",
-      "projectPath": "C:\\Users\\Asus\\SoftUni\\9.C# Web\\C# Web MVC Frameworks ASP.NET\\24.Exam Project\\FindMyPet\\FindMyPet.Tests\\FindMyPet.Tests.csproj",
+      "projectPath": "C:\\Users\\Asus\\Desktop\\FindMyPet\\FindMyPet\\FindMyPet.Tests\\FindMyPet.Tests.csproj",
       "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Asus\\SoftUni\\9.C# Web\\C# Web MVC Frameworks ASP.NET\\24.Exam Project\\FindMyPet\\FindMyPet.Tests\\obj\\",
+      "outputPath": "C:\\Users\\Asus\\Desktop\\FindMyPet\\FindMyPet\\FindMyPet.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -10401,11 +10401,11 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\Users\\Asus\\SoftUni\\9.C# Web\\C# Web MVC Frameworks ASP.NET\\24.Exam Project\\FindMyPet\\FindMyPet.Data\\FindMyPet.Data.csproj": {
-              "projectPath": "C:\\Users\\Asus\\SoftUni\\9.C# Web\\C# Web MVC Frameworks ASP.NET\\24.Exam Project\\FindMyPet\\FindMyPet.Data\\FindMyPet.Data.csproj"
+            "C:\\Users\\Asus\\Desktop\\FindMyPet\\FindMyPet\\FindMyPet.Data\\FindMyPet.Data.csproj": {
+              "projectPath": "C:\\Users\\Asus\\Desktop\\FindMyPet\\FindMyPet\\FindMyPet.Data\\FindMyPet.Data.csproj"
             },
-            "C:\\Users\\Asus\\SoftUni\\9.C# Web\\C# Web MVC Frameworks ASP.NET\\24.Exam Project\\FindMyPet\\FindMyPet.Web\\FindMyPet.Web.csproj": {
-              "projectPath": "C:\\Users\\Asus\\SoftUni\\9.C# Web\\C# Web MVC Frameworks ASP.NET\\24.Exam Project\\FindMyPet\\FindMyPet.Web\\FindMyPet.Web.csproj"
+            "C:\\Users\\Asus\\Desktop\\FindMyPet\\FindMyPet\\FindMyPet.Web\\FindMyPet.Web.csproj": {
+              "projectPath": "C:\\Users\\Asus\\Desktop\\FindMyPet\\FindMyPet\\FindMyPet.Web\\FindMyPet.Web.csproj"
             }
           }
         }

@@ -16,18 +16,20 @@
 
     @if (Model.Count > 1)
     {
+        <div class="left">
+
         <partial name="_PetPartialView" />
+        </div>
     }
 
-    <br />
 
     @foreach (var pet in Model)
     {
         
-        <div class="card col-sm-4 text-center petStyle">
+        <div  class="classComix card col-sm-4 text-center petStyle">
 
             <a class="pageLink" asp-controller="Pets" asp-action="Details" asp-route-id="@pet.Id">
-                <img class="petImg card-image-top img-fluid img-thumbnail" src="@pet.ImageUrl" />
+                <img class="card-image-top img-fluid img-thumbnail" src="@pet.ImageUrl" />
                 <div class="card-body">
                     <h4 class="card-title"></h4>
                     <p class="card-text">
@@ -52,6 +54,8 @@
                 </div>
             </a>
 
+            <div class="classButtons" >
+
             <a class="btn btn-primary col-3" asp-controller="Pets" asp-action="Details" asp-route-id="@pet.Id">Details</a>
             @if (pet.Status == "Lost")
             {
@@ -64,6 +68,7 @@
                 <a class="btn btn-warning col-3" asp-route-id="@pet.Id" asp-page="/PetsPages/Edit">Edit</a>
                 <a class="btn btn-danger col-3" asp-route-id="@pet.Id" asp-page="/PetsPages/Delete">Delete</a>
             }
+            </div>
 
         </div>
 

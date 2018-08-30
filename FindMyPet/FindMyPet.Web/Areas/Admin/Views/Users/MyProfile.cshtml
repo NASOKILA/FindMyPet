@@ -27,7 +27,10 @@
                 <br />
 
 
-                <img width="250" class="card-image-top img-fluid img-thumbnail" src="@Model.AvatarUrl" />
+                @if (Model.AvatarUrl != null)
+                {
+                    <img width="250" class="card-image-top img-fluid img-thumbnail" src="@Model.AvatarUrl" />
+                }
                 <br />
                 <br />
                 <br />
@@ -66,11 +69,11 @@
                 <br />
 
                 <!--
-                    Pets Owned
-                    Pets Found
+        Pets Owned
+        Pets Found
 
-                    Messages
-                -->
+        Messages
+    -->
 
 
             </div>
@@ -166,7 +169,7 @@
 
                 <div class="card-footer text-center">
                     <h1 class="display-3" style="background: lightgreen">Actions</h1>
-                    <a class="btn btn-primary col-3" asp-controller="Pets" asp-action="All">Home</a>
+                    <a class="btn btn-lg btn-primary col-3" asp-controller="Pets" asp-action="All">Home</a>
                 </div>
 
             </div>

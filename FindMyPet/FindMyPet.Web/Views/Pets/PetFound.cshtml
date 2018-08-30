@@ -9,7 +9,7 @@
         <div class="col-12 text-center">
             <br />
             <div class="titleDiv">
-                <h1 class="display-3 classTitle">Are you sure you found this pet ?</h1>
+                <h1 class="display-3 left">Are you sure you found this pet ?</h1>
             </div>
             <br />
             <hr class="display-3" />
@@ -34,8 +34,8 @@
 
                 <form method="post" asp-controller="Pets" asp-action="PetFoundPost" asp-route-id="@Model.Id">
 
-                    <input type="submit" id="btn-add-game" class="btn btn-success btn-lg btn-block" value="Yes" />
-                    <a id="btn-add-game" href="/Pets/All" class="btn btn-primary btn-lg btn-block">No</a>
+                    <input type="submit" id="btn-add-game" class="left btn btn-success btn-lg btn-block" value="Yes" />
+                    <a id="btn-add-game" href="/Pets/All" class="right btn btn-primary btn-lg btn-block">No</a>
                 </form>
             </div>
         </div>

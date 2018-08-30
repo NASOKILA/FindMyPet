@@ -28,9 +28,10 @@
                 <h2 class="display-5"><strong>FeedBack</strong> : @Model.FeedBack</h2>
                 <br />
 
-
-                <img width="250" class="card-image-top img-fluid img-thumbnail" src="@Model.AvatarUrl" />
-                <br />
+                @if (Model.AvatarUrl != null)
+                {
+                    <img width="250" class="card-image-top img-fluid img-thumbnail" src="@Model.AvatarUrl" />
+                }
                 <br />
                 <br />
 
@@ -68,11 +69,11 @@
                 <br />
 
                 <!--
-            Pets Owned
-            Pets Found
+        Pets Owned
+        Pets Found
 
-            Messages
-        -->
+        Messages
+    -->
 
 
             </div>

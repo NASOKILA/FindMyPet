@@ -34,11 +34,6 @@ a:hover {
         background-color: red !important;
     }
 
-.petImg {
-    width: 150px;
-    height: 150px;
-}
-
 
 .jumbotron {
     background-color: antiquewhite;
@@ -51,10 +46,13 @@ footer {
 }
 
 .petStyle {
-    background-color: antiquewhite;
+    background-color: aquamarine;
     margin: 5px 0px;
     padding: 25px;
     border: 1px solid black;
+    height: 600px;
+    position:relative;
+    top: 10px;
 }
 
 .petStyle:hover {

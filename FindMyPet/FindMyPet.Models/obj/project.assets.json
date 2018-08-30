@@ -4019,11 +4019,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Asus\\SoftUni\\9.C# Web\\C# Web MVC Frameworks ASP.NET\\24.Exam Project\\FindMyPet\\FindMyPet.Models\\FindMyPet.Models.csproj",
+      "projectUniqueName": "C:\\Users\\Asus\\Desktop\\FindMyPet\\FindMyPet\\FindMyPet.Models\\FindMyPet.Models.csproj",
       "projectName": "FindMyPet.Models",
-      "projectPath": "C:\\Users\\Asus\\SoftUni\\9.C# Web\\C# Web MVC Frameworks ASP.NET\\24.Exam Project\\FindMyPet\\FindMyPet.Models\\FindMyPet.Models.csproj",
+      "projectPath": "C:\\Users\\Asus\\Desktop\\FindMyPet\\FindMyPet\\FindMyPet.Models\\FindMyPet.Models.csproj",
       "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Asus\\SoftUni\\9.C# Web\\C# Web MVC Frameworks ASP.NET\\24.Exam Project\\FindMyPet\\FindMyPet.Models\\obj\\",
+      "outputPath": "C:\\Users\\Asus\\Desktop\\FindMyPet\\FindMyPet\\FindMyPet.Models\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

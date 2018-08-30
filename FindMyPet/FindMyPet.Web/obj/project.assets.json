@@ -12319,11 +12319,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Asus\\SoftUni\\9.C# Web\\C# Web MVC Frameworks ASP.NET\\24.Exam Project\\FindMyPet\\FindMyPet.Web\\FindMyPet.Web.csproj",
+      "projectUniqueName": "C:\\Users\\Asus\\Desktop\\FindMyPet\\FindMyPet\\FindMyPet.Web\\FindMyPet.Web.csproj",
       "projectName": "FindMyPet.Web",
-      "projectPath": "C:\\Users\\Asus\\SoftUni\\9.C# Web\\C# Web MVC Frameworks ASP.NET\\24.Exam Project\\FindMyPet\\FindMyPet.Web\\FindMyPet.Web.csproj",
+      "projectPath": "C:\\Users\\Asus\\Desktop\\FindMyPet\\FindMyPet\\FindMyPet.Web\\FindMyPet.Web.csproj",
       "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Asus\\SoftUni\\9.C# Web\\C# Web MVC Frameworks ASP.NET\\24.Exam Project\\FindMyPet\\FindMyPet.Web\\obj\\",
+      "outputPath": "C:\\Users\\Asus\\Desktop\\FindMyPet\\FindMyPet\\FindMyPet.Web\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -12342,8 +12342,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\Users\\Asus\\SoftUni\\9.C# Web\\C# Web MVC Frameworks ASP.NET\\24.Exam Project\\FindMyPet\\FindMyPet.Data\\FindMyPet.Data.csproj": {
-              "projectPath": "C:\\Users\\Asus\\SoftUni\\9.C# Web\\C# Web MVC Frameworks ASP.NET\\24.Exam Project\\FindMyPet\\FindMyPet.Data\\FindMyPet.Data.csproj"
+            "C:\\Users\\Asus\\Desktop\\FindMyPet\\FindMyPet\\FindMyPet.Data\\FindMyPet.Data.csproj": {
+              "projectPath": "C:\\Users\\Asus\\Desktop\\FindMyPet\\FindMyPet\\FindMyPet.Data\\FindMyPet.Data.csproj"
             }
           }
         }

@@ -1,11 +1,13 @@
 ﻿@page
 @model FindMyPet.Web.Pages.PetsPages.DeleteModel
 @{
+    Layout = "_Layout";
     ViewData["Title"] = "Delete";
 }
 
-<h2>Delete</h2>
+<h2 class="left">Delete</h2>
 
+<div class="forms">
 
 <form method="post" asp-route-id="@Model.Id">
 
@@ -94,3 +96,4 @@
     </div>
 
 </form>
+</div>
