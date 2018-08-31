@@ -87,3 +87,23 @@ footer {
 .profileLink {
     font-size:20px;
 }
+
+
+.adminNav {
+    background-color: darkblue;
+    color: white;
+}
+
+.tableAvatar {
+    width:40px; 
+    height:40px; 
+    border-radius:100%;
+}
+
+.thCol {
+
+    position: relative;
+    left: 70px;
+}
+
+

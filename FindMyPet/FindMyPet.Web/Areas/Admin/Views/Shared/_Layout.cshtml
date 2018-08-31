@@ -29,7 +29,7 @@
 
         @if (ViewData["IsAdmin"].ToString() == "True")
         {
-            <nav style="background-color:blue" class="navbar navbar-inverse navbar-fixed-top">
+            <nav class="navbar navbar-inverse navbar-fixed-top adminNav">
                 <div class="container">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -45,8 +45,11 @@
                             <li><a asp-area="Admin" asp-controller="Home" asp-action="Index">Home</a></li>
                             <li><a asp-area="Admin" asp-controller="Home" asp-action="About">About</a></li>
                             <li><a asp-area="Admin" asp-controller="Users" asp-action="MyProfile">My Profile</a></li>
-
+                            @if (this.User.Identity.IsAuthenticated)
+                            { 
                             <li><a asp-area="Admin" asp-controller="PetsPages" asp-action="Create">Create Pet</a></li>
+                            <li><a asp-area="Admin" asp-controller="PetsPages" asp-action="AllUsers">All Users</a></li>
+                            }
                         </ul>
                         <partial name="_LoginPartial" />
                     </div>

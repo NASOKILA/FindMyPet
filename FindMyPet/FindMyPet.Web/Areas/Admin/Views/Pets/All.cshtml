@@ -7,7 +7,7 @@
 
 @if (this.User.Identity.IsAuthenticated)
 {
-    <div class="text-center titleDiv">
+    <div  class="text-center">
         <h1 class="display-3 classTitle">All Pets</h1>
     </div>
     <hr class="display-3" />
@@ -15,7 +15,7 @@
 
     @if (Model.Count > 1)
     {
-        <div class="left">
+        <div class="right">
 
             <partial name="_PetPartialView" />
         </div>

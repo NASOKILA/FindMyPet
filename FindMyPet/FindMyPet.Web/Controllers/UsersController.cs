@@ -16,7 +16,6 @@ namespace FindMyPet.Web.Controllers
         {
             this.context = context;
         }
-
         
         [HttpGet]
         public IActionResult Profile(string id)
@@ -80,6 +79,80 @@ namespace FindMyPet.Web.Controllers
             return View(user);
         }
 
+        [HttpGet]
+        public IActionResult LockUser()
+        {
+
+            //USER
+            if (!this.User.Identity.IsAuthenticated)
+            {
+                return Redirect("/Identity/Account/Login");
+            }
+
+
+            bool isLoggedIn = false;
+            bool isAdmin = false;
+
+            var currentUser = this.User;
+            if (currentUser.Identity.IsAuthenticated)
+            {
+                isLoggedIn = true;
+
+                isAdmin = currentUser.Claims.Any(c => c.Value == "Admin");
+
+
+                ViewData["LoggedIn"] = isLoggedIn.ToString();
+                ViewData["IsAdmin"] = isAdmin.ToString();
+                if (isAdmin == true)
+                {
+                    return new RedirectToActionResult("AllUsers", "Users", new { @area = "Admin" });
+                }
+
+            }
+
+            ViewData["LoggedIn"] = isLoggedIn.ToString();
+            ViewData["IsAdmin"] = isAdmin.ToString();
+
+            return new RedirectToActionResult("All", "Pets", new { @area = "" });
+
+        }
+
+        [HttpGet]
+        public IActionResult UnlockUser()
+        {
+
+            //USER
+            if (!this.User.Identity.IsAuthenticated)
+            {
+                return Redirect("/Identity/Account/Login");
+            }
+
+
+            bool isLoggedIn = false;
+            bool isAdmin = false;
+
+            var currentUser = this.User;
+            if (currentUser.Identity.IsAuthenticated)
+            {
+                isLoggedIn = true;
+
+                isAdmin = currentUser.Claims.Any(c => c.Value == "Admin");
+                
+                ViewData["LoggedIn"] = isLoggedIn.ToString();
+                ViewData["IsAdmin"] = isAdmin.ToString();
+
+                if (isAdmin == true)
+                {
+                    return new RedirectToActionResult("AllUsers", "Users", new { @area = "Admin" });
+                }
+            }
+
+            ViewData["LoggedIn"] = isLoggedIn.ToString();
+            ViewData["IsAdmin"] = isAdmin.ToString();
+
+            return new RedirectToActionResult("All", "Pets", new { @area = "" });
+        }
+        
         [HttpGet]
         public IActionResult MyProfile()
         {

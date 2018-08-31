@@ -5,14 +5,14 @@
     ViewData["Title"] = "Create";
 }
 
+<div class="left">
+    <h1>Create Pet</h1>
+</div>
 
 <div class="container">
     <div class="row right">
         <div class="col-12">
 
-            <div class="left">
-                <h1>Create Pet</h1>
-            </div>
 
             @if (ViewData["petExists"].ToString() == "True")
             {
@@ -96,7 +96,7 @@
                 </div>
 
                 <br />
-                <div class="btns">
+                <div class="">
                     <button type="submit" class="btn btn-success">Create</button>
                     <a class="btn btn-outline-success" href="/Pets/All">Cancel</a>
                 </div>

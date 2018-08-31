@@ -6,6 +6,9 @@
     ViewData["Title"] = "Manage your external logins";
 }
 
+<div class="top">
+
+
 @Html.Partial("_StatusMessage", Model.StatusMessage)
 @if (Model.CurrentLogins?.Count > 0)
 {
@@ -52,3 +55,5 @@
         </div>
     </form>
 }
+
+</div>

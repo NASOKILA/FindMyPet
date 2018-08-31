@@ -136,6 +136,101 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
         }
 
 
+        [HttpGet]
+        public IActionResult LockUser(string id)
+        {
+            //Admin
+            if (!this.User.Identity.IsAuthenticated)
+            {
+                return Redirect("/Identity/Account/Login");
+            }
+
+
+            bool isLoggedIn = false;
+            bool isAdmin = false;
+
+            var currentUser = this.User;
+            if (currentUser.Identity.IsAuthenticated)
+            {
+                isLoggedIn = true;
+
+                isAdmin = currentUser.Claims.Any(c => c.Value == "Admin");
+
+                if (!isAdmin) {
+                    return new RedirectToActionResult("All", "Pets", new { @area = "Admin" });
+                }
+            }
+
+            ViewData["LoggedIn"] = isLoggedIn.ToString();
+            ViewData["IsAdmin"] = isAdmin.ToString();
+
+
+            //disable User
+
+            User user = this.context.Users.FirstOrDefault(u => u.Id == id);
+
+            DateTime lockoutDate = DateTime.Now;
+            lockoutDate = lockoutDate.AddMinutes(20);
+
+            user.LockoutEnd = lockoutDate;
+
+            this.context.Users.Update(user);
+            this.context.SaveChanges();
+
+            return RedirectToPage("/PetsPages/AllUsers", new { @area = "Admin" });
+            
+        }
+
+
+        [HttpGet]
+        public IActionResult UnlockUser(string id)
+        {
+
+            //USER
+            if (!this.User.Identity.IsAuthenticated)
+            {
+                return Redirect("/Identity/Account/Login");
+            }
+
+
+            bool isLoggedIn = false;
+            bool isAdmin = false;
+
+            var currentUser = this.User;
+            if (currentUser.Identity.IsAuthenticated)
+            {
+                isLoggedIn = true;
+
+                isAdmin = currentUser.Claims.Any(c => c.Value == "Admin");
+
+                ViewData["LoggedIn"] = isLoggedIn.ToString();
+                ViewData["IsAdmin"] = isAdmin.ToString();
+
+                if (!isAdmin)
+                {
+                    return new RedirectToActionResult("All", "Pets", new { @area = "Admin" });
+                }
+            }
+
+            ViewData["LoggedIn"] = isLoggedIn.ToString();
+            ViewData["IsAdmin"] = isAdmin.ToString();
+
+            User user = this.context.Users.FirstOrDefault(u => u.Id == id);
+
+            
+            user.LockoutEnd = null;
+
+            this.context.Users.Update(user);
+            this.context.SaveChanges();
+
+            return RedirectToPage("/PetsPages/AllUsers", new { @area = "Admin" });
+
+        }
+
+
+
+
+
         [HttpPost]
         public IActionResult AddMessage(string id, string Description) {
 

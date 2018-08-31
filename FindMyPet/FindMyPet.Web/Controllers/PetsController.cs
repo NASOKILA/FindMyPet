@@ -19,14 +19,14 @@ namespace FindMyPet.Web.Controllers
 
         [BindProperty]
         public List<Comment> CommentsForPetDetails { get; set; }
-        
+
         private readonly UserManager<User> userManager;
         private readonly FindMyPetDbContext context;
 
         public PetsController(
             UserManager<User> userManager,
             FindMyPetDbContext context)
-        {   
+        {
             this.userManager = userManager;
             this.context = context;
         }
@@ -49,7 +49,7 @@ namespace FindMyPet.Web.Controllers
                     return new RedirectToActionResult("Index", "Home", new { @area = "Admin" });
                 }
             }
-            
+
             ViewData["LoggedIn"] = isLoggedIn.ToString();
             ViewData["IsAdmin"] = isAdmin.ToString();
 
@@ -95,13 +95,13 @@ namespace FindMyPet.Web.Controllers
                 .ThenInclude(c => c.Likes)
                 .ThenInclude(l => l.Creator)
                 .FirstOrDefault(p => p.Id == id);
-            
+
             var allLikes = context.Likes
                 .Include(l => l.Creator)
                 .ToList();
 
-            foreach(var currentComment in pet.Comments) {
-                
+            foreach (var currentComment in pet.Comments) {
+
                 int likesCountByUserForCurrentComment = currentComment.Likes.Where(l => l.Creator.Email == this.User.Identity.Name).Count();
 
                 if (likesCountByUserForCurrentComment > 0)
@@ -114,7 +114,7 @@ namespace FindMyPet.Web.Controllers
             this.CommentsForPetDetails = pet.Comments.ToList();
             ViewBag.Comments = CommentsForPetDetails;
             ViewData["CurrentId"] = id;
-            
+
             bool isLoggedIn = false;
             bool isAdmin = false;
 
@@ -136,7 +136,7 @@ namespace FindMyPet.Web.Controllers
 
             return View(pet);
         }
-        
+
         [HttpPost]
         public IActionResult AddCommentToPet(int id, string Description)
         {
@@ -180,7 +180,7 @@ namespace FindMyPet.Web.Controllers
         [HttpGet]
         public IActionResult PetFound(int id)
         {
-            
+
             PetFoundBindingModel petFoundBindingModel = context.Pets.Select(p => new PetFoundBindingModel()
             {
                 Id = p.Id,
@@ -194,19 +194,38 @@ namespace FindMyPet.Web.Controllers
 
             if (petFoundBindingModel == null)
                 return RedirectToAction("All", "Pets", new { Id = id });
-            
+
             return View(petFoundBindingModel);
         }
-         
+
         [HttpPost]
         public IActionResult PetFoundPost(int id)
         {
-            Pet pet = context.Pets.Find(id);
+            Pet pet = context.Pets
+                .Include(p => p.Owner).FirstOrDefault(p => p.Id == id);
+
+            User currentUser = this.context.Users.FirstOrDefault(u => u.Email == this.User.Identity.Name);
+
 
             if (pet.Status == "Found")
             {
                 return RedirectToAction("All", "Pets");
             }
+
+            //Send message to owner founder
+            Message foundMessage = new Message()
+            {
+                CreationDate = DateTime.Now,
+                Content = "Your pet " + pet.Name + " was found by " + this.User.Identity.Name + " at " + DateTime.Now + ".",
+                LikeDisabled = false,
+                Likes = new List<Like>(),
+                ReceverId = pet.Owner.Id,
+                SenderId = currentUser.Id
+            };
+
+
+            this.context.Messages.Add(foundMessage);
+            this.context.SaveChanges();
 
             pet.Status = "Found";
             pet.TimeFound = DateTime.Now;
@@ -215,8 +234,7 @@ namespace FindMyPet.Web.Controllers
 
             if (pet == null)
                 return RedirectToAction("All", "Pets", new { Id = id });
-
-            var currentUser = context.Users.FirstOrDefault(u => u.Email == this.User.Identity.Name);
+            
 
             currentUser.PetsFound.Add(pet);
             
