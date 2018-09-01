@@ -1,15 +1,15 @@
 ﻿using FindMyPet.Data;
 using FindMyPet.Models;
+using FindMyPet.Web.Static;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace FindMyPet.Web.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Area(StaticConstants.AdminRole)]
+    [Authorize(Roles = StaticConstants.AdminRole)]
     public class MessagesController : Controller
     {
         private readonly FindMyPetDbContext context;
@@ -18,14 +18,11 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
         {
             this.context = context;
         }
-
-     
-
+        
         [HttpGet]
         public IActionResult AddLike(string id)
         {
-
-            var tokens = id.Split("*").ToList();
+            var tokens = id.Split(StaticConstants.Star).ToList();
 
             string returnUserId = tokens[0];
 
@@ -43,16 +40,15 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
 
             this.context.Likes.Add(like);
             this.context.SaveChanges();
-
             
-            return RedirectToAction("Profile", "Users", new { Id = returnUserId });
+            return RedirectToAction(StaticConstants.Profile, StaticConstants.Users, new { Id = returnUserId });
         }
 
         [HttpGet]
         public IActionResult RemoveLike(string id)
         {
 
-            var tokens = id.Split("*").ToList();
+            var tokens = id.Split(StaticConstants.Star).ToList();
 
             string returnUserId = tokens[0];
 
@@ -64,16 +60,14 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
                 .Include(c => c.Likes)
                 .ThenInclude(l => l.Creator)
                 .FirstOrDefault(c => c.Id == commentId);
-
             
             Like likeToRemove = message.Likes.FirstOrDefault(l => l.Creator.Email == this.User.Identity.Name);
 
             this.context.Likes.Remove(likeToRemove);
+
             this.context.SaveChanges();
             
-
-            return RedirectToAction("Profile", "Users", new { Id = returnUserId });
+            return RedirectToAction(StaticConstants.Profile, StaticConstants.Users, new { Id = returnUserId });
         }
-
     }
 }

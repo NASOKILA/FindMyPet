@@ -1,6 +1,7 @@
 ﻿using FindMyPet.Data;
 using FindMyPet.Models;
 using FindMyPet.Web.Models.BindingModels;
+using FindMyPet.Web.Static;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace FindMyPet.Web.Controllers
 {
@@ -16,9 +16,12 @@ namespace FindMyPet.Web.Controllers
     [Authorize]
     public class PetsController : Controller
     {
-
         [BindProperty]
         public List<Comment> CommentsForPetDetails { get; set; }
+
+        private const int oneHundred = 100;
+        private const int twoHundred = 200;
+        private const int threeHundred = 300;
 
         private readonly UserManager<User> userManager;
         private readonly FindMyPetDbContext context;
@@ -42,18 +45,18 @@ namespace FindMyPet.Web.Controllers
             {
                 isLoggedIn = true;
 
-                isAdmin = currentUser.Claims.Any(c => c.Value == "Admin");
+                isAdmin = currentUser.Claims.Any(c => c.Value == StaticConstants.AdminRole);
 
                 if (isAdmin == true)
                 {
-                    return new RedirectToActionResult("Index", "Home", new { @area = "Admin" });
+                    return new RedirectToActionResult(StaticConstants.Index, StaticConstants.Home, new { @area = StaticConstants.AdminRole });
                 }
             }
 
-            ViewData["LoggedIn"] = isLoggedIn.ToString();
-            ViewData["IsAdmin"] = isAdmin.ToString();
+            ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
+            ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
+            
 
-            //get all pets
             List<ListPetsBindingModel> pets = this.context.Pets
                 .Select(p => new ListPetsBindingModel()
                 {
@@ -76,10 +79,8 @@ namespace FindMyPet.Web.Controllers
                 .OrderByDescending(a => a.Status)
                 .ThenByDescending(a => a.TimeLost)
                 .ToList();
-
-
+            
             return View(pets);
-
         }
 
         [HttpGet]
@@ -113,7 +114,7 @@ namespace FindMyPet.Web.Controllers
 
             this.CommentsForPetDetails = pet.Comments.ToList();
             ViewBag.Comments = CommentsForPetDetails;
-            ViewData["CurrentId"] = id;
+            ViewData[StaticConstants.CurrentId] = id;
 
             bool isLoggedIn = false;
             bool isAdmin = false;
@@ -123,16 +124,16 @@ namespace FindMyPet.Web.Controllers
             {
                 isLoggedIn = true;
 
-                isAdmin = currentUser.Claims.Any(c => c.Value == "Admin");
+                isAdmin = currentUser.Claims.Any(c => c.Value == StaticConstants.AdminRole);
 
                 if (isAdmin == true)
                 {
-                    return new RedirectToActionResult("Index", "Home", new { @area = "Admin" });
+                    return new RedirectToActionResult(StaticConstants.Index, StaticConstants.Home, new { @area = StaticConstants.AdminRole });
                 }
             }
 
-            ViewData["LoggedIn"] = isLoggedIn.ToString();
-            ViewData["IsAdmin"] = isAdmin.ToString();
+            ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
+            ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
 
             return View(pet);
         }
@@ -158,7 +159,7 @@ namespace FindMyPet.Web.Controllers
 
             this.context.SaveChanges();
 
-            return RedirectToAction("Details", "Pets", new { Id = petId });
+            return RedirectToAction(StaticConstants.Details, StaticConstants.Pets, new { Id = petId });
         }
 
         [HttpGet]
@@ -174,7 +175,7 @@ namespace FindMyPet.Web.Controllers
             }
             this.context.SaveChanges();
 
-            return RedirectToAction("Details", "Pets", new { Id = petId });
+            return RedirectToAction(StaticConstants.Details, StaticConstants.Pets, new { Id = petId });
         }
 
         [HttpGet]
@@ -193,7 +194,7 @@ namespace FindMyPet.Web.Controllers
             }).FirstOrDefault(p => p.Id == id);
 
             if (petFoundBindingModel == null)
-                return RedirectToAction("All", "Pets", new { Id = id });
+                return RedirectToAction(StaticConstants.All, StaticConstants.Pets, new { Id = id });
 
             return View(petFoundBindingModel);
         }
@@ -205,18 +206,19 @@ namespace FindMyPet.Web.Controllers
                 .Include(p => p.Owner).FirstOrDefault(p => p.Id == id);
 
             User currentUser = this.context.Users.FirstOrDefault(u => u.Email == this.User.Identity.Name);
-
-
-            if (pet.Status == "Found")
+            
+            if (pet.Status == StaticConstants.Found)
             {
-                return RedirectToAction("All", "Pets");
+                return RedirectToAction(StaticConstants.All, StaticConstants.Pets);
             }
+
+            string content = "Your pet " + pet.Name + " was found by " + this.User.Identity.Name + " at " + DateTime.Now + ".";
 
             //Send message to owner founder
             Message foundMessage = new Message()
             {
                 CreationDate = DateTime.Now,
-                Content = "Your pet " + pet.Name + " was found by " + this.User.Identity.Name + " at " + DateTime.Now + ".",
+                Content = content,
                 LikeDisabled = false,
                 Likes = new List<Like>(),
                 ReceverId = pet.Owner.Id,
@@ -227,40 +229,37 @@ namespace FindMyPet.Web.Controllers
             this.context.Messages.Add(foundMessage);
             this.context.SaveChanges();
 
-            pet.Status = "Found";
+            pet.Status = StaticConstants.Found;
             pet.TimeFound = DateTime.Now;
             context.Pets.Update(pet);
             context.SaveChanges();
 
             if (pet == null)
-                return RedirectToAction("All", "Pets", new { Id = id });
+                return RedirectToAction(StaticConstants.All, StaticConstants.Pets, new { Id = id });
             
 
             currentUser.PetsFound.Add(pet);
             
             switch (pet.Type)
             {
-                case "Dog":
-                    currentUser.FeedBack = currentUser.FeedBack + 100;
+                case StaticConstants.Dog:
+                    currentUser.FeedBack = currentUser.FeedBack + oneHundred;
                     break;
-                case "Cat":
-                    currentUser.FeedBack = currentUser.FeedBack + 200;
+                case StaticConstants.Cat:
+                    currentUser.FeedBack = currentUser.FeedBack + twoHundred;
                     break;
-                case "Bird":
-                    currentUser.FeedBack = currentUser.FeedBack + 300;
+                case StaticConstants.Bird:
+                    currentUser.FeedBack = currentUser.FeedBack + threeHundred;
                     break;
                 default:
                     break;
             }
             
-
             currentUser.PetsFound.Add(pet);
             context.Users.Update(currentUser);
             context.SaveChanges();
-
-
-
-            return View("PetFoundCompleted");
+            
+            return View(StaticConstants.PetFoundCompleted);
         }
     }
 }

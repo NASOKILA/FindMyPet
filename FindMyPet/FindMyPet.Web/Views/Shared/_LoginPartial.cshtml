@@ -11,14 +11,14 @@
             
             <li>
                 <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
-                    <img style="width:40px; height:40px; border-radius:100%; position:absolute; right:15px; top:5px" src="@findMyPetDbContext.Users.Find(UserManager.GetUserId(User)).AvatarUrl" />
+                    <img class="avatar" src="@findMyPetDbContext.Users.Find(UserManager.GetUserId(User)).AvatarUrl" />
                 </a>
             </li>
             <li>
                 <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @findMyPetDbContext.Users.Find(UserManager.GetUserId(User)).UserName!</a>
             </li>
             <li>
-                <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
+                <button type="submit" class="btn btn-link navbar-btn navbar-link logoutBtn">Logout</button>
             </li>
         </ul>
     </form>

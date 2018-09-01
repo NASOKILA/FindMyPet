@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -9,30 +7,20 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using FindMyPet.Data;
 using FindMyPet.Models;
-using System.Security.Claims;
-using Microsoft.EntityFrameworkCore;
-using FindMyPet.Models.Interfaces;
+using FindMyPet.Web.Static;
 
 namespace FindMyPet.Web.Controllers
 {
 
-
-    //works with users
-    //.getRolesAsync()     // roles of user
-    // thi.User.IsInRole("Administrator")
-    //.getUserAsync()    //current user
-    //.AddToRoleAsync(user, roleName)    //add user to a role     //WE HAVE TO SEED THE ROLES
-    //this.User.Identity.IsAuthenticated       //if user is logged in
-
-
-
-    //[Authorize] //ako ne sme lognati ni vrushta v login stranicata
-    //[Authorize(roles = "Administrator")] //ako ne admini ni othvurlq
     [AllowAnonymous]
     public class HomeController : Controller
     {
+        private const string descriptionMessage = "Your application description page.";
+        private const string contactMessage = "Your contact page.";
+
         private readonly UserManager<User> userManager;
         private readonly FindMyPetDbContext context;
+
         public HomeController(
             UserManager<User> userManager,
             FindMyPetDbContext context)
@@ -51,30 +39,29 @@ namespace FindMyPet.Web.Controllers
             if (currentUser.Identity.IsAuthenticated)
             {
                 isLoggedIn = true;
-                isAdmin = currentUser.Claims.Any(c => c.Value == "Admin");
+                isAdmin = currentUser.Claims.Any(c => c.Value == StaticConstants.AdminRole);
 
                 if (isAdmin == true)
                 {
-                    return new RedirectToActionResult("Index", "Home", new { @area = "Admin" });
+                    return new RedirectToActionResult(StaticConstants.Index, StaticConstants.Home, new { @area = StaticConstants.AdminRole });
                 }
 
 
-                ViewData["LoggedIn"] = isLoggedIn.ToString();
-                ViewData["IsAdmin"] = isAdmin.ToString();
+                ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
+                ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
 
-                return RedirectToAction("All", "Pets");
+                return RedirectToAction(StaticConstants.All, StaticConstants.Pets);
             }
 
-            ViewData["LoggedIn"] = isLoggedIn.ToString();
-            ViewData["IsAdmin"] = isAdmin.ToString();
+            ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
+            ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
 
             return View();
         }
-
-
+        
         public async Task<IActionResult> About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData[StaticConstants.Message] = descriptionMessage;
 
 
             bool isLoggedIn = false;
@@ -85,24 +72,23 @@ namespace FindMyPet.Web.Controllers
             {
                 isLoggedIn = true;
 
-                isAdmin = await this.userManager.IsInRoleAsync(currentUser, "Admin");
+                isAdmin = await this.userManager.IsInRoleAsync(currentUser, StaticConstants.AdminRole);
 
                 if (isAdmin == true)
                 {
-                    return new RedirectToActionResult("Index", "Home", new { @area = "Admin" });
+                    return new RedirectToActionResult(StaticConstants.Index, StaticConstants.Home, new { @area = StaticConstants.AdminRole });
                 }
             }
-
-
-            ViewData["LoggedIn"] = isLoggedIn.ToString();
-            ViewData["IsAdmin"] = isAdmin.ToString();
+            
+            ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
+            ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
             
             return View();
         }
 
         public async Task<IActionResult> Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData[StaticConstants.Message] = contactMessage;
 
             bool isLoggedIn = false;
             bool isAdmin = false;
@@ -112,17 +98,17 @@ namespace FindMyPet.Web.Controllers
             {
                 isLoggedIn = true;
 
-                isAdmin = await this.userManager.IsInRoleAsync(currentUser, "Admin");
+                isAdmin = await this.userManager.IsInRoleAsync(currentUser, StaticConstants.AdminRole);
 
                 if (isAdmin == true)
                 {
-                    return new RedirectToActionResult("Index", "Home", new { @area = "Admin" });
+                    return new RedirectToActionResult(StaticConstants.Index, StaticConstants.Home, new { @area = StaticConstants.AdminRole });
                 }
             }
 
 
-            ViewData["LoggedIn"] = isLoggedIn.ToString();
-            ViewData["IsAdmin"] = isAdmin.ToString();
+            ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
+            ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
 
             return View();
         }
@@ -137,12 +123,12 @@ namespace FindMyPet.Web.Controllers
             {
                 isLoggedIn = true;
 
-                isAdmin = await this.userManager.IsInRoleAsync(currentUser, "Admin");
+                isAdmin = await this.userManager.IsInRoleAsync(currentUser, StaticConstants.AdminRole);
             }
 
 
-            ViewData["LoggedIn"] = isLoggedIn.ToString();
-            ViewData["IsAdmin"] = isAdmin.ToString();
+            ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
+            ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
 
             return View();
         }
@@ -158,12 +144,11 @@ namespace FindMyPet.Web.Controllers
             {
                 isLoggedIn = true;
 
-                isAdmin = await this.userManager.IsInRoleAsync(currentUser, "Admin");
+                isAdmin = await this.userManager.IsInRoleAsync(currentUser, StaticConstants.AdminRole);
             }
-
-
-            ViewData["LoggedIn"] = isLoggedIn.ToString();
-            ViewData["IsAdmin"] = isAdmin.ToString();
+            
+            ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
+            ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
 
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }

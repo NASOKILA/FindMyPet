@@ -1,6 +1,6 @@
 ﻿using FindMyPet.Data;
 using FindMyPet.Models;
-using Microsoft.AspNetCore.Http;
+using FindMyPet.Web.Static;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -26,18 +26,18 @@ namespace FindMyPet.Web.Controllers
             {
                 isLoggedIn = true;
 
-                isAdmin = this.User.Claims.Any(c => c.Value == "Admin");
+                isAdmin = this.User.Claims.Any(c => c.Value == StaticConstants.AdminRole);
 
                 if (isAdmin == true)
                 {
-                    return new RedirectToActionResult("AddLike", "Messages", new { @area = "Admin" });
+                    return new RedirectToActionResult(StaticConstants.AddLike, StaticConstants.Messages, new { @area = StaticConstants.AdminRole });
                 }
             }
 
-            ViewData["LoggedIn"] = isLoggedIn.ToString();
-            ViewData["IsAdmin"] = isAdmin.ToString();
+            ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
+            ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
 
-            var tokens = id.Split("*").ToList();
+            var tokens = id.Split(StaticConstants.Star).ToList();
 
             string returnUserId = tokens[0];
 
@@ -55,9 +55,8 @@ namespace FindMyPet.Web.Controllers
 
             this.context.Likes.Add(like);
             this.context.SaveChanges();
-
             
-            return RedirectToAction("Profile", "Users", new { Id = returnUserId });
+            return RedirectToAction(StaticConstants.Profile, StaticConstants.Users, new { Id = returnUserId });
         }
 
         [HttpGet]
@@ -70,18 +69,18 @@ namespace FindMyPet.Web.Controllers
             {
                 isLoggedIn = true;
 
-                isAdmin = this.User.Claims.Any(c => c.Value == "Admin");
+                isAdmin = this.User.Claims.Any(c => c.Value == StaticConstants.AdminRole);
 
                 if (isAdmin == true)
                 {
-                    return new RedirectToActionResult("RemoveLike", "Messages", new { @area = "Admin" });
+                    return new RedirectToActionResult(StaticConstants.RemoveLike, StaticConstants.Messages, new { @area = StaticConstants.AdminRole });
                 }
             }
 
-            ViewData["LoggedIn"] = isLoggedIn.ToString();
-            ViewData["IsAdmin"] = isAdmin.ToString();
+            ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
+            ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
 
-            var tokens = id.Split("*").ToList();
+            var tokens = id.Split(StaticConstants.Star).ToList();
 
             string returnUserId = tokens[0];
 
@@ -101,8 +100,7 @@ namespace FindMyPet.Web.Controllers
             this.context.SaveChanges();
             
 
-            return RedirectToAction("Profile", "Users", new { Id = returnUserId });
+            return RedirectToAction(StaticConstants.Profile, StaticConstants.Users, new { Id = returnUserId });
         }
-
     }
 }

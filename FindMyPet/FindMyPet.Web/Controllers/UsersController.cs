@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System;
+using FindMyPet.Web.Static;
 
 namespace FindMyPet.Web.Controllers
 {
@@ -22,7 +23,7 @@ namespace FindMyPet.Web.Controllers
         {
 
             if (!this.User.Identity.IsAuthenticated){
-                return Redirect("/Identity/Account/Login");
+                return Redirect(StaticConstants.LoginRedirect);
             }
             
             User user = context.Users
@@ -37,7 +38,7 @@ namespace FindMyPet.Web.Controllers
                 .FirstOrDefault(u => u.Id == id);
 
             if (user == null)
-                return RedirectToAction("All", "Pets");
+                return RedirectToAction(StaticConstants.All, StaticConstants.Pets);
 
 
             var allLikes = context.Likes
@@ -55,7 +56,7 @@ namespace FindMyPet.Web.Controllers
             }
             
             ViewBag.Messages = user.MessagesReceived.ToList();
-            ViewData["CurrentId"] = id;
+            ViewData[StaticConstants.CurrentId] = id;
 
             bool isLoggedIn = false;
             bool isAdmin = false;
@@ -65,16 +66,16 @@ namespace FindMyPet.Web.Controllers
             {
                 isLoggedIn = true;
 
-                isAdmin = currentUser.Claims.Any(c => c.Value == "Admin");
+                isAdmin = currentUser.Claims.Any(c => c.Value == StaticConstants.AdminRole);
 
                 if (isAdmin == true)
                 {
-                    return new RedirectToActionResult("Index", "Home", new { @area = "Admin" });
+                    return new RedirectToActionResult(StaticConstants.Index, StaticConstants.Home, new { @area = StaticConstants.AdminRole });
                 }
             }
 
-            ViewData["LoggedIn"] = isLoggedIn.ToString();
-            ViewData["IsAdmin"] = isAdmin.ToString();
+            ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
+            ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
 
             return View(user);
         }
@@ -82,14 +83,11 @@ namespace FindMyPet.Web.Controllers
         [HttpGet]
         public IActionResult LockUser()
         {
-
-            //USER
             if (!this.User.Identity.IsAuthenticated)
             {
-                return Redirect("/Identity/Account/Login");
+                return Redirect(StaticConstants.LoginRedirect);
             }
-
-
+            
             bool isLoggedIn = false;
             bool isAdmin = false;
 
@@ -98,36 +96,33 @@ namespace FindMyPet.Web.Controllers
             {
                 isLoggedIn = true;
 
-                isAdmin = currentUser.Claims.Any(c => c.Value == "Admin");
+                isAdmin = currentUser.Claims.Any(c => c.Value == StaticConstants.AdminRole);
 
 
-                ViewData["LoggedIn"] = isLoggedIn.ToString();
-                ViewData["IsAdmin"] = isAdmin.ToString();
+                ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
+                ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
                 if (isAdmin == true)
                 {
-                    return new RedirectToActionResult("AllUsers", "Users", new { @area = "Admin" });
+                    return new RedirectToActionResult(StaticConstants.AllUsers, StaticConstants.Users, new { @area = StaticConstants.AdminRole });
                 }
-
             }
 
-            ViewData["LoggedIn"] = isLoggedIn.ToString();
-            ViewData["IsAdmin"] = isAdmin.ToString();
+            ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
+            ViewData[StaticConstants.AdminRole] = isAdmin.ToString();
 
-            return new RedirectToActionResult("All", "Pets", new { @area = "" });
+            return new RedirectToActionResult(StaticConstants.All, StaticConstants.Pets, new { @area = StaticConstants.Empty });
 
         }
 
         [HttpGet]
         public IActionResult UnlockUser()
         {
-
-            //USER
+            
             if (!this.User.Identity.IsAuthenticated)
             {
-                return Redirect("/Identity/Account/Login");
+                return Redirect(StaticConstants.LoginRedirect);
             }
-
-
+            
             bool isLoggedIn = false;
             bool isAdmin = false;
 
@@ -136,21 +131,21 @@ namespace FindMyPet.Web.Controllers
             {
                 isLoggedIn = true;
 
-                isAdmin = currentUser.Claims.Any(c => c.Value == "Admin");
+                isAdmin = currentUser.Claims.Any(c => c.Value == StaticConstants.AdminRole);
                 
-                ViewData["LoggedIn"] = isLoggedIn.ToString();
-                ViewData["IsAdmin"] = isAdmin.ToString();
+                ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
+                ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
 
                 if (isAdmin == true)
                 {
-                    return new RedirectToActionResult("AllUsers", "Users", new { @area = "Admin" });
+                    return new RedirectToActionResult(StaticConstants.AllUsers, StaticConstants.Users, new { @area = StaticConstants.AdminRole });
                 }
             }
 
-            ViewData["LoggedIn"] = isLoggedIn.ToString();
-            ViewData["IsAdmin"] = isAdmin.ToString();
+            ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
+            ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
 
-            return new RedirectToActionResult("All", "Pets", new { @area = "" });
+            return new RedirectToActionResult(StaticConstants.All, StaticConstants.Pets, new { @area = StaticConstants.Empty });
         }
         
         [HttpGet]
@@ -159,7 +154,7 @@ namespace FindMyPet.Web.Controllers
 
             if (!this.User.Identity.IsAuthenticated)
             {
-                return Redirect("/Identity/Account/Login");
+                return Redirect(StaticConstants.LoginRedirect);
             }
 
             var currentUser = context.Users.FirstOrDefault(u => u.Email == this.User.Identity.Name);
@@ -176,9 +171,8 @@ namespace FindMyPet.Web.Controllers
                 .FirstOrDefault(u => u.Id == currentUser.Id);
 
             if (user == null)
-                return RedirectToAction("All", "Pets");
-
-
+                return RedirectToAction(StaticConstants.All, StaticConstants.Pets);
+            
             var allLikes = context.Likes
                 .Include(l => l.Creator)
                 .ToList();
@@ -194,7 +188,7 @@ namespace FindMyPet.Web.Controllers
             }
 
             ViewBag.Messages = user.MessagesReceived.ToList();
-            ViewData["CurrentId"] = currentUser.Id;
+            ViewData[StaticConstants.CurrentId] = currentUser.Id;
 
             bool isLoggedIn = false;
             bool isAdmin = false;
@@ -203,16 +197,16 @@ namespace FindMyPet.Web.Controllers
             {
                 isLoggedIn = true;
 
-                isAdmin = this.User.Claims.Any(c => c.Value == "Admin");
+                isAdmin = this.User.Claims.Any(c => c.Value == StaticConstants.AdminRole);
 
                 if (isAdmin == true)
                 {
-                    return new RedirectToActionResult("Index", "Home", new { @area = "Admin" });
+                    return new RedirectToActionResult(StaticConstants.Index, StaticConstants.Home, new { @area = StaticConstants.AdminRole });
                 }
             }
 
-            ViewData["LoggedIn"] = isLoggedIn.ToString();
-            ViewData["IsAdmin"] = isAdmin.ToString();
+            ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
+            ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
 
             return View(user);
         }
@@ -238,8 +232,7 @@ namespace FindMyPet.Web.Controllers
 
             this.context.SaveChanges();
 
-            return RedirectToAction("Profile", "Users", new { Id = receverId });
-
+            return RedirectToAction(StaticConstants.Profile, StaticConstants.Users, new { Id = receverId });
         }
         
         [HttpGet]
@@ -252,7 +245,7 @@ namespace FindMyPet.Web.Controllers
 
             if (message == null)
             {
-                return RedirectToAction("All", "Pets");
+                return RedirectToAction(StaticConstants.All, StaticConstants.Pets);
             }
 
             foreach (Like like in message.Likes)
@@ -265,7 +258,7 @@ namespace FindMyPet.Web.Controllers
             this.context.Messages.Remove(message);
             this.context.SaveChanges();
 
-            return RedirectToAction("Profile", "Users", new { Id = userId });
+            return RedirectToAction(StaticConstants.Profile, StaticConstants.Users, new { Id = userId });
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using FindMyPet.Data;
 using FindMyPet.Models;
+using FindMyPet.Web.Static;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -71,9 +72,15 @@ namespace FindMyPet.Web.Areas.Identity.Pages.Account
             public string AvatarUrl { get; set; }
         }
 
-        public void OnGet(string returnUrl = null)
+        public IActionResult OnGet(string returnUrl = null)
         {
+            if (this.User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction(StaticConstants.All, StaticConstants.Pets, new { @area = StaticConstants.Empty });
+            }
+
             ReturnUrl = returnUrl;
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)

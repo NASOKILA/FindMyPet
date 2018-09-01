@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using FindMyPet.Data;
 using FindMyPet.Models;
+using FindMyPet.Web.Static;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace FindMyPet.Web.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Area(StaticConstants.AdminRole)]
+    [Authorize(Roles = StaticConstants.AdminRole)]
     public class CommentsController : Controller
     {
-        
         private readonly UserManager<User> userManager;
         private readonly FindMyPetDbContext context;
 
@@ -32,7 +28,7 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
         public IActionResult AddLike(string id)
         {
 
-            var tokens = id.Split("*").ToList();
+            var tokens = id.Split(StaticConstants.Star).ToList();
             int returnPetId = int.Parse(tokens[0]);
             int commentId = int.Parse(tokens[1]);
             var currentUser = context.Users.FirstOrDefault(u => u.Email == this.User.Identity.Name);
@@ -48,14 +44,13 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
             this.context.SaveChanges();
             
             
-            return RedirectToAction("Details", "Pets", new { Id = returnPetId });
+            return RedirectToAction(StaticConstants.Details, StaticConstants.Pets, new { Id = returnPetId });
         }
 
         [HttpGet]
         public IActionResult RemoveLike(string id)
         {
-
-            var tokens = id.Split("*").ToList();
+            var tokens = id.Split(StaticConstants.Star).ToList();
             int returnPetId = int.Parse(tokens[0]);
             int commentId = int.Parse(tokens[1]);
             var currentUser = context.Users.FirstOrDefault(u => u.Email == this.User.Identity.Name);
@@ -70,7 +65,7 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
             this.context.Likes.Remove(likeToRemove);
             this.context.SaveChanges();
             
-            return RedirectToAction("Details", "Pets", new { Id = returnPetId });
+            return RedirectToAction(StaticConstants.Details, StaticConstants.Pets, new { Id = returnPetId });
         }
     }
 }

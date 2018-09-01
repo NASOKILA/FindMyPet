@@ -2,7 +2,8 @@
 
 @{
     ViewData["Title"] = "All";
-    ViewData["Style"] = "petStyle";
+    
+    string petStyle = "petStyle";
 }
 
 
@@ -25,11 +26,16 @@
 
     @foreach (var pet in Model)
     {
-        
-        <div  class="classComix card col-sm-4 text-center petStyle">
+
+
+        @if (pet.Status == "Found")
+        {
+            petStyle = "petFoundStyle";
+        }
+        <div  class="classComix card col-sm-4 text-center @petStyle">
 
             <a class="pageLink" asp-controller="Pets" asp-action="Details" asp-route-id="@pet.Id">
-                <img class="card-image-top img-fluid img-thumbnail" src="@pet.ImageUrl" />
+                <img class="bottom card-image-top img-fluid img-thumbnail" src="@pet.ImageUrl" />
                 <div class="card-body">
                     <h4 class="card-title"></h4>
                     <p class="card-text">

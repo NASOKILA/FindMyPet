@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Threading.Tasks;
 using FindMyPet.Data;
 using FindMyPet.Models;
 using FindMyPet.Web.Models.BindingModels;
+using FindMyPet.Web.Static;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -13,36 +12,39 @@ namespace FindMyPet.Web.Pages.PetsPages
 {
     public class EditModel : PageModel
     {
+        private const int zero = 0;
+        private const int three = 3;
+        private const int oneHundred = 100;
 
         public int Id { get; set; }
-        
+
         [BindProperty]
-        [Required(ErrorMessage = "Type is required.")]
-        [MinLength(3, ErrorMessage = "Type must be atleast 3 symbols.")]
+        [Required(ErrorMessage = ValidationConstants.TypeRequired)]
+        [MinLength(three, ErrorMessage = ValidationConstants.TypeAtleastThreeSymbols)]
         public string Type { get; set; }
 
         [BindProperty]
-        [Required(ErrorMessage = "Name is required.")]
-        [MinLength(3, ErrorMessage = "Name must be atleast 3 symbols.")]
+        [Required(ErrorMessage = ValidationConstants.NameRequired)]
+        [MinLength(three, ErrorMessage = ValidationConstants.NameAtleastThreeSymbols)]
         public string Name { get; set; }
 
         [BindProperty]
-        [Required(ErrorMessage = "Age is required.")]
-        [Range(0, 100, ErrorMessage = "Age must be in range between 0 and 100.")]
+        [Required(ErrorMessage = ValidationConstants.AgeRequired)]
+        [Range(zero, oneHundred, ErrorMessage = ValidationConstants.AgeRangeBetweenZeroAndOnehundred)]
         public int? Age { get; set; }
 
         [BindProperty]
         [DataType(DataType.Url)]
-        [Required(ErrorMessage = "Image Url is required.")]
+        [Required(ErrorMessage = ValidationConstants.ImageUrlRequired)]
         public string ImageUrl { get; set; }
 
         [BindProperty]
-        [Required(ErrorMessage = "Location is required.")]
-        [MinLength(3, ErrorMessage = "Location must be atleast 3 symbols.")]
+        [Required(ErrorMessage = ValidationConstants.LocationRequired)]
+        [MinLength(three, ErrorMessage = ValidationConstants.LocationAtleastThreeSymbols)]
         public string LocationLost { get; set; }
 
         [BindProperty]
-        [Required(ErrorMessage = "Time Lost is required.")]
+        [Required(ErrorMessage = ValidationConstants.TimeLostRequired)]
         public DateTime TimeLost { get; set; }
 
         [BindProperty]
@@ -68,16 +70,16 @@ namespace FindMyPet.Web.Pages.PetsPages
             {
                 isLoggedIn = true;
 
-                isAdmin = currentUser.Claims.Any(c => c.Value == "Admin");
+                isAdmin = currentUser.Claims.Any(c => c.Value == StaticConstants.AdminRole);
             }
 
-            ViewData["LoggedIn"] = isLoggedIn.ToString();
-            ViewData["IsAdmin"] = isAdmin.ToString();
+            ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
+            ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
 
 
             if (!this.User.Identity.IsAuthenticated)
             {
-                return Redirect("/Identity/Account/Login");
+                return Redirect(StaticConstants.LoginRedirect);
             }
             
             using (var context = new FindMyPetDbContext())
@@ -99,7 +101,7 @@ namespace FindMyPet.Web.Pages.PetsPages
                     .FirstOrDefault(p => p.Id == id);
 
                 if (pet == null)
-                    return RedirectToAction("All", "Pets");
+                    return RedirectToAction(StaticConstants.All, StaticConstants.Pets);
 
                 this.Id = pet.Id;
                 this.Type = pet.Type;
@@ -128,16 +130,16 @@ namespace FindMyPet.Web.Pages.PetsPages
             {
                 isLoggedIn = true;
 
-                isAdmin = currentUser.Claims.Any(c => c.Value == "Admin");
+                isAdmin = currentUser.Claims.Any(c => c.Value == StaticConstants.AdminRole);
             }
 
-            ViewData["LoggedIn"] = isLoggedIn.ToString();
-            ViewData["IsAdmin"] = isAdmin.ToString();
+            ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
+            ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
 
 
             if (!this.User.Identity.IsAuthenticated)
             {
-                return Redirect("/Identity/Account/Login");
+                return Redirect(StaticConstants.LoginRedirect);
             }
 
             if (!ModelState.IsValid)
@@ -151,7 +153,7 @@ namespace FindMyPet.Web.Pages.PetsPages
                 Pet pet = context.Pets.FirstOrDefault(p => p.Id == id);
 
                 if (pet == null)
-                    return RedirectToAction("All", "Pets");
+                    return RedirectToAction(StaticConstants.All, StaticConstants.Pets);
 
                 pet.Type = this.Type;
                 pet.Name = this.Name;
@@ -166,7 +168,7 @@ namespace FindMyPet.Web.Pages.PetsPages
                 context.Pets.Update(pet);
                 context.SaveChanges();
                 
-                return RedirectToAction("Details", "Pets", new { Id = pet.Id });
+                return RedirectToAction(StaticConstants.Details, StaticConstants.Pets, new { Id = pet.Id });
             }
         }
     }

@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Threading.Tasks;
 using FindMyPet.Data;
 using FindMyPet.Models;
 using FindMyPet.Web.Models.BindingModels;
+using FindMyPet.Web.Static;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace FindMyPet.Web.Pages.PetsPages
 {
@@ -17,32 +16,21 @@ namespace FindMyPet.Web.Pages.PetsPages
         public int Id { get; set; }
 
         [BindProperty]
-        [Required(ErrorMessage = "Type is required.")]
-        [MinLength(3, ErrorMessage = "Type must be atleast 3 symbols.")]
         public string Type { get; set; }
 
         [BindProperty]
-        [Required(ErrorMessage = "Name is required.")]
-        [MinLength(3, ErrorMessage = "Name must be atleast 3 symbols.")]
         public string Name { get; set; }
 
         [BindProperty]
-        [Required(ErrorMessage = "Age is required.")]
-        [Range(0, 100, ErrorMessage = "Age must be in range between 0 and 100.")]
         public int? Age { get; set; }
 
         [BindProperty]
-        [DataType(DataType.Url)]
-        [Required(ErrorMessage = "Image Url is required.")]
         public string ImageUrl { get; set; }
 
         [BindProperty]
-        [Required(ErrorMessage = "Location is required.")]
-        [MinLength(3, ErrorMessage = "Location must be atleast 3 symbols.")]
         public string LocationLost { get; set; }
 
         [BindProperty]
-        [Required(ErrorMessage = "Time Lost is required.")]
         public DateTime TimeLost { get; set; }
 
         [BindProperty]
@@ -67,15 +55,15 @@ namespace FindMyPet.Web.Pages.PetsPages
             if (currentUser.Identity.IsAuthenticated)
             {
                 isLoggedIn = true;
-                isAdmin = currentUser.Claims.Any(c => c.Value == "Admin");
+                isAdmin = currentUser.Claims.Any(c => c.Value == StaticConstants.AdminRole);
             }
 
-            ViewData["LoggedIn"] = isLoggedIn.ToString();
-            ViewData["IsAdmin"] = isAdmin.ToString();
+            ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
+            ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
 
             if (!this.User.Identity.IsAuthenticated)
             {
-                return Redirect("/Identity/Account/Login");
+                return Redirect(StaticConstants.LoginRedirect);
             }
             
 
@@ -98,7 +86,7 @@ namespace FindMyPet.Web.Pages.PetsPages
                     .FirstOrDefault(p => p.Id == id);
 
                 if (pet == null)
-                    return RedirectToAction("All", "Pets");
+                    return RedirectToAction(StaticConstants.All, StaticConstants.Pets);
 
                 this.Id = pet.Id;
                 this.Type = pet.Type;
@@ -126,28 +114,46 @@ namespace FindMyPet.Web.Pages.PetsPages
             if (currentUser.Identity.IsAuthenticated)
             {
                 isLoggedIn = true;
-                isAdmin = currentUser.Claims.Any(c => c.Value == "Admin");
+                isAdmin = currentUser.Claims.Any(c => c.Value == StaticConstants.AdminRole);
             }
 
-            ViewData["LoggedIn"] = isLoggedIn.ToString();
-            ViewData["IsAdmin"] = isAdmin.ToString();
+            ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
+            ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
 
             if (!this.User.Identity.IsAuthenticated)
             {
-                return Redirect("/Identity/Account/Login");
+                return Redirect(StaticConstants.LoginRedirect);
             }
 
             using (var context = new FindMyPetDbContext())
             {
-                Pet pet = context.Pets.FirstOrDefault(p => p.Id == id);
+                Pet pet = context.Pets
+                    .Include(p => p.Comments)
+                    .ThenInclude(c => c.Likes)
+                    .FirstOrDefault(p => p.Id == id);
+
+
+                foreach (Comment comm in pet.Comments)
+                {
+
+                    foreach (Like like in comm.Likes)
+                    {
+                        context.Likes.Remove(like);
+                    }
+                    context.SaveChanges();
+
+                    context.Comments.Remove(comm);
+                }
+
+                context.SaveChanges();
 
                 if (pet == null)
-                    return RedirectToAction("All", "Pets");
+                    return RedirectToAction(StaticConstants.All, StaticConstants.Pets);
 
                 context.Pets.Remove(pet);
                 context.SaveChanges();
 
-                return RedirectToAction("All", "Pets");
+                return RedirectToAction(StaticConstants.All, StaticConstants.Pets);
             }
         }
     }

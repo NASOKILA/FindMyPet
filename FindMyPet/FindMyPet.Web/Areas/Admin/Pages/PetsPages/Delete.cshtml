@@ -9,7 +9,7 @@
 
 <div class="forms">
 
-    <form method="post" asp-route-id="@Model.Id">
+    <form method="post" asp-area="Admin" asp-route-id="@Model.Id">
 
         <div class="form-group row">
             <label asp-for="Type">Type <span class="requiredStar">*</span></label>

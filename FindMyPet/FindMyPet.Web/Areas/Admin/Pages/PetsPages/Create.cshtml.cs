@@ -2,47 +2,51 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Threading.Tasks;
 using FindMyPet.Data;
 using FindMyPet.Models;
+using FindMyPet.Web.Static;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace FindMyPet.Web.Admin.Pages.Pets
 {
-    
-    [Authorize(Roles = "Admin")]
+
+    [Area(StaticConstants.AdminRole)]
+    [Authorize(Roles = StaticConstants.AdminRole)]
     public class CreateModel : PageModel
     {
-        
+        private const int numberZero = 0;
+        private const int numberThree = 3;
+        private const int numberOnehundred = 100;
+
         [BindProperty]
-        [Required(ErrorMessage = "Type is required.")]
-        [MinLength(3, ErrorMessage = "Type must be atleast 3 symbols.")]
+        [Required(ErrorMessage = ValidationConstants.TypeRequired)]
+        [MinLength(numberThree, ErrorMessage = ValidationConstants.TypeAtleastThreeSymbols)]
         public string Type { get; set; }
 
         [BindProperty]
-        [Required(ErrorMessage = "Name is required.")]
-        [MinLength(3, ErrorMessage = "Name must be atleast 3 symbols.")]
+        [Required(ErrorMessage = ValidationConstants.NameRequired)]
+        [MinLength(numberThree, ErrorMessage = ValidationConstants.NameAtleastThreeSymbols)]
         public string Name { get; set; }
 
         [BindProperty]
-        [Required(ErrorMessage = "Age is required.")]
-        [Range(0, 100, ErrorMessage = "Age must be in range between 0 and 100.")]
+        [Required(ErrorMessage = ValidationConstants.AgeRequired)]
+        [Range(numberZero, numberOnehundred, ErrorMessage = ValidationConstants.AgeRangeBetweenZeroAndOnehundred)]
         public int Age { get; set; }
 
         [BindProperty]
         [DataType(DataType.Url)]
-        [Required(ErrorMessage = "Image Url is required.")]
+        [Required(ErrorMessage = ValidationConstants.ImageUrlRequired)]
         public string ImageUrl { get; set; }
 
         [BindProperty]
-        [Required(ErrorMessage = "Location is required.")]
-        [MinLength(3, ErrorMessage = "Location must be atleast 3 symbols.")]
+        [Required(ErrorMessage = ValidationConstants.LocationRequired)]
+        [MinLength(numberThree, ErrorMessage = ValidationConstants.LocationAtleastThreeSymbols)]
         public string LocationLost { get; set; }
 
         [BindProperty]
-        [Required(ErrorMessage = "Time Lost is required.")]
+        [Required(ErrorMessage = ValidationConstants.TimeLostRequired)]
         public DateTime TimeLost { get; set; }
 
         [BindProperty]
@@ -57,16 +61,15 @@ namespace FindMyPet.Web.Admin.Pages.Pets
         [BindProperty]
         public string Color { get; set; }
 
-        
+        [HttpGet]
         public IActionResult OnGet()
         {
-            //ADMIN 
             if (!this.User.Identity.IsAuthenticated)
             {
-                return Redirect("/Identity/Account/Login");
+                return Redirect(StaticConstants.LoginRedirect);
             }
 
-            ViewData["petExists"] = false;
+            ViewData[StaticConstants.PetExists] = false;
             return Page();
         }
 
@@ -75,12 +78,12 @@ namespace FindMyPet.Web.Admin.Pages.Pets
         public IActionResult OnPost()
         {
             if (!this.User.Identity.IsAuthenticated)
-                return Redirect("/Identity/Account/Login");
+                return Redirect(StaticConstants.LoginRedirect);
 
 
             if (!ModelState.IsValid) {
 
-                ViewData["petExists"] = false;
+                ViewData[StaticConstants.PetExists] = false;
                 return Page();
             }
 
@@ -91,11 +94,11 @@ namespace FindMyPet.Web.Admin.Pages.Pets
 
                 if (petsExists)
                 {
-                    ViewData["petExists"] = true;
+                    ViewData[StaticConstants.PetExists] = true;
                     return Page();
                 }
 
-                ViewData["petExists"] = false;
+                ViewData[StaticConstants.PetExists] = false;
 
                 User currentUser = context.Users.FirstOrDefault(u => u.Email == this.User.Identity.Name);
 
@@ -111,7 +114,7 @@ namespace FindMyPet.Web.Admin.Pages.Pets
                     Gender = this.Gender,
                     Breed = this.Breed,
                     Color = this.Color,
-                    Status = "Lost",
+                    Status = StaticConstants.Lost,
                     Comments = new List<Comment>(),
                     OwnerId = currentUser.Id
                 };
@@ -119,7 +122,7 @@ namespace FindMyPet.Web.Admin.Pages.Pets
                 context.Pets.Add(pet);
                 context.SaveChanges();
                 
-                return RedirectToAction("Details", "Pets", new { Id = pet.Id });
+                return RedirectToAction(StaticConstants.Details, StaticConstants.Pets, new { Id = pet.Id });
             }
         }
     }

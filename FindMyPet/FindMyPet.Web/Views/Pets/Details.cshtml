@@ -13,23 +13,23 @@
             <br />
             <hr class="display-3" />
 
-            <div class="forms">
+            <div class="">
 
 
                 <br />
-                <h2 class="display-4"><strong>Type</strong> : @Model.Type</h2>
+                <h2 class="display-4"><strong class="right">Type</strong> : <i class="left">@Model.Type</i></h2>
                 <br />
 
                 <br />
-                <h2 class="display-5"><strong>Name</strong> : @Model.Name</h2>
+                <h2 class="display-5"><strong class="right2">Name</strong> : <i class="left2">@Model.Name</i></h2>
                 <br />
 
                 <br />
-                <h2 class="display-5"><strong>Status</strong> : @Model.Status</h2>
+                <h2 class="display-5"><strong class="right3">Status</strong> : <i class="left3">@Model.Status</i></h2>
                 <br />
 
 
-                <img width="500" class="card-image-top img-fluid img-thumbnail" src="@Model.ImageUrl" />
+                <img width="500" class="forms card-image-top img-fluid img-thumbnail" src="@Model.ImageUrl" />
                 <br />
                 <br />
 
@@ -38,13 +38,13 @@
                 {
 
                     <h2>
-                        <strong>Age</strong> : @Model.Age
+                        <strong class="left">Age</strong> : <i class="right">@Model.Age</i>
                     </h2>
                 }
                 else
                 {
                     <h2>
-                        <strong>Age</strong> : Not specified
+                        <strong class="left">Age</strong> : <i class="right">Not specified</i>
                     </h2>
                 }
 
@@ -54,13 +54,13 @@
                 {
 
                     <h2>
-                        <strong>Breed</strong> : @Model.Breed
+                        <strong class="left">Breed</strong> : <i class="right">@Model.Breed</i>
                     </h2>
                 }
                 else
                 {
                     <h2>
-                        <strong>Breed</strong> : Not specified
+                        <strong class="left">Breed</strong> : <i class="right">Not specified</i>
                     </h2>
                 }
 
@@ -70,27 +70,27 @@
                 {
 
                     <h2>
-                        <strong>Color</strong> : @Model.Color
+                        <strong class="left">Color</strong> : <i class="right">@Model.Color</i>
                     </h2>
                 }
                 else
                 {
                     <h2>
-                        <strong>Color</strong> : Not specified
+                        <strong class="left">Color</strong> : <i class="right">Not specified</i>
                     </h2>
                 }
                 <br />
                 @if (Model.Gender != null)
                 {
                     <h2>
-                        <strong>Gender</strong> : @Model.Gender
+                        <strong class="left">Gender</strong> : <i class="right">@Model.Gender</i>
                     </h2>
                 }
                 else
                 {
 
                     <h2>
-                        <strong>Gender</strong> : Not specified
+                        <strong class="left">Gender</strong> : <i class="right">Not specified</i>
                     </h2>
                 }
 
@@ -99,13 +99,13 @@
                 @if (Model.LocationLost != null)
                 {
                     <h2>
-                        <strong>Location Lost</strong> : @Model.LocationLost
+                        <strong class="left">Location Lost</strong> : <i class="right">@Model.LocationLost</i>
                     </h2>
                 }
                 else
                 {
                     <h2>
-                        <strong>Location Lost</strong> : Not specified
+                        <strong class="left">Location Lost</strong> : <i class="right">Not specified</i>
                     </h2>
                 }
 
@@ -115,13 +115,13 @@
                 {
 
                     <h2>
-                        <strong>Time Lost</strong> : @Model.TimeLost
+                        <strong class="left">Time Lost</strong> : <i class="right">@Model.TimeLost</i>
                     </h2>
                 }
                 else
                 {
                     <h2>
-                        <strong>Time Lost</strong> : Not spcified
+                        <strong class="left">Time Lost</strong> : <i class="right">Not spcified</i>
                     </h2>
                 }
 
@@ -132,13 +132,13 @@
                 {
 
                     <h2>
-                        <strong>Time Found</strong> : @Model.TimeFound
+                        <strong class="left">Time Found</strong> :  <i class="right">@Model.TimeFound</i>
                     </h2>
                 }
                 else
                 {
                     <h2>
-                        <strong>Time Found</strong> : Not spcified
+                        <strong class="left">Time Found</strong> : <i class="right">Not spcified</i>
                     </h2>
                 }
 
@@ -148,13 +148,13 @@
                 @if (Model.Founder != null)
                 {
                     <h2>
-                        <strong>Founder</strong> : @Model.Founder.FullName
+                        <strong class="left">Founder</strong> : <i class="right">@Model.Founder.FullName</i>
                     </h2>
                 }
                 else
                 {
                     <h2>
-                        <strong>Founder</strong> : Not Found Yet
+                        <strong class="left">Founder</strong> : <i class="right">Not Found Yet</i>
                     </h2>
                 }
 
@@ -163,13 +163,13 @@
                 @if (Model.Owner != null)
                 {
                     <h2>
-                        <strong>Owner</strong> : @Model.Owner.Email
+                        <strong class="left">Owner</strong> : <i class="right">@Model.Owner.Email</i>
                     </h2>
                 }
                 else
                 {
                     <h2>
-                        <strong>Owner</strong> : Not Specified
+                        <strong class="left">Owner</strong> : <i class="right">Not Specified</i>
                     </h2>
                 }
                 <br />
@@ -182,7 +182,7 @@
                 <h2>
                     <strong>Comments</strong>
                 </h2>
-                <div class="card col-12 thumbnail">
+                <div class="card col-12 commentsContainer">
                     <br />
 
                     @if (Model.Comments.Count < 1)
@@ -195,9 +195,9 @@
                     else
                     {
 
-                        @foreach (var comment in ViewBag.Comments)
-                        {
-                            <div class="card col-12 commentsContainer">
+                        <div class="card col-12">
+                            @foreach (var comment in ViewBag.Comments)
+                            {
 
                                 <h2>@comment.Content</h2>
                                 <span>
@@ -239,8 +239,8 @@
                                 }
                                 <br />
                                 <br />
-                            </div>
-                        }
+                            }
+                        </div>
 
                     }
                     <br />
@@ -256,7 +256,7 @@
                               minlength="10" required></textarea>
                 </div>
 
-                <input type="submit" id="btn-add-game" class="btn btn-outline-success btn-lg btn-block" value="Add Comment" />
+                <input type="submit" id="btn-add-game" class="btn btn-success btn-lg btn-block" value="Add Comment" />
             </form>
 
             <br />
@@ -267,8 +267,8 @@
             <div class="bottom">
 
                 <div class="card-footer text-center">
-                    <h1 class="display-3" style="background: lightgreen">Actions</h1>
-
+                    <h1 class="display-3">Actions</h1>
+                    <hr />
                     <a class="btn btn-lg btn-primary col-3" asp-controller="Pets" asp-action="All">Back</a>
                     @if (Model.Status == "Lost")
                     {

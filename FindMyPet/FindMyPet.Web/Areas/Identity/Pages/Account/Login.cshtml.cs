@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using FindMyPet.Data;
 using FindMyPet.Models;
+using FindMyPet.Web.Static;
 
 namespace FindMyPet.Web.Areas.Identity.Pages.Account
 {
@@ -55,8 +56,14 @@ namespace FindMyPet.Web.Areas.Identity.Pages.Account
             public bool RememberMe { get; set; }
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task<IActionResult> OnGetAsync(string returnUrl = null)
         {
+
+            if (this.User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction(StaticConstants.All, StaticConstants.Pets, new { @area = StaticConstants.Empty});
+            }
+
             if (!string.IsNullOrEmpty(ErrorMessage))
             {
                 ModelState.AddModelError(string.Empty, ErrorMessage);
@@ -70,6 +77,7 @@ namespace FindMyPet.Web.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             ReturnUrl = returnUrl;
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
