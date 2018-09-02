@@ -100,7 +100,7 @@ using FindMyPet.Web.Models;
             WriteLiteral("        <div class=\"right\">\r\n            ");
             EndContext();
             BeginContext(409, 34, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "99b72128334840c9be98feea34282b09", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "ffbd5c71035c4822bbb5bcb3aaf0a818", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper>();
@@ -164,7 +164,7 @@ WriteAttributeValue(" ", 820, petStyle, 821, 9, false);
             WriteLiteral(">\r\n\r\n                ");
             EndContext();
             BeginContext(852, 1071, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "20facc96f1924c19a11f2076219f355a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "dcb94a5105b34526aaf8b920b4f1c868", async() => {
                 BeginContext(938, 80, true);
                 WriteLiteral("\r\n                    <img class=\"bottom card-image-top img-fluid img-thumbnail\"");
                 EndContext();
@@ -262,7 +262,7 @@ WriteAttributeValue("", 1024, pet.ImageUrl, 1024, 13, false);
             WriteLiteral("\r\n\r\n                <div class=\"classButtons\">\r\n\r\n                    ");
             EndContext();
             BeginContext(1993, 110, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e747d3dcc30241cf81b343a3ff213270", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c4a0380b091d4817b303204cf9b17a0c", async() => {
                 BeginContext(2092, 7, true);
                 WriteLiteral("Details");
                 EndContext();
@@ -309,7 +309,7 @@ WriteAttributeValue("", 1024, pet.ImageUrl, 1024, 13, false);
             WriteLiteral("                        ");
             EndContext();
             BeginContext(2200, 109, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4be778d19bfe4c03bd01b25c364f2b8f", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2609e7e4a0ad454fa185d7fbf280748c", async() => {
                 BeginContext(2300, 5, true);
                 WriteLiteral("Found");
                 EndContext();
@@ -365,7 +365,7 @@ WriteAttributeValue("", 1024, pet.ImageUrl, 1024, 13, false);
             WriteLiteral("                        ");
             EndContext();
             BeginContext(2504, 91, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b7a18769c69f44a1a5adec4e57a05d9c", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "995f747b2a8547a19c5d59109db8224b", async() => {
                 BeginContext(2587, 4, true);
                 WriteLiteral("Edit");
                 EndContext();
@@ -401,7 +401,7 @@ WriteAttributeValue("", 1024, pet.ImageUrl, 1024, 13, false);
             WriteLiteral("\r\n                        ");
             EndContext();
             BeginContext(2621, 94, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a9a500e36d3c40d494b79e4eeebf5762", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "00129f8b01ba47549fb2444f4ad0868b", async() => {
                 BeginContext(2705, 6, true);
                 WriteLiteral("Delete");
                 EndContext();
@@ -509,7 +509,7 @@ WriteAttributeValue("", 1024, pet.ImageUrl, 1024, 13, false);
             WriteLiteral("        <div class=\"paginationDiv\">\r\n\r\n            <nav aria-label=\"Page navigation example\">\r\n                <ul class=\"pagination\">\r\n                    <li class=\"page-item\">\r\n                        ");
             EndContext();
             BeginContext(3943, 282, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d455ccabce85439192479d5f1d1928c4", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0433895856f44d76b13abd7e9d728646", async() => {
                 BeginContext(4059, 162, true);
                 WriteLiteral("\r\n                            <span aria-hidden=\"true\">&laquo;</span>\r\n                            <span class=\"sr-only\">Previous</span>\r\n                        ");
                 EndContext();
@@ -548,7 +548,7 @@ WriteAttributeValue("", 1024, pet.ImageUrl, 1024, 13, false);
             WriteLiteral("\r\n                    </li>\r\n                    <li class=\"page-item active\">");
             EndContext();
             BeginContext(4303, 94, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "94322a5335e84091a48c54199bc5178a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "be5b6833815f43b8942ad4e0d927771c", async() => {
                 BeginContext(4388, 5, false);
 #line 140 "C:\Users\Asus\Desktop\FindMyPet\FindMyPet\FindMyPet.Web\Areas\Admin\Views\Pets\All.cshtml"
                                                                                                                                 Write(first);
@@ -590,7 +590,7 @@ WriteAttributeValue("", 1024, pet.ImageUrl, 1024, 13, false);
             WriteLiteral("</li>\r\n                    <li class=\"page-item\">");
             EndContext();
             BeginContext(4446, 96, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3225e89aa6c94d4496a2d1441d154978", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7a60dc41ad754f089806c3215f1cb999", async() => {
                 BeginContext(4532, 6, false);
 #line 141 "C:\Users\Asus\Desktop\FindMyPet\FindMyPet\FindMyPet.Web\Areas\Admin\Views\Pets\All.cshtml"
                                                                                                                           Write(second);
@@ -632,7 +632,7 @@ WriteAttributeValue("", 1024, pet.ImageUrl, 1024, 13, false);
             WriteLiteral("</li>\r\n                    <li class=\"page-item\">");
             EndContext();
             BeginContext(4591, 94, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "06361967b634470089fa198859b87758", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "abd08e29177945b58988519ac4c6abd4", async() => {
                 BeginContext(4676, 5, false);
 #line 142 "C:\Users\Asus\Desktop\FindMyPet\FindMyPet\FindMyPet.Web\Areas\Admin\Views\Pets\All.cshtml"
                                                                                                                          Write(third);
@@ -674,7 +674,7 @@ WriteAttributeValue("", 1024, pet.ImageUrl, 1024, 13, false);
             WriteLiteral("</li>\r\n                    <li class=\"page-item\">\r\n                        ");
             EndContext();
             BeginContext(4760, 270, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c9042100b8a74c1db8590fb7c92679fb", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8ff03f253f6e4b579e81f6bf728805bb", async() => {
                 BeginContext(4868, 158, true);
                 WriteLiteral("\r\n                            <span aria-hidden=\"true\">&raquo;</span>\r\n                            <span class=\"sr-only\">Next</span>\r\n                        ");
                 EndContext();

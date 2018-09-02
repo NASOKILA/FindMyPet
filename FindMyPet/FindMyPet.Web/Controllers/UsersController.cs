@@ -236,29 +236,26 @@ namespace FindMyPet.Web.Controllers
         }
         
         [HttpGet]
-        public IActionResult RemoveMessage(string userId, int messageId)
+        public void RemoveMessage(int messageId)
         {
 
             Message message = this.context.Messages
                 .Include(m => m.Likes)
                 .FirstOrDefault(m => m.Id == messageId);
-
-            if (message == null)
-            {
-                return RedirectToAction(StaticConstants.All, StaticConstants.Pets);
-            }
+            
 
             foreach (Like like in message.Likes)
             {
                 this.context.Likes.Remove(like);
             }
+
             this.context.SaveChanges();
 
 
             this.context.Messages.Remove(message);
             this.context.SaveChanges();
 
-            return RedirectToAction(StaticConstants.Profile, StaticConstants.Users, new { Id = userId });
+            //return RedirectToAction(StaticConstants.Profile, StaticConstants.Users, new { Id = userId });
         }
     }
 }

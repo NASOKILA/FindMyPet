@@ -331,31 +331,6 @@
 
     <script>
         
-        function addLike(currentElement){ 
-
-
-
-            console.log(currentElement)
-            /*
-            console.log(passedCommentId)
-
-            let addLikeUrl = "/Comments/AddLike/" + passedCommentId;
-
-            console.log(addLikeUrl)
-
-            $.get(addLikeUrl);
-            
-            let currentLikes = Number($(this)   .parent().next()[0].innerText);
-            let newLikes = currentLikes + 1;
-
-            console.log($(this).parent().next()[0]);
-            $(this).parent().next().replaceWith("<i class=\"commentLikes\">" + newLikes + "</i>");
-            //replace
-            $(this).replaceWith("<a class='btn btn-sm btn-danger removelikeButton' data-url='/Comments/RemoveLike/" + passedCommentId + "'>Remove Like</a>");
-            */
-
-        }
-        
         $("body").on("click", ".removelikeButton", function () {
 
             let removeLikeUrl = $(this).data("url");
