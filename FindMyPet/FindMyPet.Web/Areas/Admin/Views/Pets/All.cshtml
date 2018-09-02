@@ -93,10 +93,40 @@
     {
 
 
-        int first = Model.Page;
-        int second = Model.Page + 1;
-        int third = Model.Page + 2;
+        int first = 0;
+        int second = 0;
+        int third = 0;
 
+
+
+        string active1 = "";
+        string active2 = "";
+        string active3 = "";
+
+        int remainder = Model.Page % 3;
+
+        if (remainder == 1)
+        {
+            active1 = "active";
+            first = Model.Page;
+            second = Model.Page + 1;
+            third = Model.Page + 2;
+
+        }
+        else if (remainder == 2)
+        {
+            active2 = "active";
+            first = Model.Page - 1;
+            second = Model.Page;
+            third = Model.Page + 1;
+        }
+        else if (remainder == 0)
+        {
+            active3 = "active";
+            first = Model.Page - 2;
+            second = Model.Page - 1;
+            third = Model.Page;
+        }
         <div class="paginationDiv">
 
             <nav aria-label="Page navigation example">

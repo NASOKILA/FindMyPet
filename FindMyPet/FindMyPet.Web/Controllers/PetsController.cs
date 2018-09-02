@@ -81,14 +81,14 @@ namespace FindMyPet.Web.Controllers
                 count = DefaultResultsPerPage;
 
 
-            
+            var allPets = context.Pets.ToList();
 
             List<ListPetsBindingModel> pets = this.context.Pets
                 .Include(p => p.Owner)
                 .Include(p => p.Founder)
                 .OrderByDescending(a => a.Status)
                 .ThenBy(a => a.TimeLost)
-                .Skip((page.Value - 1) * count.Value)
+                .Skip((page.Value - DefaultPage) * count.Value)
                 .Take(count.Value)
                 .Select(p => new ListPetsBindingModel()
                 {
@@ -111,7 +111,7 @@ namespace FindMyPet.Web.Controllers
 
             if (pets.Count == 0)
             {
-                page = page - 1;
+                page = (allPets.Count % DefaultResultsPerPage) + DefaultResultsPerPage;
                 return new RedirectToActionResult(StaticConstants.All, StaticConstants.Pets, new { @area = StaticConstants.Empty, @page = page });
             }
 

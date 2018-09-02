@@ -527,7 +527,7 @@ WriteAttributeValue("", 1014, Model.ImageUrl, 1014, 15, false);
             WriteLiteral("</h2>\r\n                                <span>\r\n                                    Created by\r\n                                    <strong class=\"profile\">");
             EndContext();
             BeginContext(6363, 145, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ea84d4c04cb5428ba12de3dab0eacec2", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4c5f09ccff0f4dfdbeb1dcc09846f5f6", async() => {
                 BeginContext(6483, 21, false);
 #line 205 "C:\Users\Asus\Desktop\FindMyPet\FindMyPet\FindMyPet.Web\Areas\Admin\Views\Pets\Details.cshtml"
                                                                                                                                                                               Write(comment.Creator.Email);
@@ -662,7 +662,7 @@ WriteAttributeValue("", 7541, comment.Id.ToString(), 7541, 22, false);
             WriteLiteral("                                    ");
             EndContext();
             BeginContext(8114, 271, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0be363541adf45f39c31ebbc899445b1", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8c0d52a4f97c4bc6a693dcc8cfc1e6de", async() => {
                 BeginContext(8287, 94, true);
                 WriteLiteral("\r\n                                        Delete Comment\r\n                                    ");
                 EndContext();
@@ -735,7 +735,7 @@ WriteAttributeValue("", 7541, comment.Id.ToString(), 7541, 22, false);
             WriteLiteral("                    <br />\r\n                </div>\r\n            </div>\r\n\r\n            <br />\r\n            ");
             EndContext();
             BeginContext(8696, 577, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e426bdb8b5a04cd29fe94e6964f7381a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "98d363ef12844f8a8dc9bce5754286d4", async() => {
                 BeginContext(8809, 457, true);
                 WriteLiteral(@"
 
@@ -787,7 +787,7 @@ WriteAttributeValue("", 7541, comment.Id.ToString(), 7541, 22, false);
             WriteLiteral("\r\n\r\n            <br />\r\n            <br />\r\n\r\n\r\n\r\n            <div class=\"bottom\">\r\n\r\n                <div class=\"card-footer text-center\">\r\n                    <h1 class=\"display-3\">Actions</h1>\r\n                    <hr />\r\n                    ");
             EndContext();
             BeginContext(9518, 104, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "22e8666175e347a0890cc2e2b93b5103", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e8840772acb041b3b7348669c4c69e37", async() => {
                 BeginContext(9614, 4, true);
                 WriteLiteral("Back");
                 EndContext();
@@ -823,7 +823,7 @@ WriteAttributeValue("", 7541, comment.Id.ToString(), 7541, 22, false);
             WriteLiteral("                        ");
             EndContext();
             BeginContext(9721, 135, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e6b72e872a4e4e779245df8bf86630ae", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d2b40c2fef4c48449f5d3039e2794ff0", async() => {
                 BeginContext(9847, 5, true);
                 WriteLiteral("Found");
                 EndContext();
@@ -892,7 +892,7 @@ WriteAttributeValue("", 7541, comment.Id.ToString(), 7541, 22, false);
             WriteLiteral("                        ");
             EndContext();
             BeginContext(10146, 117, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e2e3e51c77314dd9b1bc001210bd2af9", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5d55055178604c6cba41908a7048f40d", async() => {
                 BeginContext(10255, 4, true);
                 WriteLiteral("Edit");
                 EndContext();
@@ -930,7 +930,7 @@ WriteAttributeValue("", 7541, comment.Id.ToString(), 7541, 22, false);
             WriteLiteral("\r\n                        ");
             EndContext();
             BeginContext(10289, 120, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d7f282b75bd041e287b45dce08461f1a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1baf0e70fdc1459cb079b0284d43c30f", async() => {
                 BeginContext(10399, 6, true);
                 WriteLiteral("Delete");
                 EndContext();

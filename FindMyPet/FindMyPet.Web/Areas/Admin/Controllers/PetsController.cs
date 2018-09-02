@@ -69,37 +69,39 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
             
             if (count < 1)
                 count = DefaultResultsPerPage;
-            
+
+
+            var allPets = context.Pets.ToList();
 
             List<ListPetsBindingModel> pets = this.context.Pets
-            .Include(p => p.Owner)
-            .Include(p => p.Founder)
-            .OrderByDescending(a => a.Status)
-            .ThenBy(a => a.TimeLost)
-            .Skip((page.Value - 1) * count.Value)
-            .Take(count.Value)
-            .Select(p => new ListPetsBindingModel()
-            {
-                Id = p.Id,
-                Age = p.Age,
-                ImageUrl = p.ImageUrl,
-                LocationLost = p.LocationLost,
-                Name = p.Name,
-                Type = p.Type,
-                TimeLost = p.TimeLost,
-                TimeFound = p.TimeFound,
-                Status = p.Status,
-                OwnerId = p.OwnerId,
-                Owner = p.Owner,
-                Founder = p.Founder,
-                FounderId = p.FounderId
-            })
-            .ToList();
+                .Include(p => p.Owner)
+                .Include(p => p.Founder)
+                .OrderByDescending(a => a.Status)
+                .ThenBy(a => a.TimeLost)
+                .Skip((page.Value - DefaultPage) * count.Value)
+                .Take(count.Value)
+                .Select(p => new ListPetsBindingModel()
+                {
+                    Id = p.Id,
+                    Age = p.Age,
+                    ImageUrl = p.ImageUrl,
+                    LocationLost = p.LocationLost,
+                    Name = p.Name,
+                    Type = p.Type,
+                    TimeLost = p.TimeLost,
+                    TimeFound = p.TimeFound,
+                    Status = p.Status,
+                    OwnerId = p.OwnerId,
+                    Owner = p.Owner,
+                    Founder = p.Founder,
+                    FounderId = p.FounderId
+                })
+                .ToList();
 
 
             if (pets.Count == 0)
             {
-                page = page - 1;
+                page = (allPets.Count % DefaultResultsPerPage) + DefaultResultsPerPage;
                 return new RedirectToActionResult(StaticConstants.All, StaticConstants.Pets, new { @area = StaticConstants.AdminRole, @page = page });
             }
 
