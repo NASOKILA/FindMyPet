@@ -69,20 +69,20 @@
                 <br />
 
                 <!--
-        Pets Owned
-        Pets Found
+                    Pets Owned
+                    Pets Found
 
-        Messages
-    -->
+                    Messages
+                -->
 
 
             </div>
 
             <div class="left">
 
-                
-                    <h1 class="display-3"><strong>Messages</strong></h1>
-                
+
+                <h1 class="display-3"><strong>Messages</strong></h1>
+
                 <div class="card col-12 thumbnail">
                     <br />
 
@@ -98,53 +98,51 @@
 
                         @foreach (var message in ViewBag.Messages)
                         {
-                            <div class="card col-12 commentsContainer">
-
-                                <h2>@message.Content</h2>
-                                <span>
-                                    Created by
-                                    <strong style="color: grey"><a style="font-size:20px" asp-controller="Users" asp-action="Profile" asp-route-id="@message.Sender.Id">@message.Sender.Email</a></strong>
-                                    on
-                                    <i>@message.CreationDate</i>
-                                    <br />
-                                    <br />
-
-                                    @if (message.LikeDisabled == false)
-                                    {
-
-                                        <strong style="color: darkblue">
-                                            <a class="btn btn-sm btn-success likeButton" href="/Messages/AddLike/@ViewData["CurrentId"].ToString()*@message.Id.ToString()">Like</a>
-                                            :
-                                        </strong>
-
-                                    }
-                                    else
-                                    {
-
-                                        <strong style="color: darkblue">
-                                            <a class="btn btn-sm btn-danger removelikeButton" href="/Messages/RemoveLike/@ViewData["CurrentId"].ToString()*@message.Id.ToString()">Dislike</a>
-                                            :
-                                        </strong>
-                                    }
-
-
-
-                                    <i>@message.Likes.Count</i>
-
-                                    <br />
-
-                                </span>
+                        <div class="card col-12 commentsContainer">
+                            <br />
+                            <br />
+                            <h2>@message.Content</h2>
+                            <span>
+                                Created by
+                                <strong style="color: grey"><a style="font-size:20px" asp-controller="Users" asp-action="Profile" asp-route-id="@message.Sender.Id">@message.Sender.Email</a></strong>
+                                on
+                                <i>@message.CreationDate</i>
                                 <br />
-                                @if (ViewData["isAdmin"].ToString() == "True" || this.User.Identity.Name == Model.Email)
+                                <br />
+
+                                @if (message.LikeDisabled == false)
                                 {
-
-                                    <a style="margin: 0 auto" class="btn btn-danger col-3" asp-controller="Users" asp-action="RemoveMessage" asp-route-userId="@Model.Id" asp-route-messageId="@message.Id">
-                                        Delete Message
-                                    </a>
+                                    <strong style="color: darkblue">
+                                        <a class="btn btn-sm btn-success likeButton" data-url="@Url.Action("AddLike", "Messages", new {id = message.Id.ToString()})">Like</a>
+                                        :
+                                    </strong>
                                 }
+                                else
+                                {
+                                    <strong style="color: darkblue">
+                                        <a class="btn btn-sm btn-danger removelikeButton" data-url="@Url.Action("RemoveLike", "Messages", new {id = message.Id.ToString()})">Remove Like</a>
+                                        :
+                                    </strong>
+                                }
+
+
+
+                                <i>@message.Likes.Count</i>
+
                                 <br />
-                                <br />
-                            </div>
+
+                            </span>
+                            <br />
+                            @if (ViewData["isAdmin"].ToString() == "True" || this.User.Identity.Name == Model.Email)
+                            {
+
+                                <a style="margin: 0 auto" class="btn btn-danger col-3" asp-controller="Users" asp-action="RemoveMessage" asp-route-userId="@Model.Id" asp-route-messageId="@message.Id">
+                                    Delete Message
+                                </a>
+                            }
+                            <br />
+                            <br />
+                        </div>
                         }
 
                     }
@@ -155,7 +153,7 @@
             <br />
             <form method="post" asp-controller="Users" asp-action="AddMessage" asp-route-id="@Model.Id">
 
-                    <h2 class=""><strong>Add Message</strong></h2>
+                <h2 class=""><strong>Add Message</strong></h2>
                 <div class="form-group row">
                     <textarea class="form-control commentDescription" name="Description" placeholder="Enter Comment"
                               minlength="10" required></textarea>
@@ -180,3 +178,54 @@
     </div>
 </div>
 
+
+@section Scripts {
+
+    
+    <script>
+        
+        $("body").on("click", ".likeButton", function () {
+        let addLikeUrl = $(this).data("url");
+            $.get(addLikeUrl);
+
+            let commentId = addLikeUrl.split("/").slice(-1).pop()
+            console.log(commentId)
+            let currentLikes = Number($(this).parent().next()[0].innerText);
+            let newLikes = currentLikes + 1;
+
+            console.log($(this).parent().next()[0]);
+            $(this).parent().next().replaceWith("<i class=\"commentLikes\">" + newLikes + "</i>");
+            //replace
+            $(this).replaceWith("<a class='btn btn-sm btn-danger removelikeButton' data-url='/Messages/RemoveLike/" + commentId + "'>Remove Like</a>");
+
+        });
+
+    </script>
+
+    <script>
+        
+        $("body").on("click", ".removelikeButton", function () {
+
+            let removeLikeUrl = $(this).data("url");
+            $.get(removeLikeUrl);
+
+            let commentId = removeLikeUrl.split("/").slice(-1).pop()
+            console.log(commentId);
+
+            let currentLikes = Number($(this).parent().next()[0].innerText);
+            console.log(currentLikes)
+
+            let newLikes = currentLikes - 1;
+            console.log(newLikes)
+
+            console.log($(this).parent().next()[0]);
+
+            //replace
+            $(this).parent().next().replaceWith("<i class=\"commentLikes\">" + newLikes + "</i>");
+
+            $(this).replaceWith("<a class='btn btn-sm btn-success likeButton'  data-url='/Messages/AddLike/" + commentId + "'>Like</a>");
+        });
+
+    </script>
+
+}

@@ -274,7 +274,7 @@ WriteAttributeValue("", 945, Model.AvatarUrl, 945, 16, false);
             WriteLiteral("</h2>\r\n                                <span>\r\n                                    Created by\r\n                                    <strong style=\"color: grey\">");
             EndContext();
             BeginContext(2927, 129, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "411354aa4dbc43bba7f24f45b21929f7", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8331bc03ba5c4ab3ba7ec2ad2abd41a2", async() => {
                 BeginContext(3032, 20, false);
 #line 105 "C:\Users\Asus\Desktop\FindMyPet\FindMyPet\FindMyPet.Web\Areas\Admin\Views\Users\MyProfile.cshtml"
                                                                                                                                                                    Write(message.Sender.Email);
@@ -408,7 +408,7 @@ WriteAttributeValue("", 4079, message.Id.ToString(), 4079, 22, false);
             WriteLiteral("                                    ");
             EndContext();
             BeginContext(4648, 266, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f3d61e88fa274f5e856cb58f150c96b5", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5628f5290d68484a98cd7b40771dee5b", async() => {
                 BeginContext(4816, 94, true);
                 WriteLiteral("\r\n                                        Delete Message\r\n                                    ");
                 EndContext();
@@ -490,7 +490,7 @@ WriteAttributeValue("", 4079, message.Id.ToString(), 4079, 22, false);
                     ");
             EndContext();
             BeginContext(5427, 87, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "58da4434544c4592b7ce4e4e5e6f0eed", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ee27acead45849ac99daa343f659bd15", async() => {
                 BeginContext(5506, 4, true);
                 WriteLiteral("Home");
                 EndContext();
