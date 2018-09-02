@@ -15,7 +15,6 @@
 
             <div class="">
 
-
                 <br />
                 <h2 class="display-4"><strong class="right">Type</strong> : <i class="left">@Model.Type</i></h2>
                 <br />
@@ -198,50 +197,49 @@
                         <div class="card col-12">
                             @foreach (var comment in ViewBag.Comments)
                             {
+                                <div>
 
-                                <h2>@comment.Content</h2>
-                                <span>
-                                    Created by
-                                    <strong class="profile"><a class="profileLink" asp-controller="Users" asp-action="Profile" asp-route-id="@comment.Creator.Id">@comment.Creator.Email</a></strong>
-                                    on
-                                    <i>@comment.CreationDate</i>
+                                    <h2>@comment.Content</h2>
+                                    <span>
+                                        Created by
+                                        <strong class="profile"><a class="profileLink" asp-controller="Users" asp-action="Profile" asp-route-id="@comment.Creator.Id">@comment.Creator.Email</a></strong>
+                                        on
+                                        <i>@comment.CreationDate</i>
+                                        <br />
+                                        <br />
+
+                                        @if (comment.LikeDisabled == false)
+                                        {
+                                            <strong style="color: darkblue">
+                                                <a class="btn btn-sm btn-success likeButton" data-url="@Url.Action("AddLike", "Comments", new {id = comment.Id.ToString()})">Like</a>
+                                                :
+                                            </strong>
+                                        }
+                                        else
+                                        {
+                                            <strong style="color: darkblue">
+                                                <a class="btn btn-sm btn-danger removelikeButton" data-url="@Url.Action("RemoveLike", "Comments", new {id = comment.Id.ToString()})">Remove Like</a>
+                                                :
+                                            </strong>
+                                        }
+
+                                        <i class="commentLikes">@comment.Likes.Count</i>
+
+                                    </span>
                                     <br />
                                     <br />
-
-                                    @if (comment.LikeDisabled == false)
+                                    @if (this.User.Identity.Name == comment.Creator.Email || ViewData["isAdmin"].ToString() == "True")
                                     {
-                                        <strong style="color: darkblue">
-                                            <a class="btn btn-sm btn-success likeButton" href="/Comments/AddLike/@ViewData["CurrentId"].ToString()*@comment.Id.ToString()">Like</a>
-                                            :
-                                        </strong>
+                                        //<a style="margin: 0 auto" class="deleteBtn btn btn-danger col-3" autocomplete="off" data-url="@Url.Action("RemoveCommentFromPet", "Pets", new {commentId = comment.Id} )">
+                                        <a style="margin: 0 auto" class="deleteBtn btn btn-danger col-3" autocomplete="off" data-url="@Url.Action("RemoveCommentFromPet", "Pets", new {commentId = comment.Id} )">
+                                            Delete Comment
+                                        </a>
                                     }
-                                    else
-                                    {
-                                        <strong style="color: darkblue">
-                                            <a class="btn btn-sm btn-danger removelikeButton" href="/Comments/RemoveLike/@ViewData["CurrentId"].ToString()*@comment.Id.ToString()">Remove Like</a>
-                                            :
-                                        </strong>
-                                    }
-
-
-
-                                    <i>@comment.Likes.Count</i>
-
-                                </span>
-                                <br />
-                                <br />
-                                @if (this.User.Identity.Name == comment.Creator.Email || ViewData["isAdmin"].ToString() == "True")
-                                {
-
-                                    <a style="margin: 0 auto" class="btn btn-danger col-3" asp-controller="Pets" asp-action="RemoveCommentFromPet" asp-route-petId="@Model.Id" asp-route-commentId="@comment.Id">
-                                        Delete Comment
-                                    </a>
-                                }
-                                <br />
-                                <br />
+                                    <br />
+                                    <br />
+                                </div>
                             }
                         </div>
-
                     }
                     <br />
                 </div>
@@ -281,11 +279,9 @@
 
                     @if (this.User.Identity.Name == Model.Owner.Email || ViewData["isAdmin"].ToString() == "True")
                     {
-
                         <a class="btn btn-lg btn-warning col-3" asp-route-id="@Model.Id" asp-page="/PetsPages/Edit">Edit</a>
                         <a class="btn btn-lg btn-danger col-3" asp-route-id="@Model.Id" asp-page="/PetsPages/Delete">Delete</a>
                     }
-
 
                 </div>
 
@@ -297,4 +293,92 @@
     </div>
 </div>
 
+
+@section Scripts {
+
+    <script>
+
+        let deleteCommentUrl = $(".deleteBtn").data("url");
+
+        $(".deleteBtn").click(function () {
+            $.get(deleteCommentUrl);
+            $(this).parent().hide();
+        });
+
+
+    </script>
+
+    <script>
+
+
+        $("body").on("click", ".likeButton", function () {
+        let addLikeUrl = $(this).data("url");
+            $.get(addLikeUrl);
+
+            let commentId = addLikeUrl.split("/").slice(-1).pop()
+            console.log(commentId)
+            let currentLikes = Number($(this).parent().next()[0].innerText);
+            let newLikes = currentLikes + 1;
+
+            console.log($(this).parent().next()[0]);
+            $(this).parent().next().replaceWith("<i class=\"commentLikes\">" + newLikes + "</i>");
+            //replace
+            $(this).replaceWith("<a class='btn btn-sm btn-danger removelikeButton' data-url='/Comments/RemoveLike/" + commentId + "'>Remove Like</a>");
+
+        });
+
+    </script>
+
+    <script>
+        
+        function addLike(currentElement){ 
+
+
+
+            console.log(currentElement)
+            /*
+            console.log(passedCommentId)
+
+            let addLikeUrl = "/Comments/AddLike/" + passedCommentId;
+
+            console.log(addLikeUrl)
+
+            $.get(addLikeUrl);
+            
+            let currentLikes = Number($(this)   .parent().next()[0].innerText);
+            let newLikes = currentLikes + 1;
+
+            console.log($(this).parent().next()[0]);
+            $(this).parent().next().replaceWith("<i class=\"commentLikes\">" + newLikes + "</i>");
+            //replace
+            $(this).replaceWith("<a class='btn btn-sm btn-danger removelikeButton' data-url='/Comments/RemoveLike/" + passedCommentId + "'>Remove Like</a>");
+            */
+
+        }
+        
+        $("body").on("click", ".removelikeButton", function () {
+
+            let removeLikeUrl = $(this).data("url");
+            $.get(removeLikeUrl);
+
+            let commentId = removeLikeUrl.split("/").slice(-1).pop()
+            console.log(commentId);
+
+            let currentLikes = Number($(this).parent().next()[0].innerText);
+            console.log(currentLikes)
+
+            let newLikes = currentLikes - 1;
+            console.log(newLikes)
+            
+            console.log($(this).parent().next()[0]);
+
+            //replace
+            $(this).parent().next().replaceWith("<i class=\"commentLikes\">" + newLikes + "</i>");
+
+            $(this).replaceWith("<a class='btn btn-sm btn-success likeButton'  data-url='/Comments/AddLike/" + commentId + "'>Like</a>");
+        });
+
+    </script>
+
+}
 

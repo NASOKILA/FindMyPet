@@ -88,7 +88,7 @@ using FindMyPet.Web.Models;
                                 ");
             EndContext();
             BeginContext(813, 104, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "288112e922d64da2becdeb49a931b787", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ac5dad7b5c9442568da1dad0d5072adf", async() => {
                 BeginContext(905, 8, true);
                 WriteLiteral("Register");
                 EndContext();
@@ -115,7 +115,7 @@ using FindMyPet.Web.Models;
             WriteLiteral(" if you don\'t have an account.\r\n                            </h3>\r\n                            <br />\r\n                            <h3>\r\n                                ");
             EndContext();
             BeginContext(1086, 98, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0806f72727ae46cc8f3cedc10f9103d4", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "620158ae56aa4c799c4184711b371eb7", async() => {
                 BeginContext(1175, 5, true);
                 WriteLiteral("Login");
                 EndContext();

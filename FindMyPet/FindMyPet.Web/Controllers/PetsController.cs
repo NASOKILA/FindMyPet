@@ -212,14 +212,12 @@ namespace FindMyPet.Web.Controllers
             };
 
             this.context.Comments.Add(comment);
-
             this.context.SaveChanges();
-
             return RedirectToAction(StaticConstants.Details, StaticConstants.Pets, new { Id = petId });
         }
 
         [HttpGet]
-        public IActionResult RemoveCommentFromPet(int petId, int commentId) {
+        public void RemoveCommentFromPet(int petId, int commentId) {
 
             Comment comment = this.context.Comments
                 .Include(c => c.Likes)
@@ -229,9 +227,11 @@ namespace FindMyPet.Web.Controllers
             {
                 this.context.Likes.Remove(like);
             }
+
+            this.context.Comments.Remove(comment);
             this.context.SaveChanges();
 
-            return RedirectToAction(StaticConstants.Details, StaticConstants.Pets, new { Id = petId });
+            //return RedirectToAction(StaticConstants.Details, StaticConstants.Pets, new { Id = petId });
         }
 
         [HttpGet]
