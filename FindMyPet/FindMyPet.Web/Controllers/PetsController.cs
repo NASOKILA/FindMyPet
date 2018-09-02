@@ -1,6 +1,7 @@
 ﻿using FindMyPet.Data;
 using FindMyPet.Models;
 using FindMyPet.Web.Models.BindingModels;
+using FindMyPet.Web.Models.ViewModels;
 using FindMyPet.Web.Static;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -19,9 +20,13 @@ namespace FindMyPet.Web.Controllers
         [BindProperty]
         public List<Comment> CommentsForPetDetails { get; set; }
 
+        private const int fifty = 50;
         private const int oneHundred = 100;
         private const int twoHundred = 200;
         private const int threeHundred = 300;
+
+        private const int DefaultPage = 1;
+        private const int DefaultResultsPerPage = 3;
 
         private readonly UserManager<User> userManager;
         private readonly FindMyPetDbContext context;
@@ -35,8 +40,9 @@ namespace FindMyPet.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult All()
+        public IActionResult All(int? page, int? count)
         {
+
             bool isLoggedIn = false;
             bool isAdmin = false;
 
@@ -55,9 +61,35 @@ namespace FindMyPet.Web.Controllers
 
             ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
             ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
+
+
+            
+
+            if (!page.HasValue)
+                page = DefaultPage;
+
+
+            if (!count.HasValue)
+                count = DefaultResultsPerPage;
+
+            //Validation
+            if (page < 1)
+                page = DefaultPage;
+
+
+            if (count < 1)
+                count = DefaultResultsPerPage;
+
+
             
 
             List<ListPetsBindingModel> pets = this.context.Pets
+                .Include(p => p.Owner)
+                .Include(p => p.Founder)
+                .OrderByDescending(a => a.Status)
+                .ThenBy(a => a.TimeLost)
+                .Skip((page.Value - 1) * count.Value)
+                .Take(count.Value)
                 .Select(p => new ListPetsBindingModel()
                 {
                     Id = p.Id,
@@ -74,13 +106,37 @@ namespace FindMyPet.Web.Controllers
                     Founder = p.Founder,
                     FounderId = p.FounderId
                 })
-                .Include(p => p.Owner)
-                .Include(p => p.Founder)
-                .OrderByDescending(a => a.Status)
-                .ThenByDescending(a => a.TimeLost)
                 .ToList();
-            
-            return View(pets);
+
+
+            if (pets.Count == 0)
+            {
+                page = page - 1;
+                return new RedirectToActionResult(StaticConstants.All, StaticConstants.Pets, new { @area = StaticConstants.Empty, @page = page });
+            }
+
+            PaginationViewModel pagination = new PaginationViewModel()
+            {
+                Page = page.Value,
+                Count = count.Value,
+                Pets = pets
+            };
+
+            return View(pagination);
+        }
+        
+        [HttpGet]
+        public IActionResult Previous(int page)
+        {
+            page = page - DefaultPage;
+            return new RedirectToActionResult(StaticConstants.All, StaticConstants.Pets, new { @area = StaticConstants.Empty, @page = page });
+        }
+        
+        [HttpGet]
+        public IActionResult Next(int page)
+        {
+            page = page + DefaultPage;
+            return new RedirectToActionResult(StaticConstants.All, StaticConstants.Pets, new { @area = StaticConstants.Empty, @page = page });
         }
 
         [HttpGet]
@@ -242,6 +298,9 @@ namespace FindMyPet.Web.Controllers
             
             switch (pet.Type)
             {
+                case StaticConstants.Other:
+                    currentUser.FeedBack = currentUser.FeedBack + fifty;
+                    break;
                 case StaticConstants.Dog:
                     currentUser.FeedBack = currentUser.FeedBack + oneHundred;
                     break;

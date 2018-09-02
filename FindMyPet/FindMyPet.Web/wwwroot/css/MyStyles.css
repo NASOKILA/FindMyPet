@@ -140,7 +140,6 @@ footer {
     color: white !important;
 }
 
-
 .avatar {
     width:40px; 
     height:40px; 
@@ -152,18 +151,34 @@ footer {
 
 .logoutBtn {
     font-style: italic;
-    color: white !important;
+    color: black !important;
 }
 
 .logoutBtn:hover {
     position: relative;
-    color: black !important;
+    color: white !important;
+    text-decoration:none;
 }
-
 
 .commentsContainer {
     background-image: radial-gradient(circle, #f9f5c8, #f7f4a8, #f2f387, #eaf264, #e1f239);
     border-radius: 25%;
 }
 
+.paginationDiv {
+    text-align: center;
+    width: 100%;
+    float:right;
+}
 
+
+.logoutBtnAdmin {
+    font-style: italic;
+    color: white !important;
+}
+
+.logoutBtnAdmin:hover {
+    position: relative;
+    color: black !important;
+    text-decoration: none;
+}

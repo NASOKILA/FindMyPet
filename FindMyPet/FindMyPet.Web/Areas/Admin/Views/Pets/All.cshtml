@@ -1,4 +1,4 @@
-﻿@model IList<FindMyPet.Web.Models.BindingModels.ListPetsBindingModel>
+﻿@model FindMyPet.Web.Models.ViewModels.PaginationViewModel
 
 @{
     ViewData["Title"] = "All";
@@ -7,93 +7,121 @@
 }
 
 
+
 @if (this.User.Identity.IsAuthenticated)
 {
-    <div class="text-center">
+    <div class="text-center titleDiv">
         <h1 class="display-3 classTitle">All Pets</h1>
     </div>
     <hr class="display-3" />
 
-
-    @if (Model.Count > 1)
+    @if (Model.Pets.Count > 1)
     {
         <div class="right">
-
             <partial name="_PetPartialView" />
         </div>
     }
-    <br />
 
+    <div class="AllPetList">
 
-
-    @foreach (var pet in Model)
-    {
-
-        @if (pet.Status == "Found")
+        @foreach (var pet in Model.Pets)
         {
-            petStyle = "petFoundStyle";
-        }
-        <div class="classComix  card col-sm-4 text-center @petStyle">
-            <a class="pageLink" asp-controller="Pets" asp-action="Details" asp-route-id="@pet.Id">
-                <img class="petImg card-image-top img-fluid img-thumbnail" src="@pet.ImageUrl" />
-                <div class="card-body">
-                    <h4 class="card-title"></h4>
-                    <p class="card-text">
-                        <strong>Type</strong> : @pet.Type;
-                    </p>
-                    <p class="card-text">
-                        <strong>Name</strong> : @pet.Name
-                    </p>
 
-                    <p class="card-text">
-                        <strong>Age</strong> : @pet.Age
-                    </p>
+            @if (pet.Status != "Lost")
+            {
+                petStyle = "petFoundStyle";
+            }
+            else
+            {
+                petStyle = "petStyle";
+            }
+            <div class="classComix card col-sm-4 text-center @petStyle">
 
-                    <p class="card-text">
-                        <strong>Location Lost</strong> : @pet.LocationLost
-                    </p>
+                <a class="pageLink" asp-controller="Pets" asp-action="Details" asp-route-id="@pet.Id">
+                    <img class="bottom card-image-top img-fluid img-thumbnail" src="@pet.ImageUrl" />
+                    <div class="card-body">
+                        <h4 class="card-title"></h4>
+                        <p class="card-text">
+                            <strong>Type</strong> : @pet.Type;
+                        </p>
+                        <p class="card-text">
+                            <strong>Name</strong> : @pet.Name
+                        </p>
 
-                    <p class="card-text">
-                        <strong>Time Lost</strong> : @pet.TimeLost
-                    </p>
+                        <p class="card-text">
+                            <strong>Age</strong> : @pet.Age
+                        </p>
 
+                        <p class="card-text">
+                            <strong>Location Lost</strong> : @pet.LocationLost
+                        </p>
+
+                        <p class="card-text">
+                            <strong>Time Lost</strong> : @pet.TimeLost
+                        </p>
+
+                    </div>
+                </a>
+
+                <div class="classButtons">
+
+                    <a class="btn btn-primary col-3" asp-controller="Pets" asp-action="Details" asp-route-id="@pet.Id">Details</a>
+                    @if (pet.Status == "Lost")
+                    {
+                        <a class="btn btn-success col-3" asp-controller="Pets" asp-action="PetFound" asp-route-id="@pet.Id">Found</a>
+                    }
+
+                    @if (this.User.Identity.Name == pet.Owner.Email || this.User.Claims.Any(c => c.Value == "Admin"))
+                    {
+
+                        <a class="btn btn-warning col-3" asp-route-id="@pet.Id" asp-page="/PetsPages/Edit">Edit</a>
+                        <a class="btn btn-danger col-3" asp-route-id="@pet.Id" asp-page="/PetsPages/Delete">Delete</a>
+                    }
                 </div>
-            </a>
-
-
-            <div class="classButtons">
-                <a class="btn btn-primary col-3" asp-controller="Pets" asp-action="Details" asp-route-id="@pet.Id">Details</a>
-                @if (pet.Status == "Lost")
-                {
-                    <a class="btn btn-success col-3" asp-controller="Pets" asp-action="PetFound" asp-route-id="@pet.Id">Found</a>
-                }
-
-                @if (this.User.Identity.Name == pet.Owner.Email || this.User.Claims.Any(c => c.Value == "Admin"))
-                {
-
-                    <a class="btn btn-warning col-3" asp-route-id="@pet.Id" asp-page="/PetsPages/Edit">Edit</a>
-                    <a class="btn btn-danger col-3" asp-route-id="@pet.Id" asp-page="/PetsPages/Delete">Delete</a>
-                }
 
             </div>
-        </div>
 
-    }
+        }
+
+    </div>
 
     @if (Model.Count == 0)
     {
         <h3 class="text-center">No pets in database.</h3>
     }
+    else
+    {
+
+
+        int first = Model.Page;
+        int second = Model.Page + 1;
+        int third = Model.Page + 2;
+
+        <div class="paginationDiv">
+
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Pets" asp-action="Previous" asp-route-page="@Model.Page" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" asp-controller="Pets" asp-action="All" asp-route-page="@first">@first</a></li>
+                    <li class="page-item"><a class="page-link" asp-controller="Pets" asp-action="All" asp-route-page="@second">@second</a></li>
+                    <li class="page-item"><a class="page-link" asp-controller="Pets" asp-action="All" asp-route-page="@third">@third</a></li>
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Pets" asp-action="Next" asp-route-page="@Model.Page" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    }
 
     <br />
-
-    <div>
-
-        <div class="classButtons">
-
-        </div>
-
-    </div>
 
 }
 else

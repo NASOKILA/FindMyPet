@@ -1,6 +1,7 @@
 ﻿using FindMyPet.Data;
 using FindMyPet.Models;
 using FindMyPet.Web.Models.BindingModels;
+using FindMyPet.Web.Models.ViewModels;
 using FindMyPet.Web.Static;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -19,9 +20,14 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
         [BindProperty]
         public List<Comment> CommentsForPetDetails { get; set; }
         
+        private const int fifty = 50;
         private const int oneHundred = 100;
         private const int twoHundred = 200;
         private const int threeHundred = 300;
+
+
+        private const int DefaultPage = 1;
+        private const int DefaultResultsPerPage = 3;
 
         private readonly UserManager<User> userManager;
         private readonly FindMyPetDbContext context;
@@ -35,7 +41,7 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult All()
+        public IActionResult All(int? page, int? count)
         {
             bool isLoggedIn = false;
             bool isAdmin = false;
@@ -46,34 +52,79 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
                 isLoggedIn = true;
                 isAdmin = currentUser.Claims.Any(c => c.Value == StaticConstants.AdminRole);
             }
-            
+
+
             ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
             ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
             
-            List<ListPetsBindingModel> pets = this.context.Pets
-                .Select(p => new ListPetsBindingModel()
-                {
-                    Id = p.Id,
-                    Age = p.Age,
-                    ImageUrl = p.ImageUrl,
-                    LocationLost = p.LocationLost,
-                    Name = p.Name,
-                    Type = p.Type,
-                    TimeLost = p.TimeLost,
-                    TimeFound = p.TimeFound,
-                    Status = p.Status,
-                    OwnerId = p.OwnerId,
-                    Owner = p.Owner,
-                    Founder = p.Founder,
-                    FounderId = p.FounderId
-                })
-                .Include(p => p.Owner)
-                .Include(p => p.Founder)
-                .OrderByDescending(a => a.Status)
-                .ThenByDescending(a => a.TimeLost)
-                .ToList();
+
+            if (!page.HasValue)
+                page = DefaultPage;
             
-            return View(pets);
+            if (!count.HasValue)
+                count = DefaultResultsPerPage;
+
+            if (page < 1)
+                page = DefaultPage;
+            
+            if (count < 1)
+                count = DefaultResultsPerPage;
+            
+
+            List<ListPetsBindingModel> pets = this.context.Pets
+            .Include(p => p.Owner)
+            .Include(p => p.Founder)
+            .OrderByDescending(a => a.Status)
+            .ThenBy(a => a.TimeLost)
+            .Skip((page.Value - 1) * count.Value)
+            .Take(count.Value)
+            .Select(p => new ListPetsBindingModel()
+            {
+                Id = p.Id,
+                Age = p.Age,
+                ImageUrl = p.ImageUrl,
+                LocationLost = p.LocationLost,
+                Name = p.Name,
+                Type = p.Type,
+                TimeLost = p.TimeLost,
+                TimeFound = p.TimeFound,
+                Status = p.Status,
+                OwnerId = p.OwnerId,
+                Owner = p.Owner,
+                Founder = p.Founder,
+                FounderId = p.FounderId
+            })
+            .ToList();
+
+
+            if (pets.Count == 0)
+            {
+                page = page - 1;
+                return new RedirectToActionResult(StaticConstants.All, StaticConstants.Pets, new { @area = StaticConstants.AdminRole, @page = page });
+            }
+
+            PaginationViewModel pagination = new PaginationViewModel()
+            {
+                Page = page.Value,
+                Count = count.Value,
+                Pets = pets
+            };
+
+            return View(pagination);
+        }
+        
+        [HttpGet]
+        public IActionResult Previous(int page)
+        {
+            page = page - DefaultPage;
+            return new RedirectToActionResult(StaticConstants.All, StaticConstants.Pets, new { @area = StaticConstants.AdminRole, @page = page });
+        }
+
+        [HttpGet]
+        public IActionResult Next(int page)
+        {
+            page = page + DefaultPage;
+            return new RedirectToActionResult(StaticConstants.All, StaticConstants.Pets, new { @area = StaticConstants.AdminRole, @page = page });
         }
 
         [HttpGet]
@@ -292,6 +343,10 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
             
             switch (pet.Type)
             {
+
+                case StaticConstants.Other:
+                    currentUser.FeedBack = currentUser.FeedBack + fifty;
+                    break;
                 case StaticConstants.Dog:
                     currentUser.FeedBack = currentUser.FeedBack + oneHundred;
                     break;

@@ -19,6 +19,7 @@
         public const string Dog = "Dog";
         public const string Cat = "Cat";
         public const string Bird = "Bird";
+        public const string Other = "Other";
         public const string PetFoundCompleted = "PetFoundCompleted";
         public const string LoginRedirect = "/Identity/Account/Login";
         public const string AllUsersRedirect = "/PetsPages/AllUsers";
