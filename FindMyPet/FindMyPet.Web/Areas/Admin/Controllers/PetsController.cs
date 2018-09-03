@@ -183,10 +183,9 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
             return View(pet);
         }
         
-        [HttpPost]
-        public IActionResult AddCommentToPet(int id, string Description)
+        [HttpGet]
+        public void AddCommentToPet(int id, string Description)
         {
-
             bool isLoggedIn = false;
             bool isAdmin = false;
             
@@ -219,12 +218,12 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
 
             this.context.SaveChanges();
 
-            return RedirectToAction(StaticConstants.Details, StaticConstants.Pets, new { Id = petId });
+            //return RedirectToAction(StaticConstants.Details, StaticConstants.Pets, new { Id = petId });
         }
 
         [HttpGet]
         public void RemoveCommentFromPet(int commentId) {
-
+            
             bool isLoggedIn = false;
             bool isAdmin = false;
 

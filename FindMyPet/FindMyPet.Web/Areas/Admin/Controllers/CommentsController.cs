@@ -23,14 +23,12 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
             this.userManager = userManager;
             this.context = context;
         }
-        
 
         [HttpGet]
         public Comment GetLastComment()
         {
             return this.context.Comments.LastOrDefault();
         }
-
 
         [HttpGet]
         public void AddLike(int id)
@@ -50,7 +48,6 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
 
             this.context.Likes.Add(like);
             this.context.SaveChanges();
-            
             
             //return RedirectToAction(StaticConstants.Details, StaticConstants.Pets, new { Id = returnPetId });
         }

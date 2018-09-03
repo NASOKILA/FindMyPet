@@ -1,6 +1,8 @@
 ﻿@model FindMyPet.Models.Pet
+@using Microsoft.EntityFrameworkCore;
 @{
     ViewData["Title"] = "Details";
+    var context = new FindMyPet.Data.FindMyPetDbContext();
 }
 
 <div class="container">
@@ -13,8 +15,7 @@
             <br />
             <hr class="display-3" />
 
-            <div class="">
-
+            <div>
 
                 <br />
                 <h2 class="display-4"><strong class="right">Type</strong> : <i class="left">@Model.Type</i></h2>
@@ -182,7 +183,7 @@
                 <h2>
                     <strong>Comments</strong>
                 </h2>
-                <div class="card col-12 thumbnail commentsContainer">
+                <div class="card col-12 commentsContainer">
                     <br />
 
                     @if (Model.Comments.Count < 1)
@@ -190,18 +191,19 @@
 
                         <div>
                             <h3>No comments posted for this pet.</h3>
+                            <br />
+                            <br />
                         </div>
                     }
                     else
                     {
 
-                        <div class="card col-12 ">
-                            @foreach (var comment in ViewBag.Comments)
-                            {
-                                <div>
-                                    <h2 class="contentDiv">
-                                        @comment.Content
-                                    </h2>
+                        @foreach (var comment in ViewBag.Comments)
+                        {
+                            <div>
+                                <h2 class="contentDiv">
+                                    @comment.Content
+                                </h2>
                                 <span>
                                     Created by
                                     <strong class="profile"><a class="profileLink" asp-area="Admin" asp-controller="Users" asp-action="Profile" asp-route-id="@comment.Creator.Id">@comment.Creator.Email</a></strong>
@@ -213,43 +215,40 @@
                                     @if (comment.LikeDisabled == false)
                                     {
                                         <strong style="color: darkblue">
-                                            <a class="btn btn-sm btn-success likeButton"  data-url="@Url.Action("AddLike", "Comments", new { Area = "Admin", id = comment.Id.ToString()})">Like</a>
-                                            
+                                            <a class="btn btn-sm btn-success likeButton" data-url="@Url.Action("AddLike", "Comments", new {Area = "Admin", id = comment.Id.ToString()})">Like</a>
                                         </strong>
                                     }
                                     else
                                     {
                                         <strong style="color: darkblue">
-                                            <a class="btn btn-sm btn-danger removelikeButton" data-url="@Url.Action("RemoveLike", "Comments", new { Area = "Admin", id = comment.Id.ToString()})">Remove Like</a>
+                                            <a class="btn btn-sm btn-danger removelikeButton" data-url="@Url.Action("RemoveLike", "Comments", new {Area = "Admin", id = comment.Id.ToString()})">Remove Like</a>
                                         </strong>
                                     }
-
-                                            :
-                                    <i class="commentLikes" >@comment.Likes.Count</i>
+                                    :
+                                    <i class="commentLikes">@comment.Likes.Count</i>
 
                                 </span>
                                 <br />
                                 <br />
                                 @if (this.User.Identity.Name == comment.Creator.Email || ViewData["isAdmin"].ToString() == "True")
                                 {
-
-                                    <a style="margin: 0 auto" class="deleteBtn btn btn-danger col-3" data-url="@Url.Action("RemoveCommentFromPet", "Pets", new {Area = "Admin", commentId = comment.Id})">
+                                    //<a style="margin: 0 auto" class="deleteBtn btn btn-danger col-3" autocomplete="off" data-url="@Url.Action("RemoveCommentFromPet", "Pets", new {commentId = comment.Id} )">
+                                    <a style="margin: 0 auto" class="deleteBtn btn btn-danger col-3" autocomplete="off" data-url="@Url.Action("RemoveCommentFromPet", "Pets", new {Area = "Admin", commentId = comment.Id} )">
                                         Delete Comment
                                     </a>
                                 }
                                 <br />
                                 <br />
-                                </div>
-                            }
-                        </div>
-
+                            </div>
+                        }
                     }
-                    <br />
+
                 </div>
             </div>
 
             <br />
-            <form method="post" asp-area="Admin" asp-controller="Pets" asp-action="AddCommentToPet" asp-route-id="@Model.Id">
+
+            <form>
 
                 <h2 class=""><strong>Add Comment</strong></h2>
                 <div class="form-group row">
@@ -257,7 +256,7 @@
                               minlength="10" required></textarea>
                 </div>
 
-                <input type="submit" id="btn-add-game" class="btn btn-success btn-lg btn-block" value="Add Comment" />
+                <input type="button" id="btn-add-pet" data-url="@Url.Action("AddCommentToPet", "Pets", new { Area = "Admin", id = Model.Id})" class="btn btn-success btn-lg btn-block" value="Add Comment" />
             </form>
 
             <br />
@@ -268,7 +267,6 @@
             <div class="bottom">
 
                 <div class="card-footer text-center">
-                    
                     <h1 class="display-3">Actions</h1>
                     <hr />
                     <a class="btn btn-lg btn-primary col-3" asp-area="Admin" asp-controller="Pets" asp-action="All">Back</a>
@@ -283,11 +281,9 @@
 
                     @if (this.User.Identity.Name == Model.Owner.Email || ViewData["isAdmin"].ToString() == "True")
                     {
-
                         <a class="btn btn-lg btn-warning col-3" asp-area="Admin" asp-route-id="@Model.Id" asp-page="/PetsPages/Edit">Edit</a>
                         <a class="btn btn-lg btn-danger col-3" asp-area="Admin" asp-route-id="@Model.Id" asp-page="/PetsPages/Delete">Delete</a>
                     }
-
 
                 </div>
 
@@ -300,14 +296,85 @@
 </div>
 
 
-
 @section Scripts {
 
-    <script>
-//ADMIN
 
-        $(".deleteBtn").click(function () {
-        let deleteCommentUrl = $(this).data("url");
+    <script>
+        $("#btn-add-pet").click(function () {
+
+            let addCommentUrl = $(this).data("url");
+
+            let id = Number(addCommentUrl.split("/").pop());
+
+            let Description = $('.commentDescription').val();
+
+            console.log(addCommentUrl)
+            console.log(id)
+            console.log(Description)
+
+            $('.commentDescription').val('');
+
+            $.get(addCommentUrl,
+                    {
+                    Description: Description,
+                    id: id
+                }).then((res) => {
+
+                    console.log("SUCCESS !");
+                    console.log(res)
+
+
+                    console.log(Description);
+
+                    let currentComment = "";
+
+                    $.ajax({
+                        url: '/Admin/Comments/GetLastComment',
+                        method: 'GET',
+                        dataType: "json",
+                        success: function (currentComment) {
+
+                            console.log(currentComment)
+
+                     //APPEND TO
+                    $('.commentsContainer')
+                        .append(
+                         "<div>"
+                            + "<h2 class=\"contentDiv\">"
+                                + Description
+                            + "</h2>"
+                        + "<span> Created by "
+                        + "<strong class=\"profile\">"
+                            + "<a class='profileLink' href='/Admin/Users/Profile/@context.Users.FirstOrDefault(u => u.Email == this.User.Identity.Name).Id'>@this.User.Identity.Name</a>"
+                        + "</strong> on "
+                        + "<i>" + new Date().toLocaleDateString('en-gb') + " " + new Date().toLocaleTimeString('en-gb') + "</i><br/><br/>"
+
+                        + "<strong style='color:darkblue'>"
+                        + "<a class='btn btn-sm btn-success likeButton' data-url='/Admin/Comments/AddLike/" + currentComment.id + "'>Like</a>"
+                            + "</strong>"
+                            + ":"
+                            + "<i class=\"commentLikes\">0</i>"
+                        + "</span><br/><br/>"
+                        + "<a style='margin: 0 auto' class='deleteBtn btn btn-danger col-3' autocomplete='off' data-url='/Admin/Pets/RemoveCommentFromPet?commentId=" + currentComment.id + "'>Delete Comment<a></strong>"
+
+                        +"<br /><br /></div>");
+
+                        },
+                        error : (err) => console.log(err)
+                    })
+                });
+        });
+
+
+    </script>
+
+
+
+    <script>
+        //ADMIN
+
+        $("body").on("click",".deleteBtn",function () {
+            let deleteCommentUrl = $(this).data("url");
             $.get(deleteCommentUrl);
             $(this).parent().fadeOut();
         });
@@ -319,7 +386,7 @@
 
 
         $("body").on("click", ".likeButton", function () {
-        let addLikeUrl = $(this).data("url");
+            let addLikeUrl = $(this).data("url");
             $.get(addLikeUrl);
 
             let commentId = addLikeUrl.split("/").slice(-1).pop()

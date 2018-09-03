@@ -271,7 +271,7 @@ WriteAttributeValue("", 945, Model.AvatarUrl, 945, 16, false);
             WriteLiteral("\r\n                                </h2>\r\n                                <span>\r\n                                    Created by\r\n                                    <strong style=\"color: grey\">");
             EndContext();
             BeginContext(3030, 129, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cfeadbe9f2294245b785f4e9866f4626", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "46af34ca7249401684c3c502aefb0a0a", async() => {
                 BeginContext(3135, 20, false);
 #line 107 "C:\Users\Asus\Desktop\FindMyPet\FindMyPet\FindMyPet.Web\Areas\Admin\Views\Users\MyProfile.cshtml"
                                                                                                                                                                    Write(message.Sender.Email);
@@ -435,7 +435,7 @@ WriteAttributeValue("", 945, Model.AvatarUrl, 945, 16, false);
                     ");
             EndContext();
             BeginContext(5493, 87, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a7fcec05727349d095ba5f2e35f30254", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "aa0e2b2731b84a9792fdd9c215dedcdd", async() => {
                 BeginContext(5572, 4, true);
                 WriteLiteral("Home");
                 EndContext();

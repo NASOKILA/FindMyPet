@@ -219,7 +219,7 @@ namespace FindMyPet.Web.Controllers
 
         [HttpGet]
         public void AddMessage(string id, string Description) {
-
+            //USER
             string receverId = id;
 
             var currentUser = context.Users.FirstOrDefault(u => u.Email == this.User.Identity.Name);
@@ -244,7 +244,7 @@ namespace FindMyPet.Web.Controllers
         [HttpGet]
         public void RemoveMessage(int messageId)
         {
-
+            //User
             Message message = this.context.Messages
                 .Include(m => m.Likes)
                 .FirstOrDefault(m => m.Id == messageId);
