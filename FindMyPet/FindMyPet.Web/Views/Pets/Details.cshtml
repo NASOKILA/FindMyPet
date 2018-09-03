@@ -1,6 +1,8 @@
 ﻿@model FindMyPet.Models.Pet
+@using Microsoft.EntityFrameworkCore;
 @{
     ViewData["Title"] = "Details";
+    var context = new FindMyPet.Data.FindMyPetDbContext();
 }
 
 <div class="container">
@@ -187,19 +189,21 @@
                     @if (Model.Comments.Count < 1)
                     {
 
-                        <div>
-                            <h3>No comments posted for this pet.</h3>
-                        </div>
+                    <div>
+                        <h3>No comments posted for this pet.</h3>
+                        <br />
+                        <br />
+                    </div>
                     }
                     else
                     {
-
-                        <div class="card col-12">
+                        
                             @foreach (var comment in ViewBag.Comments)
                             {
                                 <div>
-
-                                    <h2>@comment.Content</h2>
+                                    <h2 class="contentDiv">
+                                        @comment.Content
+                                    </h2>
                                     <span>
                                         Created by
                                         <strong class="profile"><a class="profileLink" asp-controller="Users" asp-action="Profile" asp-route-id="@comment.Creator.Id">@comment.Creator.Email</a></strong>
@@ -212,17 +216,15 @@
                                         {
                                             <strong style="color: darkblue">
                                                 <a class="btn btn-sm btn-success likeButton" data-url="@Url.Action("AddLike", "Comments", new {id = comment.Id.ToString()})">Like</a>
-                                                :
                                             </strong>
                                         }
                                         else
                                         {
                                             <strong style="color: darkblue">
                                                 <a class="btn btn-sm btn-danger removelikeButton" data-url="@Url.Action("RemoveLike", "Comments", new {id = comment.Id.ToString()})">Remove Like</a>
-                                                :
                                             </strong>
                                         }
-
+                                        :
                                         <i class="commentLikes">@comment.Likes.Count</i>
 
                                     </span>
@@ -239,14 +241,15 @@
                                     <br />
                                 </div>
                             }
-                        </div>
                     }
-                    <br />
+                    
                 </div>
+                <a  hidden class="dbLink" data-url="@Url.Action("AddCommentToPet", "Pets", new { id = Model.Id})"></a>
             </div>
 
             <br />
-            <form method="post" asp-controller="Pets" asp-action="AddCommentToPet" asp-route-id="@Model.Id">
+       
+            <form>
 
                 <h2 class=""><strong>Add Comment</strong></h2>
                 <div class="form-group row">
@@ -254,7 +257,7 @@
                               minlength="10" required></textarea>
                 </div>
 
-                <input type="submit" id="btn-add-game" class="btn btn-success btn-lg btn-block" value="Add Comment" />
+                <input type="button" id="btn-add-pet" data-url="@Url.Action("AddCommentToPet", "Pets", new { id = Model.Id})" class="btn btn-success btn-lg btn-block" value="Add Comment" />
             </form>
 
             <br />
@@ -296,21 +299,86 @@
 
 @section Scripts {
 
-    <script>
 
-        let deleteCommentUrl = $(".deleteBtn").data("url");
+<script>
+        $("#btn-add-pet").click(function () {
 
-        $(".deleteBtn").click(function () {
-            $.get(deleteCommentUrl);
-            $(this).parent().hide();
+            let addCommentUrl = $(this).data("url");
+
+            let id = Number(addCommentUrl.split("/").pop());
+
+            let Description = $('.commentDescription').val();
+
+            
+
+            $('.commentDescription').val('');
+            
+            $.get(addCommentUrl,
+                    {
+                    Description: Description,
+                    id: id
+                }).then((res) => {
+
+                    console.log("SUCCESS !");
+                    console.log(res)
+
+
+                    console.log(Description);
+
+                    let currentComment = "";
+
+                    $.ajax({
+                        url: '/Comments/GetLastComment',
+                        method: 'GET',
+                        dataType: "json",
+                        success: function (currentComment) { 
+                            
+                            console.log(currentComment)
+
+                     //APPEND TO
+                    $('.commentsContainer')
+                        .append(
+                         "<div>"
+                            + "<h2 class=\"contentDiv\">"
+                                + Description
+                            + "</h2>"
+                        + "<span> Created by "
+                        + "<strong class=\"profile\">"
+                            + "<a class='profileLink' href='/Users/Profile/@context.Users.FirstOrDefault(u => u.Email == this.User.Identity.Name).Id'>@this.User.Identity.Name</a>"
+                        + "</strong> on "
+                        + "<i>" + new Date().toLocaleDateString('en-gb') + " " + new Date().toLocaleTimeString('en-gb') + "</i><br/><br/>"
+
+                        + "<strong style='color:darkblue'>"
+                        + "<a class='btn btn-sm btn-success likeButton' data-url='/Comments/AddLike/" + currentComment.id + "'>Like</a>"
+                            + "</strong>"
+                            + ":"
+                            + "<i class=\"commentLikes\">0</i>"
+                        + "</span><br/><br/>"                       
+                        + "<a style='margin: 0 auto' class='deleteBtn btn btn-danger col-3' autocomplete='off' data-url='/Comments/RemoveCommentFromPet/" + currentComment.id + "'>Delete Comment<a></strong>"
+                        
+                        +"<br /><br /></div>");
+
+                        },
+                        error : (err) => console.log(err) 
+                    })                   
+                });
         });
+    
 
+</script>
 
+    <script>
+        
+        $("body").on("click", ".deleteBtn", function () {
+            let deleteCommentUrl = $(this).data("url");
+            $.get(deleteCommentUrl);
+            $(this).parent().fadeOut();
+        });
+        
     </script>
 
     <script>
-
-
+        
         $("body").on("click", ".likeButton", function () {
         let addLikeUrl = $(this).data("url");
             $.get(addLikeUrl);
@@ -323,7 +391,10 @@
             console.log($(this).parent().next()[0]);
             $(this).parent().next().replaceWith("<i class=\"commentLikes\">" + newLikes + "</i>");
             //replace
-            $(this).replaceWith("<a class='btn btn-sm btn-danger removelikeButton' data-url='/Comments/RemoveLike/" + commentId + "'>Remove Like</a>");
+
+            $(this).fadeOut(() => {
+                $("<a class='btn btn-sm btn-danger removelikeButton' data-url='/Comments/RemoveLike/" + commentId + "'>Remove Like</a>").hide().appendTo($(this).parent()).fadeIn();
+            });
 
         });
 
@@ -350,10 +421,12 @@
             //replace
             $(this).parent().next().replaceWith("<i class=\"commentLikes\">" + newLikes + "</i>");
 
-            $(this).replaceWith("<a class='btn btn-sm btn-success likeButton'  data-url='/Comments/AddLike/" + commentId + "'>Like</a>");
+            $(this).fadeOut(() => {
+                $("<a class='btn btn-sm btn-success likeButton'  data-url='/Comments/AddLike/" + commentId + "'>Like</a>").hide().appendTo($(this).parent()).fadeIn();
+            });
+            
         });
 
     </script>
-
 }
 

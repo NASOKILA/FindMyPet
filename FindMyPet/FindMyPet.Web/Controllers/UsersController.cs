@@ -25,7 +25,13 @@ namespace FindMyPet.Web.Controllers
             if (!this.User.Identity.IsAuthenticated){
                 return Redirect(StaticConstants.LoginRedirect);
             }
-            
+
+            string thisUserId = context.Users.FirstOrDefault(u => u.Email == this.User.Identity.Name).Id;
+
+            if (id == thisUserId) {
+                return new RedirectToActionResult(StaticConstants.MyProfile, StaticConstants.Users, new { @area = StaticConstants.Empty });
+            }
+
             User user = context.Users
                 .Include(u => u.MessagesSent)
                     .ThenInclude(ms => ms.Likes)
@@ -210,9 +216,9 @@ namespace FindMyPet.Web.Controllers
 
             return View(user);
         }
-        
-        [HttpPost]
-        public IActionResult AddMessage(string id, string Description) {
+
+        [HttpGet]
+        public void AddMessage(string id, string Description) {
 
             string receverId = id;
 
@@ -232,7 +238,7 @@ namespace FindMyPet.Web.Controllers
 
             this.context.SaveChanges();
 
-            return RedirectToAction(StaticConstants.Profile, StaticConstants.Users, new { Id = receverId });
+            //return RedirectToAction(StaticConstants.Profile, StaticConstants.Users, new { Id = receverId });
         }
         
         [HttpGet]

@@ -31,7 +31,8 @@
         public const string AddLike = "AddLike";
         public const string RemoveLike = "RemoveLike";
         public const string Messages = "Messages";
-        public const string AllUsers = "AllUsers";
-        
+        public const string AllUsers = "AllUsers"; 
+        public const string MyProfile = "MyProfile"; 
+
     }
 }

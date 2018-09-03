@@ -28,6 +28,13 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
                 return Redirect(StaticConstants.LoginRedirect);
             }
             
+            string thisUserId = context.Users.FirstOrDefault(u => u.Email == this.User.Identity.Name).Id;
+
+            if (id == thisUserId)
+            {
+                return new RedirectToActionResult(StaticConstants.MyProfile, StaticConstants.Users, new { @area = StaticConstants.AdminRole });
+            }
+            
             User user = context.Users
                 .Include(u => u.MessagesSent)
                     .ThenInclude(ms => ms.Likes)
@@ -243,16 +250,12 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
         }
         
         [HttpGet]
-        public IActionResult RemoveMessage(string userId, int messageId)
+        public void RemoveMessage(int messageId)
         {
             Message message = this.context.Messages
                 .Include(m => m.Likes)
                 .FirstOrDefault(m => m.Id == messageId);
             
-            if (message == null){
-                return RedirectToAction(StaticConstants.All, StaticConstants.Pets);
-            }
-
             foreach (Like like in message.Likes)
             {
                 this.context.Likes.Remove(like);
@@ -262,7 +265,7 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
             this.context.Messages.Remove(message);
             this.context.SaveChanges();
 
-            return RedirectToAction(StaticConstants.Profile, StaticConstants.Users, new { Id = userId });
+            //return RedirectToAction(StaticConstants.Profile, StaticConstants.Users, new { Id = userId });
         }
     }
 }

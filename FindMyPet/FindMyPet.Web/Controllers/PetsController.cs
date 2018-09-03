@@ -61,8 +61,6 @@ namespace FindMyPet.Web.Controllers
 
             ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
             ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
-
-
             
 
             if (!page.HasValue)
@@ -71,8 +69,7 @@ namespace FindMyPet.Web.Controllers
 
             if (!count.HasValue)
                 count = DefaultResultsPerPage;
-
-            //Validation
+            
             if (page < 1)
                 page = DefaultPage;
 
@@ -194,8 +191,8 @@ namespace FindMyPet.Web.Controllers
             return View(pet);
         }
 
-        [HttpPost]
-        public IActionResult AddCommentToPet(int id, string Description)
+        [HttpGet]
+        public void AddCommentToPet(int id, string Description)
         {
             int petId = id;
 
@@ -213,7 +210,8 @@ namespace FindMyPet.Web.Controllers
 
             this.context.Comments.Add(comment);
             this.context.SaveChanges();
-            return RedirectToAction(StaticConstants.Details, StaticConstants.Pets, new { Id = petId });
+            
+            //return RedirectToAction(StaticConstants.Details, StaticConstants.Pets, new { Id = petId });
         }
 
         [HttpGet]

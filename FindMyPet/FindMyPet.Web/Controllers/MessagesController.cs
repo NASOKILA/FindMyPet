@@ -15,34 +15,19 @@ namespace FindMyPet.Web.Controllers
         {
             this.context = context;
         }
-        
+
+        [HttpGet]
+        public Message GetLastMessage()
+        {
+            Message message = this.context.Messages.LastOrDefault();
+            return message;
+        }
+
         [HttpGet]
         public void AddLike(int id)
-        {
-            /*
-            bool isLoggedIn = false;
-            bool isAdmin = false;
-            
-            if (this.User.Identity.IsAuthenticated)
-            {
-                isLoggedIn = true;
-
-                isAdmin = this.User.Claims.Any(c => c.Value == StaticConstants.AdminRole);
-
-                if (isAdmin == true)
-                {
-                    return new RedirectToActionResult(StaticConstants.AddLike, StaticConstants.Messages, new { @area = StaticConstants.AdminRole });
-                }
-            }
-
-            ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
-            ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
-            */
-
+        {   
             //var tokens = id.Split(StaticConstants.Star).ToList();
-
             //string returnUserId = tokens[0];
-
             //int messageId = int.Parse(tokens[1]);
             
             var currentUser = context.Users.FirstOrDefault(u => u.Email == this.User.Identity.Name);
@@ -64,30 +49,8 @@ namespace FindMyPet.Web.Controllers
         [HttpGet]
         public void RemoveLike(int id)
         {
-            /*
-            bool isLoggedIn = false;
-            bool isAdmin = false;
-
-            if (this.User.Identity.IsAuthenticated)
-            {
-                isLoggedIn = true;
-
-                isAdmin = this.User.Claims.Any(c => c.Value == StaticConstants.AdminRole);
-
-                if (isAdmin == true)
-                {
-                    return new RedirectToActionResult(StaticConstants.RemoveLike, StaticConstants.Messages, new { @area = StaticConstants.AdminRole });
-                }
-            }
-
-            ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
-            ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
-            */
-
-           // var tokens = id.Split(StaticConstants.Star).ToList();
-
+           //var tokens = id.Split(StaticConstants.Star).ToList();
             //string returnUserId = tokens[0];
-
             //int commentId = int.Parse(tokens[1]);
 
             var currentUser = context.Users.FirstOrDefault(u => u.Email == this.User.Identity.Name);

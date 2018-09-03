@@ -93,7 +93,9 @@
                             <div class="card col-12 commentsContainer">
 
                                 <br />
-                                <h2>@message.Content</h2>
+                                <h2 class="contentDiv">
+                                    @message.Content
+                                </h2>
                                 <span>
                                     Created by
                                     <strong style="color: grey"><a style="font-size:20px" asp-controller="Users" asp-action="Profile" asp-route-id="@message.Sender.Id">@message.Sender.Email</a></strong>
@@ -106,18 +108,15 @@
                                     {
                                         <strong style="color: darkblue">
                                             <a class="btn btn-sm btn-success likeButton" data-url="@Url.Action("AddLike", "Messages", new { id = message.Id.ToString() })">Like</a>
-                                            :
                                         </strong>
                                     }
                                     else
                                     {
                                         <strong style="color: darkblue">
                                             <a class="btn btn-sm btn-danger removelikeButton" data-url="@Url.Action("RemoveLike", "Messages", new { id = message.Id.ToString() })">Remove Like</a>
-                                            :
                                         </strong>
                                     }
-
-
+                                    :
 
                                     <i>@message.Likes.Count</i>
 
@@ -163,11 +162,11 @@
 @section Scripts {
 
     <script>
-        let deleteCommentUrl = $(".deleteBtn").data("url");
 
         $(".deleteBtn").click(function () {
+        let deleteCommentUrl = $(this).data("url");
             $.get(deleteCommentUrl);
-            $(this).parent().hide();
+            $(this).parent().fadeOut();
         });
     </script>
 
@@ -184,7 +183,11 @@
             console.log($(this).parent().next()[0]);
             $(this).parent().next().replaceWith("<i class=\"commentLikes\">" + newLikes + "</i>");
             //replace
-            $(this).replaceWith("<a class='btn btn-sm btn-danger removelikeButton' data-url='/Messages/RemoveLike/" + commentId + "'>Remove Like</a>");
+
+            $(this).fadeOut(() => {
+                $("<a class='btn btn-sm btn-danger removelikeButton' data-url='/Messages/RemoveLike/" + commentId + "'>Remove Like</a>").hide().appendTo($(this).parent()).fadeIn();
+            });
+
         });
     </script>
 
@@ -208,7 +211,11 @@
             //replace
             $(this).parent().next().replaceWith("<i class=\"commentLikes\">" + newLikes + "</i>");
 
-            $(this).replaceWith("<a class='btn btn-sm btn-success likeButton'  data-url='/Messages/AddLike/" + commentId + "'>Like</a>");
+            
+            $(this).fadeOut(() => {
+                $("<a class='btn btn-sm btn-success likeButton' data-url='/Messages/AddLike/" + commentId + "'>Like</a>").hide().appendTo($(this).parent()).fadeIn();
+            });
+
         });
     </script>
 }

@@ -18,19 +18,23 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
         {
             this.context = context;
         }
+
+        [HttpGet]
+        public Message GetLastMessage()
+        {
+            return this.context.Messages.LastOrDefault();
+        }
         
         [HttpGet]
-        public IActionResult AddLike(string id)
+        public void AddLike(int id)
         {
-            var tokens = id.Split(StaticConstants.Star).ToList();
-
-            string returnUserId = tokens[0];
-
-            int messageId = int.Parse(tokens[1]);
+            //var tokens = id.Split(StaticConstants.Star).ToList();
+            //string returnUserId = tokens[0];
+            //int messageId = int.Parse(tokens[1]);
             
             var currentUser = context.Users.FirstOrDefault(u => u.Email == this.User.Identity.Name);
 
-            var message = this.context.Messages.FirstOrDefault(c => c.Id == messageId);
+            var message = this.context.Messages.FirstOrDefault(c => c.Id == id);
 
             Like like = new Like()
             {
@@ -41,25 +45,22 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
             this.context.Likes.Add(like);
             this.context.SaveChanges();
             
-            return RedirectToAction(StaticConstants.Profile, StaticConstants.Users, new { Id = returnUserId });
+            //return RedirectToAction(StaticConstants.Profile, StaticConstants.Users, new { Id = returnUserId });
         }
 
         [HttpGet]
-        public IActionResult RemoveLike(string id)
+        public void RemoveLike(int id)
         {
-
-            var tokens = id.Split(StaticConstants.Star).ToList();
-
-            string returnUserId = tokens[0];
-
-            int commentId = int.Parse(tokens[1]);
+           // var tokens = id.Split(StaticConstants.Star).ToList();
+           // string returnUserId = tokens[0];
+           // int commentId = int.Parse(tokens[1]);
 
             var currentUser = context.Users.FirstOrDefault(u => u.Email == this.User.Identity.Name);
 
             var message = this.context.Messages
                 .Include(c => c.Likes)
                 .ThenInclude(l => l.Creator)
-                .FirstOrDefault(c => c.Id == commentId);
+                .FirstOrDefault(c => c.Id == id);
             
             Like likeToRemove = message.Likes.FirstOrDefault(l => l.Creator.Email == this.User.Identity.Name);
 
@@ -67,7 +68,7 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
 
             this.context.SaveChanges();
             
-            return RedirectToAction(StaticConstants.Profile, StaticConstants.Users, new { Id = returnUserId });
+           // return RedirectToAction(StaticConstants.Profile, StaticConstants.Users, new { Id = returnUserId });
         }
     }
 }

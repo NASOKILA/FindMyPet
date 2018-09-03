@@ -127,7 +127,7 @@ WriteAttributeValue("", 541, Model.ImageUrl, 541, 15, false);
             WriteLiteral("</h2>\r\n                <br />\r\n\r\n                ");
             EndContext();
             BeginContext(1078, 354, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0be9050ba7e94116a534e3cc1d7fc7c5", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "165b6dabccff4503bebea69e1e6b79fc", async() => {
                 BeginContext(1171, 254, true);
                 WriteLiteral("\r\n\r\n                    <input type=\"submit\" id=\"btn-add-game\" class=\"left btn btn-success btn-lg btn-block\" value=\"Yes\" />\r\n                    <a id=\"btn-add-game\" href=\"/Pets/All\" class=\"right btn btn-primary btn-lg btn-block\">No</a>\r\n                ");
                 EndContext();

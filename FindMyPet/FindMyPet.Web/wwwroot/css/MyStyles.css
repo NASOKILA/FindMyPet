@@ -161,8 +161,7 @@ footer {
 }
 
 .commentsContainer {
-    background-image: radial-gradient(circle, #f9f5c8, #f7f4a8, #f2f387, #eaf264, #e1f239);
-    border-radius: 25%;
+    background-image: radial-gradient(circle, #f9f5c8, #f7f4a8, #f2f387, #eaf264, black);
 }
 
 .paginationDiv {
@@ -181,4 +180,10 @@ footer {
     position: relative;
     color: black !important;
     text-decoration: none;
+}
+
+.contentDiv {
+    width: 100%;
+    word-wrap: break-word;
+    padding: 20px 60px;
 }

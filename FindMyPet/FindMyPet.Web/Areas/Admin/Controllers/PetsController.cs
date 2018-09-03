@@ -223,7 +223,7 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult RemoveCommentFromPet(int petId, int commentId) {
+        public void RemoveCommentFromPet(int commentId) {
 
             bool isLoggedIn = false;
             bool isAdmin = false;
@@ -252,7 +252,7 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
             this.context.Comments.Remove(comment);
             this.context.SaveChanges();
 
-            return RedirectToAction(StaticConstants.Details, StaticConstants.Pets, new { Id = petId });
+            //return RedirectToAction(StaticConstants.Details, StaticConstants.Pets, new { Id = petId });
         }
 
         [HttpGet]
