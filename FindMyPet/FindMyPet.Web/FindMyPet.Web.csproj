@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\css\animate-library.css" />
     <Content Remove="wwwroot\css\keyframes.css" />
     <Content Remove="wwwroot\css\MyStyles.css" />
   </ItemGroup>
@@ -15,6 +16,9 @@
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="wwwroot\css\MyStyles.css">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wwwroot\css\animate-library.css">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>

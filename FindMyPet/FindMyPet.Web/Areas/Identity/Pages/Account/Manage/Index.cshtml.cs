@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using FindMyPet.Data;
 using FindMyPet.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -59,10 +61,9 @@ namespace FindMyPet.Web.Areas.Identity.Pages.Account.Manage
             [DataType(DataType.Date)]
             [Display(Name = "DateOfBirth")]
             public DateTime DateOfBirth { get; set; }
-
-            [DataType(DataType.Url)]
-            [Display(Name = "AvatarUrl")]
-            public string AvatarUrl { get; set; }
+            
+            [Display(Name = "AvatarUpload")]
+            public IFormFile AvatarUpload { get; set; }
 
         }
 
@@ -74,6 +75,7 @@ namespace FindMyPet.Web.Areas.Identity.Pages.Account.Manage
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
+            
 
             var userName = user.UserName;
             var email = user.Email;
@@ -88,14 +90,13 @@ namespace FindMyPet.Web.Areas.Identity.Pages.Account.Manage
             {
                 Email = email,
                 PhoneNumber = phoneNumber,
-                AvatarUrl = avatarUrl,
                 DateOfBirth = dateOfBirth,
                 FullName = fullName
             };
 
             IsEmailConfirmed = user.EmailConfirmed;
 
-            ViewData["Image"] = Input.AvatarUrl;
+            ViewData["Image"] = user.AvatarUrl;
 
 
             bool isLoggedIn = false;
@@ -122,15 +123,47 @@ namespace FindMyPet.Web.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
+            var avatarUpload = Input.AvatarUpload;
+
+            var fullFilePath = "";
+            string locationToUse = "";
+            if (avatarUpload != null)
+            {
+                //get previous image from folder
+                string[] filePaths = Directory.GetFiles(@"wwwroot/images", "*", SearchOption.TopDirectoryOnly);
+
+                var oldFile = filePaths.FirstOrDefault(p => p.Contains(this.User.Identity.Name));
+                if (System.IO.File.Exists(oldFile))
+                {
+                    System.IO.File.Delete(oldFile);
+                }
+
+             
+
+                locationToUse = "/images/" + Input.Email + "-" + avatarUpload.FileName;
+
+                fullFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", Input.Email + "-" + avatarUpload.FileName);
+
+                var fileStream = new FileStream(fullFilePath, FileMode.Create);
+                
+                avatarUpload.CopyTo(fileStream);
+                    
+                fileStream.Close();
+            }
+
             var user = _context.Users.Find(_userManager.GetUserId(User));
 
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-            
 
-            user.AvatarUrl = Input.AvatarUrl;
+
+            if (avatarUpload != null)
+            {
+                user.AvatarUrl = locationToUse;
+            }
+
             user.PhoneNumber = Input.PhoneNumber;
             user.Email = Input.Email;
             user.DateOfBirth = Input.DateOfBirth;

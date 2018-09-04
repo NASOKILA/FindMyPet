@@ -11,7 +11,7 @@
 @Html.Partial("_StatusMessage", Model.StatusMessage)
 <div class="row">
     <div class="col-md-6">
-        <form id="profile-form" method="post">
+        <form id="profile-form" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="All" class="text-danger"></div>
 
             <div class="form-group">
@@ -21,7 +21,7 @@
 
             <div class="form-group">
                 <label asp-for="Input.FullName">Full name</label>
-                <input asp-for="Input.FullName" class="form-control"/>
+                <input asp-for="Input.FullName" class="form-control" />
             </div>
 
             <div class="form-group">
@@ -50,16 +50,17 @@
 
 
             <div class="form-group">
-                <label asp-for="Input.AvatarUrl">Avatar url</label>
-                <input asp-for="Input.AvatarUrl" class="form-control" />
-                <span asp-validation-for="Input.AvatarUrl" class="text-danger"></span>
+                <label asp-for="Input.AvatarUpload">Change Avatar File (optional)</label>
+                <input asp-for="Input.AvatarUpload" class="form-control-file btn btn-block btn-lg" aria-describedby="fileHelp" />
+                <span asp-validation-for="Input.AvatarUpload" class="text-danger"></span>
+                @if (ViewData["Image"] != null)
+                {
+                    <img width="100" height="100" src="@ViewData["Image"]" />
+                    <br />
+                    <br />
+                }
             </div>
-            @if (ViewData["Image"] != null)
-            {
-                <img width="100" height="100" src="@ViewData["Image"]" />
-                <br />
-                <br />
-            }
+            
 
             <div class="form-group">
                 <label asp-for="Input.PhoneNumber"></label>

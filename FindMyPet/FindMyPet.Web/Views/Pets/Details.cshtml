@@ -10,25 +10,24 @@
         <div class="col-12 text-center">
             <br />
             <div class="titleDiv">
-                <h1 class="display-3 classTitle"><strong>Pet Details Page</strong></h1>
+                <h1 class="display-3 revealOnScroll" data-animation="zoomInDown"><strong>Pet Details Page</strong></h1>
             </div>
             <br />
             <hr class="display-3" />
 
-            <div class="">
+            <div>
 
                 <br />
-                <h2 class="display-4"><strong class="right">Type</strong> : <i class="left">@Model.Type</i></h2>
-                <br />
-
-                <br />
-                <h2 class="display-5"><strong class="right2">Name</strong> : <i class="left2">@Model.Name</i></h2>
+                <h2 class="display-4"><strong class="revealOnScroll" data-animation="right">Type</strong><span class="revealOnScroll" data-animation="forms"> : </span><i class="revealOnScroll" data-animation="left">@Model.Type</i></h2>
                 <br />
 
                 <br />
-                <h2 class="display-5"><strong class="right3">Status</strong> : <i class="left3">@Model.Status</i></h2>
+                <h2 class="display-5"><strong class="revealOnScroll" data-animation="right2">Name</strong><span class="revealOnScroll" data-animation="forms"> : </span><i class="revealOnScroll" data-animation="left2">@Model.Name</i></h2>
                 <br />
 
+                <br />
+                <h2 class="display-5"><strong class="revealOnScroll" data-animation="right3">Status</strong><span class="revealOnScroll" data-animation="forms"> : </span><i class="revealOnScroll" data-animation="left3">@Model.Status</i></h2>
+                <br />
 
                 <img width="500" class="forms card-image-top img-fluid img-thumbnail" src="@Model.ImageUrl" />
                 <br />
@@ -39,13 +38,13 @@
                 {
 
                     <h2>
-                        <strong class="left">Age</strong> : <i class="right">@Model.Age</i>
+                        <strong class="revealOnScroll" data-animation="left">Age</strong> <span class="revealOnScroll" data-animation="forms"> : </span><i class="revealOnScroll" data-animation="right">@Model.Age</i>
                     </h2>
                 }
                 else
                 {
                     <h2>
-                        <strong class="left">Age</strong> : <i class="right">Not specified</i>
+                        <strong class="revealOnScroll" data-animation="left">Age</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right">Not specified</i>
                     </h2>
                 }
 
@@ -55,13 +54,13 @@
                 {
 
                     <h2>
-                        <strong class="left">Breed</strong> : <i class="right">@Model.Breed</i>
+                        <strong class="revealOnScroll" data-animation="left2">Breed</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right2">@Model.Breed</i>
                     </h2>
                 }
                 else
                 {
                     <h2>
-                        <strong class="left">Breed</strong> : <i class="right">Not specified</i>
+                        <strong class="revealOnScroll" data-animation="left2">Breed</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right2">Not specified</i>
                     </h2>
                 }
 
@@ -71,27 +70,29 @@
                 {
 
                     <h2>
-                        <strong class="left">Color</strong> : <i class="right">@Model.Color</i>
+                        <strong class="revealOnScroll" data-animation="left3">Color</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right3">@Model.Color</i>
                     </h2>
                 }
                 else
                 {
                     <h2>
-                        <strong class="left">Color</strong> : <i class="right">Not specified</i>
+                        <strong class="revealOnScroll" data-animation="left3">Color</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right3">Not specified</i>
                     </h2>
                 }
+                
                 <br />
+
                 @if (Model.Gender != null)
                 {
                     <h2>
-                        <strong class="left">Gender</strong> : <i class="right">@Model.Gender</i>
+                        <strong class="revealOnScroll" data-animation="left">Gender</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right">@Model.Gender</i>
                     </h2>
                 }
                 else
                 {
 
                     <h2>
-                        <strong class="left">Gender</strong> : <i class="right">Not specified</i>
+                        <strong class="revealOnScroll" data-animation="left">Gender</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right">Not specified</i>
                     </h2>
                 }
 
@@ -100,13 +101,13 @@
                 @if (Model.LocationLost != null)
                 {
                     <h2>
-                        <strong class="left">Location Lost</strong> : <i class="right">@Model.LocationLost</i>
+                        <strong class="revealOnScroll" data-animation="left2">Location Lost</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right2">@Model.LocationLost</i>
                     </h2>
                 }
                 else
                 {
                     <h2>
-                        <strong class="left">Location Lost</strong> : <i class="right">Not specified</i>
+                        <strong class="revealOnScroll" data-animation="left2">Location Lost</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right2">Not specified</i>
                     </h2>
                 }
 
@@ -116,13 +117,13 @@
                 {
 
                     <h2>
-                        <strong class="left">Time Lost</strong> : <i class="right">@Model.TimeLost</i>
+                        <strong class="revealOnScroll" data-animation="left3">Time Lost</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right3">@Model.TimeLost</i>
                     </h2>
                 }
                 else
                 {
                     <h2>
-                        <strong class="left">Time Lost</strong> : <i class="right">Not spcified</i>
+                        <strong class="revealOnScroll" data-animation="left3">Time Lost</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right3">Not spcified</i>
                     </h2>
                 }
 
@@ -133,13 +134,13 @@
                 {
 
                     <h2>
-                        <strong class="left">Time Found</strong> :  <i class="right">@Model.TimeFound</i>
+                        <strong class="revealOnScroll" data-animation="left">Time Found</strong> <span class="revealOnScroll" data-animation="forms"> : </span>  <i class="revealOnScroll" data-animation="right">@Model.TimeFound</i>
                     </h2>
                 }
                 else
                 {
                     <h2>
-                        <strong class="left">Time Found</strong> : <i class="right">Not spcified</i>
+                        <strong class="revealOnScroll" data-animation="left">Time Found</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right">Not spcified</i>
                     </h2>
                 }
 
@@ -149,13 +150,13 @@
                 @if (Model.Founder != null)
                 {
                     <h2>
-                        <strong class="left">Founder</strong> : <i class="right">@Model.Founder.FullName</i>
+                        <strong class="revealOnScroll" data-animation="left2">Founder</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right2">@Model.Founder.FullName</i>
                     </h2>
                 }
                 else
                 {
                     <h2>
-                        <strong class="left">Founder</strong> : <i class="right">Not Found Yet</i>
+                        <strong class="revealOnScroll" data-animation="left2">Founder</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right2">Not Found Yet</i>
                     </h2>
                 }
 
@@ -164,40 +165,39 @@
                 @if (Model.Owner != null)
                 {
                     <h2>
-                        <strong class="left">Owner</strong> : <i class="right">@Model.Owner.Email</i>
+                        <strong class="revealOnScroll" data-animation="left3">Owner</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right3">@Model.Owner.Email</i>
                     </h2>
                 }
                 else
                 {
                     <h2>
-                        <strong class="left">Owner</strong> : <i class="right">Not Specified</i>
+                        <strong class="revealOnScroll" data-animation="left3">Owner</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right3">Not Specified</i>
                     </h2>
                 }
                 <br />
 
 
-            </div>
 
-            <div class="left">
 
-                <h2>
-                    <strong>Comments</strong>
-                </h2>
-                <div class="card col-12 commentsContainer">
-                    <br />
-
-                    @if (Model.Comments.Count < 1)
-                    {
-
-                    <div>
-                        <h3>No comments posted for this pet.</h3>
+                <div class="revealOnScroll" data-animation="left">
+                    <h2>
+                        <strong>Comments</strong>
+                    </h2>
+                    <div class="card col-12 commentsContainer">
                         <br />
-                        <br />
-                    </div>
-                    }
-                    else
-                    {
-                        
+
+                        @if (Model.Comments.Count < 1)
+                        {
+
+                            <div class="noCommentsPresent">
+                                <h3>No comments posted for this pet.</h3>
+                                <br />
+                                <br />
+                            </div>
+                        }
+                        else
+                        {
+
                             @foreach (var comment in ViewBag.Comments)
                             {
                                 <div>
@@ -241,55 +241,58 @@
                                     <br />
                                 </div>
                             }
-                    }
-                    
-                </div>
-            </div>
+                        }
 
-            <br />
-       
-            <form>
-
-                <h2 class=""><strong>Add Comment</strong></h2>
-                <div class="form-group row">
-                    <textarea class="form-control commentDescription" name="Description" placeholder="Enter Comment"
-                              minlength="10" required></textarea>
+                    </div>
                 </div>
 
-                <input type="button" id="btn-add-pet" data-url="@Url.Action("AddCommentToPet", "Pets", new { id = Model.Id})" class="btn btn-success btn-lg btn-block" value="Add Comment" />
-            </form>
+                <br />
+                <div class="revealOnScroll" data-animation="right">
 
-            <br />
-            <br />
+                    <form>
 
+                        <h2 class=""><strong>Add Comment</strong></h2>
+                        <div class="form-group row">
+                            <textarea class="form-control commentDescription" name="Description" placeholder="Enter Comment"
+                                      minlength="10" required></textarea>
+                        </div>
 
-
-            <div class="bottom">
-
-                <div class="card-footer text-center">
-                    <h1 class="display-3">Actions</h1>
-                    <hr />
-                    <a class="btn btn-lg btn-primary col-3" asp-controller="Pets" asp-action="All">Back</a>
-                    @if (Model.Status == "Lost")
-                    {
-                        <a class="btn btn-lg btn-success col-3" asp-controller="Pets" asp-action="PetFound" asp-route-id="@Model.Id">Found</a>
-                    }
-                    @if (Model.Status == "Lost")
-                    {
-
-                    }
-
-                    @if (this.User.Identity.Name == Model.Owner.Email || ViewData["isAdmin"].ToString() == "True")
-                    {
-                        <a class="btn btn-lg btn-warning col-3" asp-route-id="@Model.Id" asp-page="/PetsPages/Edit">Edit</a>
-                        <a class="btn btn-lg btn-danger col-3" asp-route-id="@Model.Id" asp-page="/PetsPages/Delete">Delete</a>
-                    }
-
+                        <input type="button" id="btn-add-pet" data-url="@Url.Action("AddCommentToPet", "Pets", new { id = Model.Id})" class="btn btn-success btn-lg btn-block" value="Add Comment" />
+                    </form>
                 </div>
 
                 <br />
                 <br />
 
+
+
+                <div class="revealOnScroll" data-animation="bottom">
+
+                    <div class="card-footer text-center">
+                        <h1 class="display-3">Actions</h1>
+                        <hr />
+                        <a class="btn btn-lg btn-primary col-3" asp-controller="Pets" asp-action="All">Back</a>
+                        @if (Model.Status == "Lost")
+                        {
+                            <a class="btn btn-lg btn-success col-3" asp-controller="Pets" asp-action="PetFound" asp-route-id="@Model.Id">Found</a>
+                        }
+                        @if (Model.Status == "Lost")
+                        {
+
+                        }
+
+                        @if (this.User.Identity.Name == Model.Owner.Email || ViewData["isAdmin"].ToString() == "True")
+                        {
+                            <a class="btn btn-lg btn-warning col-3" asp-route-id="@Model.Id" asp-page="/PetsPages/Edit">Edit</a>
+                            <a class="btn btn-lg btn-danger col-3" asp-route-id="@Model.Id" asp-page="/PetsPages/Delete">Delete</a>
+                        }
+
+                    </div>
+
+                    <br />
+                    <br />
+
+                </div>
             </div>
         </div>
     </div>
@@ -334,6 +337,10 @@
                             
                             console.log(currentComment)
 
+
+                            $(".noCommentsPresent").fadeOut();
+
+
                      //APPEND TO
                     $('.commentsContainer')
                         .append(
@@ -353,7 +360,7 @@
                             + ":"
                             + "<i class=\"commentLikes\">0</i>"
                         + "</span><br/><br/>"                       
-                        + "<a style='margin: 0 auto' class='deleteBtn btn btn-danger col-3' autocomplete='off' data-url='/Comments/RemoveCommentFromPet/" + currentComment.id + "'>Delete Comment<a></strong>"
+                        + "<a style='margin: 0 auto' class='deleteBtn btn btn-danger col-3' autocomplete='off' data-url='/Pets/RemoveCommentFromPet?commentId=" + currentComment.id + "'>Delete Comment<a></strong>"
                         
                         +"<br /><br /></div>");
 
@@ -427,5 +434,8 @@
         });
 
     </script>
+
+
+<script src="~/js/scrolling-animations-functions.js"></script>   
 }
 

@@ -10,14 +10,14 @@
 
 @if (this.User.Identity.IsAuthenticated)
 {
-    <div class="text-center titleDiv">
-        <h1 class="display-3 classTitle">All Pets</h1>
+    <div class="text-center revealOnScroll" data-animation="rollIn">
+        <h1 class="display-3">All Pets</h1>
     </div>
     <hr class="display-3" />
 
     @if (Model.Pets.Count > 1)
     {
-        <div class="right">
+        <div class="revealOnScroll" data-animation="right">
             <partial name="_PetPartialView" />
         </div>
     }
@@ -38,7 +38,7 @@
             <div class="classComix card col-sm-4 text-center @petStyle">
 
                 <a class="pageLink" asp-controller="Pets" asp-action="Details" asp-route-id="@pet.Id">
-                    <img class="bottom card-image-top img-fluid img-thumbnail" src="@pet.ImageUrl" />
+                    <img class="revealOnScroll card-image-top img-fluid img-thumbnail" data-animation="jackInTheBox" data-timeout="600" src="@pet.ImageUrl" />
                     <div class="card-body">
                         <h4 class="card-title"></h4>
                         <p class="card-text">
@@ -127,7 +127,7 @@
             second = Model.Page - 1;
             third = Model.Page;
         }
-        <div class="paginationDiv">
+        <div class="paginationDiv revealOnScroll" data-animation="fadeInUp">
 
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
@@ -159,3 +159,11 @@ else
 
     <h1>You must login first.</h1>
 }
+
+
+@section Scripts {
+
+
+    <script src="~/js/scrolling-animations-functions.js"></script>
+
+}   

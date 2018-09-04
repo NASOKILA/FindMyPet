@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using FindMyPet.Data;
 using FindMyPet.Models;
 using FindMyPet.Web.Static;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -67,11 +69,10 @@ namespace FindMyPet.Web.Areas.Identity.Pages.Account
             [Display(Name = "DateOfBirth")]
             public DateTime DateOfBirth { get; set; }
             
-            [DataType(DataType.Url)]
-            [Display(Name = "Avatar")]
-            public string AvatarUrl { get; set; }
+            [Display(Name = "AvatarUpload")]
+            public IFormFile AvatarUpload { get; set; }
         }
-
+        
         public IActionResult OnGet(string returnUrl = null)
         {
             if (this.User.Identity.IsAuthenticated)
@@ -86,9 +87,26 @@ namespace FindMyPet.Web.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
-            if (ModelState.IsValid)
-            {
-                var user = new User { FullName = Input.FullName, UserName = Input.Email, Email = Input.Email, AvatarUrl  = Input.AvatarUrl, DateOfBirth = Input.DateOfBirth};
+            
+            if (ModelState.IsValid) {
+
+                var avatarUpload = Input.AvatarUpload;
+
+                var fullFilePath = "";
+                string locationToUse = "";
+                if (avatarUpload != null)
+                {
+                    locationToUse = "/images/" + Input.Email + "-" + avatarUpload.FileName;
+                    fullFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", Input.Email + "-" + avatarUpload.FileName);
+
+                    var fileStream = new FileStream(fullFilePath, FileMode.Create);
+
+                    await avatarUpload.CopyToAsync(fileStream);
+                }
+
+
+
+                var user = new User { FullName = Input.FullName, UserName = Input.Email, Email = Input.Email, AvatarUrl  = locationToUse, DateOfBirth = Input.DateOfBirth};
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

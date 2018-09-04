@@ -8,29 +8,33 @@
         <div class="col-12 text-center">
             <br />
             <div class="titleDiv">
-                <h1 class="display-3 classTitle"><strong>My Profile Page</strong></h1>
+                <h1 class="display-3 revealOnScroll" data-animation="zoomInDown"><strong>My Profile Page</strong></h1>
             </div>
             <br />
             <hr class="display-3" />
 
-            <div class="forms">
+            <div>
 
 
                 <br />
-                <h1 class="display-4"><strong>Email</strong> : @Model.Email</h1>
+                <h1 class="display-4"><strong class="revealOnScroll" data-animation="right">Email</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="left">@Model.Email</i></h1>
                 <br />
 
-                <h2 class="display-5"><strong>FullName</strong> : @Model.FullName</h2>
+                <h2 class="display-5"><strong class="revealOnScroll" data-animation="right2">FullName</strong> <span class="revealOnScroll" data-animation="forms"> : </span><i class="revealOnScroll" data-animation="left2">@Model.FullName</i></h2>
                 <br />
 
-                <h2 class="display-5"><strong>FeedBack</strong> : @Model.FeedBack</h2>
+                <h2 class="display-5"><strong class="revealOnScroll" data-animation="right3">FeedBack</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="left3">@Model.FeedBack</i></h2>
                 <br />
 
 
                 @if (Model.AvatarUrl != null)
                 {
 
-                    <img width="250" class="card-image-top img-fluid img-thumbnail" src="@Model.AvatarUrl" />
+                    <img width="250" class="card-image-top img-fluid img-thumbnail forms" src="@Model.AvatarUrl" />
+                }
+                else
+                {
+                    <img width="250" class="card-image-top img-fluid img-thumbnail forms" src="~/images/blank-avatar.png" />
                 }
                 <br />
                 <br />
@@ -41,13 +45,13 @@
                 {
 
                     <h2>
-                        <strong>Date of Birth</strong> : @Model.DateOfBirth
+                        <strong class="revealOnScroll" data-animation="left">Date of Birth</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right">@Model.DateOfBirth</i>
                     </h2>
                 }
                 else
                 {
                     <h2>
-                        <strong>Date of Birth</strong> : Not specified
+                        <strong class="revealOnScroll" data-animation="left">Date of Birth</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right">Not specified</i>
                     </h2>
                 }
 
@@ -57,13 +61,13 @@
                 {
 
                     <h2>
-                        <strong>Phone Number</strong> : @Model.PhoneNumber
+                        <strong class="revealOnScroll" data-animation="left2">Phone Number</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right2">@Model.PhoneNumber</i>
                     </h2>
                 }
                 else
                 {
                     <h2>
-                        <strong>Phone</strong> : Not specified
+                        <strong class="revealOnScroll" data-animation="left2">Phone Number</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right2">Not specified</i>
                     </h2>
                 }
 
@@ -71,7 +75,7 @@
 
             </div>
 
-            <div class="left">
+            <div class="revealOnScroll" data-animation="rollIn">
 
 
                 <h1 class="display-3"><strong>Messages</strong></h1>
@@ -81,7 +85,7 @@
 
                     @if (ViewBag.Messages.Count < 1)
                     {
-                        <div>
+                        <div class="noCommentsPresent">
                             <h3>No comments posted for this pet.</h3>
                         </div>
                     }
@@ -144,7 +148,7 @@
             <br />
 
 
-            <div class="bottom">
+            <div class="revealOnScroll" data-animation="right">
 
                 <div class="card-footer text-center">
                     <h1 class="display-3" style="background: lightgreen">Actions</h1>
@@ -164,7 +168,7 @@
     <script>
 
         $(".deleteBtn").click(function () {
-        let deleteCommentUrl = $(this).data("url");
+            let deleteCommentUrl = $(this).data("url");
             $.get(deleteCommentUrl);
             $(this).parent().fadeOut();
         });
@@ -211,12 +215,16 @@
             //replace
             $(this).parent().next().replaceWith("<i class=\"commentLikes\">" + newLikes + "</i>");
 
-            
+
             $(this).fadeOut(() => {
                 $("<a class='btn btn-sm btn-success likeButton' data-url='/Messages/AddLike/" + commentId + "'>Like</a>").hide().appendTo($(this).parent()).fadeIn();
             });
 
         });
     </script>
+
+
+
+    <script src="~/js/scrolling-animations-functions.js"></script>
 }
 
