@@ -141,7 +141,7 @@ WriteAttributeValue("", 1278, user.AvatarUrl, 1278, 15, false);
             WriteLiteral(" alt=\"No Avatar\" /></td>\r\n                            <td class=\"tableDataRotate\">\r\n                                ");
             EndContext();
             BeginContext(1410, 122, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "56e53c9ccb154dd38127fbbb907db429", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8a32d4d0ee8e4f018ad896e6a126450a", async() => {
                 BeginContext(1521, 7, true);
                 WriteLiteral("Details");
                 EndContext();
@@ -188,7 +188,7 @@ WriteAttributeValue("", 1278, user.AvatarUrl, 1278, 15, false);
             WriteLiteral("                                    ");
             EndContext();
             BeginContext(1670, 127, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9f7811e70c4847f78f63e51b4e15509a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "12e47767988043bcbb0879e47d6b596f", async() => {
                 BeginContext(1784, 9, true);
                 WriteLiteral("Free User");
                 EndContext();
@@ -236,7 +236,7 @@ WriteAttributeValue("", 1278, user.AvatarUrl, 1278, 15, false);
             WriteLiteral("                                    ");
             EndContext();
             BeginContext(1943, 124, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a54cfbda543a41b3bb469a3f737cd3b1", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2a50ba645c894d9293f146c65ad7daab", async() => {
                 BeginContext(2054, 9, true);
                 WriteLiteral("Lock User");
                 EndContext();

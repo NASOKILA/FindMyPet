@@ -57,7 +57,6 @@ footer {
 }
 
 
-
 .petStyle:hover {
     background-image: linear-gradient(to top, #f5f6f8, #b4b9bd, #768084, #3c4b4e, #081c1c);
     cursor: pointer;
@@ -76,6 +75,7 @@ footer {
     transition-timing-function: linear;
 }
 
+
 .petFoundStyle:hover {
     background-image: linear-gradient(to top, #f5f6f8, #b4b9bd, #768084, #3c4b4e, #081c1c);
     cursor: pointer;
@@ -92,6 +92,7 @@ footer {
     color: grey;
 }
 
+
 .profileLink {
     font-size:20px;
 }
@@ -102,6 +103,7 @@ footer {
     height:40px; 
     border-radius:100%;
 }
+
 
 .thCol {
     position: relative;
@@ -114,15 +116,18 @@ footer {
     border: none;
 }
 
+
 .adminNav {
     background-image: linear-gradient(to left bottom, #a6a6f6, #807cd1, #5a54ac, #352d87, #030764);
     color: white;
 }
 
+
 .adminNav a {
     font-style:italic;
     color:white !important;
 }
+
 
 .adminNav a:hover {
     position: relative;
@@ -135,10 +140,12 @@ footer {
     color: black !important;
 }
 
+
 .normalNav a:hover {
     position: relative;
     color: white !important;
 }
+
 
 .avatar {
     width:40px; 
@@ -149,10 +156,12 @@ footer {
     top:5px;
 }
 
+
 .logoutBtn {
     font-style: italic;
     color: black !important;
 }
+
 
 .logoutBtn:hover {
     position: relative;
@@ -160,9 +169,11 @@ footer {
     text-decoration:none;
 }
 
+
 .commentsContainer {
     background-image: radial-gradient(circle, #f9f5c8, #f7f4a8, #f2f387, #eaf264, black);
 }
+
 
 .paginationDiv {
     text-align: center;
@@ -176,11 +187,13 @@ footer {
     color: white !important;
 }
 
+
 .logoutBtnAdmin:hover {
     position: relative;
     color: black !important;
     text-decoration: none;
 }
+
 
 .contentDiv {
     width: 100%;

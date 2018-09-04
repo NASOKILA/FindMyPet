@@ -13,9 +13,7 @@
             </div>
             <br />
             <hr class="display-3" />
-
             <div>
-
                 <br />
                 <h1 class="display-4"><strong class="revealOnScroll" data-animation="right">Email</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="left">@Model.Email</i></h1>
                 <br />
@@ -26,11 +24,8 @@
                 <h2 class="display-5"><strong class="revealOnScroll" data-animation="right3">FeedBack</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="left3">@Model.FeedBack</i></h2>
                 <br />
 
-
-
                 @if (Model.AvatarUrl != null)
                 {
-
                     <img width="250" class="card-image-top img-fluid img-thumbnail forms" src="@Model.AvatarUrl" />
                 }
                 else
@@ -41,10 +36,8 @@
                 <br />
                 <br />
 
-
                 @if (Model.DateOfBirth != null)
                 {
-
                     <h2>
                         <strong class="revealOnScroll" data-animation="left">Date of Birth</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right">@Model.DateOfBirth</i>
                     </h2>
@@ -59,7 +52,6 @@
 
                 @if (Model.PhoneNumber != null)
                 {
-
                     <h2>
                         <strong class="revealOnScroll" data-animation="left2">Phone Number</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right2">@Model.PhoneNumber</i>
                     </h2>
@@ -72,17 +64,12 @@
                 }
 
                 <br />
-
             </div>
 
             <div class="revealOnScroll" data-animation="rollIn">
-
-
                 <h1 class="display-3"><strong>Messages</strong></h1>
-
                 <div class="card col-12 thumbnail">
                     <br />
-
                     @if (ViewBag.Messages.Count < 1)
                     {
                         <div class="noCommentsPresent">
@@ -91,7 +78,6 @@
                     }
                     else
                     {
-
                         @foreach (var message in ViewBag.Messages)
                         {
                             <div class="card col-12 commentsContainer">
@@ -112,7 +98,6 @@
                                         <strong style="color: darkblue">
                                             <a class="btn btn-sm btn-success likeButton" data-url="@Url.Action("AddLike", "Messages", new { Area = "Admin", id = message.Id.ToString() })">Like</a>
                                         </strong>
-
                                     }
                                     else
                                     {
@@ -121,16 +106,13 @@
                                         </strong>
                                     }
                                     :
-
                                     <i>@message.Likes.Count</i>
 
                                     <br />
-
                                 </span>
                                 <br />
                                 @if (ViewData["isAdmin"].ToString() == "True" || this.User.Identity.Name == Model.Email)
                                 {
-
                                     <a style="margin: 0 auto" class="deleteBtn btn btn-danger col-3" data-url="@Url.Action("RemoveMessage", "Users", new {Area = "Admin", messageId = message.Id} )">
                                         Delete Message
                                     </a>
@@ -139,14 +121,12 @@
                                 <br />
                             </div>
                         }
-
                     }
                     <br />
                 </div>
             </div>
 
             <br />
-
 
             <div class="revealOnScroll" data-animation="right">
                 <div class="card-footer text-center">
@@ -178,11 +158,9 @@
             $.get(addLikeUrl);
 
             let commentId = addLikeUrl.split("/").slice(-1).pop()
-            console.log(commentId)
             let currentLikes = Number($(this).parent().next()[0].innerText);
             let newLikes = currentLikes + 1;
-
-            console.log($(this).parent().next()[0]);
+            
             $(this).parent().next().replaceWith("<i class=\"commentLikes\">" + newLikes + "</i>");
 
             $(this).fadeOut(() => {
@@ -199,17 +177,11 @@
             $.get(removeLikeUrl);
 
             let commentId = removeLikeUrl.split("/").slice(-1).pop()
-            console.log(commentId);
-
+        
             let currentLikes = Number($(this).parent().next()[0].innerText);
-            console.log(currentLikes)
-
+        
             let newLikes = currentLikes - 1;
-            console.log(newLikes)
-
-            console.log($(this).parent().next()[0]);
-
-            //replace
+        
             $(this).parent().next().replaceWith("<i class=\"commentLikes\">" + newLikes + "</i>");
 
             $(this).fadeOut(() => {
@@ -218,7 +190,6 @@
 
         });
     </script>
-
 
     <script src="~/js/scrolling-animations-functions.js"></script>
 }

@@ -7,7 +7,6 @@
 }
 
 
-
 @if (this.User.Identity.IsAuthenticated)
 {
     <div class="text-center revealOnScroll" data-animation="rollIn">
@@ -59,28 +58,22 @@
                         <p class="card-text">
                             <strong>Time Lost</strong> : @pet.TimeLost
                         </p>
-
                     </div>
                 </a>
 
                 <div class="classButtons">
-
                     <a class="btn btn-primary col-3" asp-controller="Pets" asp-action="Details" asp-route-id="@pet.Id">Details</a>
                     @if (pet.Status == "Lost")
                     {
                         <a class="btn btn-success col-3" asp-controller="Pets" asp-action="PetFound" asp-route-id="@pet.Id">Found</a>
                     }
-
                     @if (this.User.Identity.Name == pet.Owner.Email || this.User.Claims.Any(c => c.Value == "Admin"))
                     {
-
                         <a class="btn btn-warning col-3" asp-route-id="@pet.Id" asp-page="/PetsPages/Edit">Edit</a>
                         <a class="btn btn-danger col-3" asp-route-id="@pet.Id" asp-page="/PetsPages/Delete">Delete</a>
                     }
                 </div>
-
             </div>
-
         }
 
     </div>
@@ -91,14 +84,10 @@
     }
     else
     {
-
-
         int first = 0;
         int second = 0;
         int third = 0;
-
-
-
+        
         string active1 = "";
         string active2 = "";
         string active3 = "";
@@ -111,7 +100,6 @@
             first = Model.Page;
             second = Model.Page + 1;
             third = Model.Page + 2;
-
         }
         else if (remainder == 2)
         {
@@ -127,8 +115,8 @@
             second = Model.Page - 1;
             third = Model.Page;
         }
-        <div class="paginationDiv revealOnScroll" data-animation="fadeInUp">
 
+        <div class="paginationDiv revealOnScroll" data-animation="fadeInUp">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     <li class="page-item">
@@ -137,9 +125,9 @@
                             <span class="sr-only">Previous</span>
                         </a>
                     </li>
-                    <li class="page-item active"><a class="page-link" asp-controller="Pets" asp-action="All" asp-route-page="@first">@first</a></li>
-                    <li class="page-item"><a class="page-link" asp-controller="Pets" asp-action="All" asp-route-page="@second">@second</a></li>
-                    <li class="page-item"><a class="page-link" asp-controller="Pets" asp-action="All" asp-route-page="@third">@third</a></li>
+                    <li class="page-item @active1"><a class="page-link" asp-controller="Pets" asp-action="All" asp-route-page="@first">@first</a></li>
+                    <li class="page-item @active2"><a class="page-link" asp-controller="Pets" asp-action="All" asp-route-page="@second">@second</a></li>
+                    <li class="page-item @active3"><a class="page-link" asp-controller="Pets" asp-action="All" asp-route-page="@third">@third</a></li>
                     <li class="page-item">
                         <a class="page-link" asp-controller="Pets" asp-action="Next" asp-route-page="@Model.Page" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
@@ -152,18 +140,13 @@
     }
 
     <br />
-
 }
 else
 {
-
     <h1>You must login first.</h1>
 }
 
 
 @section Scripts {
-
-
     <script src="~/js/scrolling-animations-functions.js"></script>
-
 }   

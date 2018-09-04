@@ -10,7 +10,6 @@ using FindMyPet.Web.Static;
 
 namespace FindMyPet.Web.Areas.Admin.Controllers
 {
-    
     [Area(StaticConstants.AdminRole)]
     [Authorize(Roles = StaticConstants.AdminRole)] 
     public class HomeController : Controller
@@ -31,7 +30,6 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
 
         public IActionResult Index()
         {  
-
             ViewData[StaticConstants.LoggedIn] = StaticConstants.True;
             ViewData[StaticConstants.IsAdmin] = StaticConstants.True;
 
@@ -52,12 +50,10 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
 
                 isAdmin = await this.userManager.IsInRoleAsync(currentUser, StaticConstants.AdminRole);
             }
-
-
+            
             ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
             ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
-
-
+            
             return View();
         }
 
@@ -80,8 +76,7 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
                     return new RedirectToActionResult(StaticConstants.Index, StaticConstants.Home, new { @area = StaticConstants.AdminRole });
                 }
             }
-
-
+            
             ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
             ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
 
@@ -100,8 +95,7 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
 
                 isAdmin = await this.userManager.IsInRoleAsync(currentUser, StaticConstants.IsAdmin);
             }
-
-
+            
             ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
             ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
 

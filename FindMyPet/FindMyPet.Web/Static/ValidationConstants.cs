@@ -17,15 +17,5 @@
         public const string LocationAtleastThreeSymbols = "Location must be atleast 3 symbols.";
 
         public const string TimeLostRequired = "Time Lost is required.";
-
-        
-
-
-
-
-
-
-
-
     }
 }

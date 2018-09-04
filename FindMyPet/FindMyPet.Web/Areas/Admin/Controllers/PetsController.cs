@@ -24,8 +24,7 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
         private const int oneHundred = 100;
         private const int twoHundred = 200;
         private const int threeHundred = 300;
-
-
+        
         private const int DefaultPage = 1;
         private const int DefaultResultsPerPage = 3;
 
@@ -52,12 +51,10 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
                 isLoggedIn = true;
                 isAdmin = currentUser.Claims.Any(c => c.Value == StaticConstants.AdminRole);
             }
-
-
+            
             ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
             ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
             
-
             if (!page.HasValue)
                 page = DefaultPage;
             
@@ -69,8 +66,7 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
             
             if (count < 1)
                 count = DefaultResultsPerPage;
-
-
+            
             var allPets = context.Pets.ToList();
 
             List<ListPetsBindingModel> pets = this.context.Pets
@@ -97,8 +93,7 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
                     FounderId = p.FounderId
                 })
                 .ToList();
-
-
+            
             if (pets.Count == 0)
             {
                 page = (allPets.Count % DefaultResultsPerPage) + DefaultResultsPerPage;
@@ -132,7 +127,6 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            
             Pet pet = this.context.Pets
                 .Include(p => p.Owner)
                 .Include(p => p.Founder)
@@ -159,13 +153,11 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
                 else
                     currentComment.LikeDisabled = false;
             }
-
-
+            
             this.CommentsForPetDetails = pet.Comments.ToList();
             ViewBag.Comments = CommentsForPetDetails;
             ViewData[StaticConstants.CurrentId] = id;
-
-
+            
             bool isLoggedIn = false;
             bool isAdmin = false;
 
@@ -173,7 +165,6 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
             if (currentUser.Identity.IsAuthenticated)
             {
                 isLoggedIn = true;
-
                 isAdmin = currentUser.Claims.Any(c => c.Value == StaticConstants.AdminRole);
             }
 
@@ -198,8 +189,7 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
 
             ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
             ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
-
-
+            
             int petId = id;
 
             var currentUser = context.Users.FirstOrDefault(u => u.Email == this.User.Identity.Name);
@@ -217,8 +207,6 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
             this.context.Comments.Add(comment);
 
             this.context.SaveChanges();
-
-            //return RedirectToAction(StaticConstants.Details, StaticConstants.Pets, new { Id = petId });
         }
 
         [HttpGet]
@@ -250,8 +238,6 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
 
             this.context.Comments.Remove(comment);
             this.context.SaveChanges();
-
-            //return RedirectToAction(StaticConstants.Details, StaticConstants.Pets, new { Id = petId });
         }
 
         [HttpGet]
@@ -312,11 +298,9 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
             {
                 return RedirectToAction(StaticConstants.All, StaticConstants.Pets);
             }
-
-
+            
             string content = "Your pet " + pet.Name + " was found by " + this.User.Identity.Name + " at " + DateTime.Now + ".";
 
-            //Send message to owner founder
             Message foundMessage = new Message()
             {
                 CreationDate = DateTime.Now,
@@ -326,12 +310,10 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
                 ReceverId = pet.Owner.Id,
                 SenderId = currentUser.Id
             };
-
-
+            
             this.context.Messages.Add(foundMessage);
             this.context.SaveChanges();
-
-
+            
             pet.Status = StaticConstants.Found;
             pet.TimeFound = DateTime.Now;
             context.Pets.Update(pet);
@@ -344,7 +326,6 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
             
             switch (pet.Type)
             {
-
                 case StaticConstants.Other:
                     currentUser.FeedBack = currentUser.FeedBack + fifty;
                     break;

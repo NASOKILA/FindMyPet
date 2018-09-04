@@ -26,8 +26,6 @@ namespace FindMyPet.Web.Common
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 
-
-                //check if role exists
                 foreach (var role in roles)
                 {
                     if (!await roleManager.RoleExistsAsync(role.Name))
@@ -35,27 +33,21 @@ namespace FindMyPet.Web.Common
                         await roleManager.CreateAsync(role);
                     }
                 }
-
-
-                //create admin by default user if it does not exist
+                
                 var user = await userManager.FindByNameAsync("admin@abv.bg");
                 if (user == null)
                 {
-
-                    //we create a new user
+                    
                     user = new User()
                     {
                         UserName = "admin@abv.bg",
                         Email = "admin@abv.bg"
                     };
 
-                    //we create the new user with the userManager and set default password
                     await userManager.CreateAsync(user, DefaultAdminPassword);
                 }
 
-                //add the role to the user
                 await userManager.AddToRoleAsync(user, roles[0].Name);
-
             }
         }
     }

@@ -5,15 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FindMyPet.Data
 {
-    //we put the User class that we created because it has additional things in it
-    //we have to add a migration
     public class FindMyPetDbContext : IdentityDbContext<User>  //<User>
     {
         public FindMyPetDbContext(DbContextOptions<FindMyPetDbContext> options)
             : base(options)
-        {
-        }
-
+        {}
         
         public FindMyPetDbContext()
         {}
@@ -26,8 +22,7 @@ namespace FindMyPet.Data
 
         public DbSet<Like> Likes { get; set; }
 
-
-
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
@@ -70,6 +65,5 @@ namespace FindMyPet.Data
 
             base.OnModelCreating(builder);
         }
-        
     }
 }

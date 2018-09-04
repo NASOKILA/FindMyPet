@@ -7,7 +7,6 @@ namespace FindMyPet.Web.Models.BindingModels
 {
     public class PetDetailsBindingModel
     {
-        
         [Required]
         public string Type { get; set; }
 

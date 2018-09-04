@@ -6,7 +6,6 @@
 }
 
 
-
 <div class="container">
     <div class="row">
         <div class="col-12 text-center">
@@ -16,9 +15,7 @@
             </div>
             <br />
             <hr class="display-3" />
-
             <div>
-
                 <br />
                 <h1 class="display-4"><strong class="revealOnScroll" data-animation="right">Email</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="left">@Model.Email</i></h1>
                 <br />
@@ -55,12 +52,10 @@
                     </h2>
                 }
 
-
                 <br />
 
                 @if (Model.PhoneNumber != null)
                 {
-
                     <h2>
                         <strong class="revealOnScroll" data-animation="left2">Phone Number</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right2">@Model.PhoneNumber</i>
                     </h2>
@@ -72,29 +67,22 @@
                     </h2>
                 }
 
-
                 <br />
-
             </div>
 
             <div class="revealOnScroll" data-animation="left">
-
-
                 <h1 class="display-3"><strong>Messages</strong></h1>
-
                 <div class="card col-12 thumbnail commentsContainer">
                     <br />
 
                     @if (ViewBag.Messages.Count < 1)
                     {
-
                         <div class="noCommentsPresent">
                             <h3>No messages posted for this user.</h3>
                         </div>
                     }
                     else
                     {
-
                         @foreach (var message in ViewBag.Messages)
                         {
                             <div>
@@ -139,24 +127,18 @@
                                 <br />
                             </div>
                         }
-
                     }
                     <br />
                 </div>
             </div>
-
             <br />
-            
             <div class="revealOnScroll" data-animation="rotateInUpLeft">
-
             <form>
-
                 <h2 class=""><strong>Add Message</strong></h2>
                 <div class="form-group row">
                     <textarea class="form-control messageDescription" name="Description" placeholder="Enter Comment"
                               minlength="10" required></textarea>
                 </div>
-
                 <input type="button" id="btn-add-pet" data-url="@Url.Action("AddMessage", "Users", new { id = Model.Id})" class="btn btn-success btn-lg btn-block" value="Add Comment" />
             </form>
             </div>
@@ -164,20 +146,15 @@
             <br />
             <br />
 
-
             <div class="revealOnScroll" data-animation="rotateInUpRight">
-
                 <div class="card-footer text-center">
                     <h1 class="display-3" style="background: lightgreen">Actions</h1>
-                    <a class="btn btn-primary col-3" asp-controller="Pets" asp-action="All">Home</a>
+                    <a class="btn btn-lg btn-primary col-3" asp-controller="Pets" asp-action="All">Home</a>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
-
-
 
 @section Scripts {
 
@@ -197,8 +174,6 @@
                     Description: Description,
                     id: id
                 }).then((res) => {
-
-                    console.log("SUCCESS !");
                     
                     let currentMessage = "";
 
@@ -208,11 +183,8 @@
                         dataType: "json",
                         success: function (currentMessage) {
                             
-
                         $(".noCommentsPresent").fadeOut();
-
-
-                     //APPEND TO
+                            
                     $('.commentsContainer')
                         .append(
                          "<div>"
@@ -257,15 +229,11 @@
             $.get(addLikeUrl);
 
             let commentId = addLikeUrl.split("/").slice(-1).pop()
-            console.log(commentId)
             let currentLikes = Number($(this).parent().next()[0].innerText);
             let newLikes = currentLikes + 1;
 
-            console.log($(this).parent().next()[0]);
             $(this).parent().next().replaceWith("<i class=\"commentLikes\">" + newLikes + "</i>");
-            //replace
-
-
+            
             $(this).fadeOut(() => {
                 $("<a class='btn btn-sm btn-danger removelikeButton' data-url='/Messages/RemoveLike/" + commentId + "'>Remove Like</a>").hide().appendTo($(this).parent()).fadeIn();
             });
@@ -281,17 +249,11 @@
             $.get(removeLikeUrl);
 
             let commentId = removeLikeUrl.split("/").slice(-1).pop()
-            console.log(commentId);
-
+            
             let currentLikes = Number($(this).parent().next()[0].innerText);
-            console.log(currentLikes)
-
+            
             let newLikes = currentLikes - 1;
-            console.log(newLikes)
-
-            console.log($(this).parent().next()[0]);
-
-            //replace
+            
             $(this).parent().next().replaceWith("<i class=\"commentLikes\">" + newLikes + "</i>");
 
             $(this).fadeOut(() => {

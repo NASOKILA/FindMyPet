@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace FindMyPet.Web.Admin.Pages.PetsPages
 {
-
     [Area(StaticConstants.AdminRole)]
     [Authorize(Roles = StaticConstants.AdminRole)]
     public class EditModel : PageModel
@@ -21,8 +20,7 @@ namespace FindMyPet.Web.Admin.Pages.PetsPages
         private const int numberZero = 0;
         private const int numberThree = 3;
         private const int numberOnehundred = 100;
-
-
+        
         public int Id { get; set; }
 
         [BindProperty]
@@ -120,8 +118,7 @@ namespace FindMyPet.Web.Admin.Pages.PetsPages
             {
                 return Page();
             }
-
-
+            
             using (var context = new FindMyPetDbContext())
             {
                 Pet pet = context.Pets.FirstOrDefault(p => p.Id == id);

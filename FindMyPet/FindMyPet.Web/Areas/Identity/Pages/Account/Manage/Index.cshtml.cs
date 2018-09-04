@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
@@ -7,6 +6,7 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using FindMyPet.Data;
 using FindMyPet.Models;
+using FindMyPet.Web.Static;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -45,9 +45,8 @@ namespace FindMyPet.Web.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-
             [Required]
-            [Display(Name = "FullName")]
+            [Display(Name = StaticConstants.FullName)]
             public string FullName { get; set; }
             
             [Required]
@@ -55,14 +54,14 @@ namespace FindMyPet.Web.Areas.Identity.Pages.Account.Manage
             public string Email { get; set; }
 
             [Phone]
-            [Display(Name = "Phone number")]
+            [Display(Name = StaticConstants.PhoneNumber)]
             public string PhoneNumber { get; set; }
 
             [DataType(DataType.Date)]
-            [Display(Name = "DateOfBirth")]
+            [Display(Name = StaticConstants.DateOfBirth)]
             public DateTime DateOfBirth { get; set; }
             
-            [Display(Name = "AvatarUpload")]
+            [Display(Name = StaticConstants.AvatarUpload)]
             public IFormFile AvatarUpload { get; set; }
 
         }

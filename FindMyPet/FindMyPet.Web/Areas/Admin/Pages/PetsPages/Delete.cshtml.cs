@@ -15,7 +15,6 @@ namespace FindMyPet.Web.Admin.Pages.PetsPages
     [Authorize(Roles = StaticConstants.AdminRole)]
     public class DeleteModel : PageModel
     {
-
         public int Id { get; set; }
 
         [BindProperty]
@@ -47,8 +46,7 @@ namespace FindMyPet.Web.Admin.Pages.PetsPages
 
         [BindProperty]
         public string Color { get; set; }
-
-
+        
         public IActionResult OnGet(int id)
         {
             if (!this.User.Identity.IsAuthenticated)
@@ -91,8 +89,7 @@ namespace FindMyPet.Web.Admin.Pages.PetsPages
 
             return Page();
         }
-
-
+        
         public IActionResult OnPost(int id)
         {
             if (!this.User.Identity.IsAuthenticated)
@@ -102,29 +99,23 @@ namespace FindMyPet.Web.Admin.Pages.PetsPages
 
             using (var context = new FindMyPetDbContext())
             {
-                //ADMIN
                 Pet pet = context.Pets
                     .Include(p => p.Comments)
                     .ThenInclude(c => c.Likes)
                     .FirstOrDefault(p => p.Id == id);
-
-
+                
                 foreach (Comment comm in pet.Comments)
                 {
-
                     foreach (Like like in comm.Likes)
                     {
                         context.Likes.Remove(like);
                     }
-                    context.SaveChanges();
 
                     context.Comments.Remove(comm);
                 }
 
                 context.SaveChanges();
-
-
-
+                
                 if (pet == null)
                     return RedirectToAction(StaticConstants.All, StaticConstants.Pets);
 

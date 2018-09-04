@@ -35,8 +35,7 @@ namespace FindMyPet.Web.Areas.Admin.Pages.PetsPages
 
             ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
             ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
-
-
+            
             using (var context = new FindMyPetDbContext())
             {
                 var users = context.Users

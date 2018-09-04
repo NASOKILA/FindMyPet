@@ -1,10 +1,8 @@
-﻿body {
+﻿
+body {
     background-color: cadetblue;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-
-
-
 
 .left {
     left: -1500px;
@@ -216,9 +214,6 @@
     animation-fill-mode: forwards;
 }
 
-
-
-
 .detailsData {
     right: -2500px;
     position: relative;
@@ -228,7 +223,6 @@
     animation-fill-mode: forwards;
 }
 
-
 .detailsDataFromLeft {
     left: -2500px;
     position: relative;
@@ -237,7 +231,6 @@
     animation-delay: 0.5s;
     animation-fill-mode: forwards;
 }
-
 
 .houseData {
     transition: 0;
@@ -249,7 +242,6 @@
     animation-fill-mode: forwards;
 }
 
-
 .housebuttons {
     transition: 0;
     opacity: 0;
@@ -260,11 +252,9 @@
     animation-fill-mode: forwards;
 }
 
-
 .card-image-top {
     height: 350px;
 }
-
 
 .classTitle {
     position: relative;
@@ -278,8 +268,6 @@
     animation-fill-mode: forwards; 
 }
 
-
-
 .classButtons {
     opacity: 0;
     animation-name: buttons;
@@ -288,8 +276,6 @@
     animation-fill-mode: forwards;
     position: relative;
 }
-
-
 
 .content {
     transition-property: all;
@@ -307,7 +293,6 @@
     font-size: 15px;
 }
 
-
 .comixMessage {
     opacity: 0;
     animation-name: message;
@@ -316,8 +301,6 @@
     animation-fill-mode: forwards;
     position: relative;
 }
-
-
 
 .classComix {
     float: left;
@@ -336,15 +319,15 @@
     transition-timing-function: linear;
 }
 
-    .classComix:hover {
-        cursor: pointer;
-        position: relative;
-        left: 20px ;
-        top: 20px;
-        z-index: 1;   
-    }
+.classComix:hover {
+    cursor: pointer;
+    position: relative;
+    left: 20px ;
+    top: 20px;
+    z-index: 1;   
+}
 
-    .classComix a {
-        color: black !important;
-        text-decoration: none;
-    }
+.classComix a {
+    color: black !important;
+    text-decoration: none;
+}

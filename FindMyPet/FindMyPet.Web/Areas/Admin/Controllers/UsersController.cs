@@ -85,7 +85,6 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult MyProfile()
         {
-
             if (!this.User.Identity.IsAuthenticated)
             {
                 return Redirect(StaticConstants.LoginRedirect);
@@ -106,8 +105,7 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
 
             if (user == null)
                 return RedirectToAction(StaticConstants.All, StaticConstants.Pets);
-
-
+            
             var allLikes = context.Likes
                 .Include(l => l.Creator)
                 .ToList();
@@ -148,7 +146,6 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
                 return Redirect(StaticConstants.LoginRedirect);
             }
 
-
             bool isLoggedIn = false;
             bool isAdmin = false;
 
@@ -186,7 +183,6 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult UnlockUser(string id)
         {
-            //USER
             if (!this.User.Identity.IsAuthenticated)
             {
                 return Redirect(StaticConstants.LoginRedirect);
@@ -245,14 +241,11 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
             this.context.Messages.Add(message);
 
             this.context.SaveChanges();
-
-            //return RedirectToAction(StaticConstants.Profile, StaticConstants.Users, new { Id = receverId });
         }
         
         [HttpGet]
         public void RemoveMessage(int messageId)
         {
-            //Admin
             Message message = this.context.Messages
                 .Include(m => m.Likes)
                 .FirstOrDefault(m => m.Id == messageId);
@@ -265,8 +258,6 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
             
             this.context.Messages.Remove(message);
             this.context.SaveChanges();
-
-            //return RedirectToAction(StaticConstants.Profile, StaticConstants.Users, new { Id = userId });
         }
     }
 }

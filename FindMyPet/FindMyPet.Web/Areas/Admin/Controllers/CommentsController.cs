@@ -33,10 +33,6 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
         [HttpGet]
         public void AddLike(int id)
         {
-            //var tokens = id.Split(StaticConstants.Star).ToList();
-            //int returnPetId = int.Parse(tokens[0]);
-            //int commentId = int.Parse(tokens[1]);
-
             var currentUser = context.Users.FirstOrDefault(u => u.Email == this.User.Identity.Name);
             var comment = this.context.Comments.FirstOrDefault(c => c.Id == id);
 
@@ -48,17 +44,11 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
 
             this.context.Likes.Add(like);
             this.context.SaveChanges();
-            
-            //return RedirectToAction(StaticConstants.Details, StaticConstants.Pets, new { Id = returnPetId });
         }
 
         [HttpGet]
         public void RemoveLike(int id)
         {
-            //var tokens = id.Split(StaticConstants.Star).ToList();
-            //int returnPetId = int.Parse(tokens[0]);
-            //int commentId = int.Parse(tokens[1]);
-
             var currentUser = context.Users.FirstOrDefault(u => u.Email == this.User.Identity.Name);
 
             var comment = this.context.Comments
@@ -70,8 +60,6 @@ namespace FindMyPet.Web.Areas.Admin.Controllers
             
             this.context.Likes.Remove(likeToRemove);
             this.context.SaveChanges();
-            
-            //return RedirectToAction(StaticConstants.Details, StaticConstants.Pets, new { Id = returnPetId });
         }
     }
 }

@@ -6,7 +6,6 @@
 }
 
 
-
 <div class="container">
     <div class="row">
         <div class="col-12 text-center">
@@ -16,9 +15,7 @@
             </div>
             <br />
             <hr class="display-3" />
-
             <div>
-
                 <br />
                 <h1 class="display-4"><strong class="revealOnScroll" data-animation="right">Email</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="left">@Model.Email</i></h1>
                 <br />
@@ -28,7 +25,6 @@
 
                 <h2 class="display-5"><strong class="revealOnScroll" data-animation="right3">FeedBack</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="left3">@Model.FeedBack</i></h2>
                 <br />
-
 
                 @if (Model.AvatarUrl != null)
                 {
@@ -40,7 +36,6 @@
                 }
                 <br />
                 <br />
-
 
                 @if (Model.DateOfBirth != null)
                 {
@@ -59,7 +54,6 @@
 
                 @if (Model.PhoneNumber != null)
                 {
-
                     <h2>
                         <strong class="revealOnScroll" data-animation="left2">Phone Number</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right2">@Model.PhoneNumber</i>
                     </h2>
@@ -70,23 +64,16 @@
                         <strong class="revealOnScroll" data-animation="left2">Phone Number</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right2">Not specified</i>
                     </h2>
                 }
-
-
                 <br />
-
             </div>
 
             <div class="revealOnScroll" data-animation="left">
-
-
                 <h1 class="display-3"><strong>Messages</strong></h1>
-
                 <div class="card col-12 thumbnail commentsContainer">
                     <br />
 
                     @if (ViewBag.Messages.Count < 1)
                     {
-
                         <div class="noCommentsPresent">
                             <h3>No messages posted for this user.</h3>
                         </div>
@@ -122,14 +109,11 @@
                                     }
                                     :
                                     <i>@message.Likes.Count</i>
-
                                     <br />
-
                                 </span>
                                 <br />
                                 @if (ViewData["isAdmin"].ToString() == "True" || this.User.Identity.Name == Model.Email)
                                 {
-
                                     <a style="margin: 0 auto" class="deleteBtn btn btn-danger col-3" data-url="@Url.Action("RemoveMessage", "Users", new {Area="Admin", messageId = message.Id})">
                                         Delete Message
                                     </a>
@@ -138,7 +122,6 @@
                                 <br />
                             </div>
                         }
-
                     }
                     <br />
                 </div>
@@ -146,7 +129,6 @@
 
             <br />
             <div class="revealOnScroll" data-animation="rotateInUpLeft">
-
                 <form>
                     <h2 class=""><strong>Add Message</strong></h2>
                     <div class="form-group row">
@@ -160,19 +142,15 @@
             <br />
             <br />
 
-
             <div class="revealOnScroll" data-animation="rotateInUpRight">
-
                 <div class="card-footer text-center">
                     <h1 class="display-3" style="background: lightgreen">Actions</h1>
-                    <a class="btn btn-primary col-3" asp-area="Admin" asp-controller="Pets" asp-action="All">Home</a>
+                    <a class="btn btn-primary btn-lg col-3" asp-area="Admin" asp-controller="Pets" asp-action="All">Home</a>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
-
 
 
 @section Scripts {
@@ -193,9 +171,7 @@
                     Description: Description,
                     id: id
                 }).then((res) => {
-
-                    console.log("SUCCESS !");
-
+                    
                     let currentMessage = "";
 
                     $.ajax({
@@ -206,8 +182,7 @@
 
 
                             $(".noCommentsPresent").fadeOut();
-
-                     //APPEND TO
+                            
                     $('.commentsContainer')
                         .append(
                          "<div>"
@@ -238,7 +213,6 @@
     </script>
 
     <script>
-
         $("body").on("click", ".deleteBtn", function () {
             let deleteCommentUrl = $(this).data("url");
             $.get(deleteCommentUrl);
@@ -252,21 +226,15 @@
             $.get(addLikeUrl);
 
             let commentId = addLikeUrl.split("/").slice(-1).pop()
-            console.log(commentId)
             let currentLikes = Number($(this).parent().next()[0].innerText);
             let newLikes = currentLikes + 1;
 
-            console.log($(this).parent().next()[0]);
             $(this).parent().next().replaceWith("<i class=\"commentLikes\">" + newLikes + "</i>");
-            //replace
-
-
+            
             $(this).fadeOut(() => {
                 $("<a class='btn btn-sm btn-danger removelikeButton' data-url='/Admin/Messages/RemoveLike/" + commentId + "'>Remove Like</a>").hide().appendTo($(this).parent()).fadeIn();
             });
-
         });
-
     </script>
 
     <script>
@@ -277,17 +245,11 @@
             $.get(removeLikeUrl);
 
             let commentId = removeLikeUrl.split("/").slice(-1).pop()
-            console.log(commentId);
 
             let currentLikes = Number($(this).parent().next()[0].innerText);
-            console.log(currentLikes)
-
+            
             let newLikes = currentLikes - 1;
-            console.log(newLikes)
 
-            console.log($(this).parent().next()[0]);
-
-            //replace
             $(this).parent().next().replaceWith("<i class=\"commentLikes\">" + newLikes + "</i>");
 
             $(this).fadeOut(() => {
@@ -300,3 +262,4 @@
 
     <script src="~/js/scrolling-animations-functions.js"></script>
 }
+

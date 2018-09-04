@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using FindMyPet.Data;
 using FindMyPet.Models;
 using FindMyPet.Web.Static;
+using Microsoft.AspNetCore.Http;
 
 namespace FindMyPet.Web.Controllers
 {
@@ -28,8 +29,7 @@ namespace FindMyPet.Web.Controllers
             this.userManager = userManager;
             this.context = context;
         }
-
-
+        
         public IActionResult Index()
         {  
             bool isLoggedIn = false;
@@ -45,8 +45,7 @@ namespace FindMyPet.Web.Controllers
                 {
                     return new RedirectToActionResult(StaticConstants.Index, StaticConstants.Home, new { @area = StaticConstants.AdminRole });
                 }
-
-
+                
                 ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
                 ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
 
@@ -55,15 +54,18 @@ namespace FindMyPet.Web.Controllers
 
             ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
             ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
+            
+            this.HttpContext.Session.SetString("SessionKey", "String to test the session.");
 
             return View();
         }
         
         public async Task<IActionResult> About()
         {
+            string strFromSession = this.HttpContext.Session.GetString("SessionTest");
+
             ViewData[StaticConstants.Message] = descriptionMessage;
-
-
+            
             bool isLoggedIn = false;
             bool isAdmin = false;
 
@@ -105,8 +107,7 @@ namespace FindMyPet.Web.Controllers
                     return new RedirectToActionResult(StaticConstants.Index, StaticConstants.Home, new { @area = StaticConstants.AdminRole });
                 }
             }
-
-
+            
             ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
             ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
 
@@ -125,8 +126,7 @@ namespace FindMyPet.Web.Controllers
 
                 isAdmin = await this.userManager.IsInRoleAsync(currentUser, StaticConstants.AdminRole);
             }
-
-
+            
             ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
             ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
 

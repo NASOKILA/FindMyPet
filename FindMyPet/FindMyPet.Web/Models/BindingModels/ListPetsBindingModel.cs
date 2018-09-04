@@ -30,6 +30,5 @@ namespace FindMyPet.Web.Models.BindingModels
         public string FounderId { get; set; }
 
         public User Founder { get; set; }
-
     }
 }

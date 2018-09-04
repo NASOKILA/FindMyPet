@@ -1,5 +1,4 @@
-﻿using FindMyPet.Models;
-using FindMyPet.Web.Models.BindingModels;
+﻿using FindMyPet.Web.Models.BindingModels;
 using System.Collections.Generic;
 
 namespace FindMyPet.Web.Models.ViewModels

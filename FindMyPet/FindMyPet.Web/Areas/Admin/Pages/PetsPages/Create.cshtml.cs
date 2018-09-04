@@ -72,8 +72,7 @@ namespace FindMyPet.Web.Admin.Pages.Pets
             ViewData[StaticConstants.PetExists] = false;
             return Page();
         }
-
-
+        
         [HttpPost]
         public IActionResult OnPost()
         {
@@ -86,8 +85,7 @@ namespace FindMyPet.Web.Admin.Pages.Pets
                 ViewData[StaticConstants.PetExists] = false;
                 return Page();
             }
-
-
+            
             using (var context = new FindMyPetDbContext())
             {
                 var petsExists = context.Pets.Any(p => p.Name == this.Name && p.Type == this.Type && p.ImageUrl == this.ImageUrl);

@@ -15,7 +15,6 @@
 }
 
 <form method="post">
-
     <div class="form-group row">
         <label asp-for="Type">Type <span class="requiredStar">*</span></label>
         <div class="col-sm-6">
@@ -53,7 +52,6 @@
         </div>
     </div>
 
-
     <div class="form-group row">
         <label asp-for="Gender">Gender (optional)</label>
         <div class="col-sm-6">
@@ -61,6 +59,7 @@
             <span asp-validation-for="Gender" class="text-danger"></span>
         </div>
     </div>
+    
     <div class="form-group row">
         <label asp-for="Breed">Breed (optional)</label>
         <div class="col-sm-6">
@@ -68,6 +67,7 @@
             <span asp-validation-for="Breed" class="text-danger"></span>
         </div>
     </div>
+    
     <div class="form-group row">
         <label asp-for="Color">Color (optional)</label>
         <div class="col-sm-6">
@@ -83,6 +83,7 @@
             <span asp-validation-for="LocationLost" class="text-danger"></span>
         </div>
     </div>
+
     <div class="form-group row">
         <label asp-for="TimeLost">Time Lost <span class="requiredStar">*</span></label>
         <div class="col-sm-6">
@@ -96,6 +97,5 @@
         <button type="submit" class="btn btn-success">Create</button>
         <a class="btn btn-outline-success" href="/Pets/All">Cancel</a>
     </div>
-
 </form>
 </div>

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using SendGrid;
 using SendGrid.Helpers.Mail;
@@ -10,9 +9,6 @@ namespace SoftUniClone.Web.Areas.Identity.Services
     {
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            //App ID 5Fk7nnMYQ--Ff_UJO7BZzA
-            //APP KEY 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
-
             var apiKey = "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";
             var client = new SendGridClient(apiKey);
             var from = new EmailAddress("atanas_kambitov@abv.bg", "Admin");

@@ -15,7 +15,6 @@
 
             <div>
 
-
                 <br />
                 <h1 class="display-4"><strong class="revealOnScroll" data-animation="right">Email</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="left">@Model.Email</i></h1>
                 <br />
@@ -29,7 +28,6 @@
 
                 @if (Model.AvatarUrl != null)
                 {
-
                     <img width="250" class="card-image-top img-fluid img-thumbnail forms" src="@Model.AvatarUrl" />
                 }
                 else
@@ -40,10 +38,8 @@
                 <br />
                 <br />
 
-
                 @if (Model.DateOfBirth != null)
                 {
-
                     <h2>
                         <strong class="revealOnScroll" data-animation="left">Date of Birth</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right">@Model.DateOfBirth</i>
                     </h2>
@@ -59,7 +55,6 @@
 
                 @if (Model.PhoneNumber != null)
                 {
-
                     <h2>
                         <strong class="revealOnScroll" data-animation="left2">Phone Number</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right2">@Model.PhoneNumber</i>
                     </h2>
@@ -76,10 +71,7 @@
             </div>
 
             <div class="revealOnScroll" data-animation="rollIn">
-
-
                 <h1 class="display-3"><strong>Messages</strong></h1>
-
                 <div class="card col-12 thumbnail">
                     <br />
 
@@ -125,7 +117,6 @@
                                     <i>@message.Likes.Count</i>
 
                                     <br />
-
                                 </span>
                                 <br />
                                 @if (ViewData["isAdmin"].ToString() == "True" || this.User.Identity.Name == Model.Email)
@@ -138,7 +129,6 @@
                                 <br />
                             </div>
                         }
-
                     }
                     <br />
                 </div>
@@ -147,21 +137,17 @@
             <br />
             <br />
 
-
             <div class="revealOnScroll" data-animation="right">
 
                 <div class="card-footer text-center">
                     <h1 class="display-3" style="background: lightgreen">Actions</h1>
-                    <a class="btn btn-primary col-3" asp-controller="Pets" asp-action="All">Home</a>
+                    <a class="btn btn-lg btn-primary col-3" asp-controller="Pets" asp-action="All">Home</a>
                 </div>
 
             </div>
         </div>
     </div>
 </div>
-
-
-
 
 @section Scripts {
 
@@ -180,14 +166,11 @@
             $.get(addLikeUrl);
 
             let commentId = addLikeUrl.split("/").slice(-1).pop()
-            console.log(commentId)
             let currentLikes = Number($(this).parent().next()[0].innerText);
             let newLikes = currentLikes + 1;
 
-            console.log($(this).parent().next()[0]);
             $(this).parent().next().replaceWith("<i class=\"commentLikes\">" + newLikes + "</i>");
-            //replace
-
+            
             $(this).fadeOut(() => {
                 $("<a class='btn btn-sm btn-danger removelikeButton' data-url='/Messages/RemoveLike/" + commentId + "'>Remove Like</a>").hide().appendTo($(this).parent()).fadeIn();
             });
@@ -202,20 +185,13 @@
             $.get(removeLikeUrl);
 
             let commentId = removeLikeUrl.split("/").slice(-1).pop()
-            console.log(commentId);
-
+            
             let currentLikes = Number($(this).parent().next()[0].innerText);
-            console.log(currentLikes)
-
+            
             let newLikes = currentLikes - 1;
-            console.log(newLikes)
-
-            console.log($(this).parent().next()[0]);
-
-            //replace
+            
             $(this).parent().next().replaceWith("<i class=\"commentLikes\">" + newLikes + "</i>");
-
-
+            
             $(this).fadeOut(() => {
                 $("<a class='btn btn-sm btn-success likeButton' data-url='/Messages/AddLike/" + commentId + "'>Like</a>").hide().appendTo($(this).parent()).fadeIn();
             });
@@ -223,8 +199,5 @@
         });
     </script>
 
-
-
     <script src="~/js/scrolling-animations-functions.js"></script>
 }
-

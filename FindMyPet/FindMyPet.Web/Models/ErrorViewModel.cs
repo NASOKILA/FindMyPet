@@ -1,5 +1,3 @@
-using System;
-
 namespace FindMyPet.Web.Models
 {
     public class ErrorViewModel

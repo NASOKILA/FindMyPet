@@ -42,7 +42,6 @@ namespace FindMyPet.Web.Controllers
         [HttpGet]
         public IActionResult All(int? page, int? count)
         {
-
             bool isLoggedIn = false;
             bool isAdmin = false;
 
@@ -139,7 +138,6 @@ namespace FindMyPet.Web.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-
             Pet pet = this.context.Pets
                 .Include(p => p.Owner)
                 .Include(p => p.Founder)
@@ -163,8 +161,7 @@ namespace FindMyPet.Web.Controllers
                 else
                     currentComment.LikeDisabled = false;
             }
-
-
+            
             this.CommentsForPetDetails = pet.Comments.ToList();
             ViewBag.Comments = CommentsForPetDetails;
             ViewData[StaticConstants.CurrentId] = id;
@@ -210,8 +207,6 @@ namespace FindMyPet.Web.Controllers
 
             this.context.Comments.Add(comment);
             this.context.SaveChanges();
-            
-            //return RedirectToAction(StaticConstants.Details, StaticConstants.Pets, new { Id = petId });
         }
 
         [HttpGet]
@@ -228,14 +223,11 @@ namespace FindMyPet.Web.Controllers
 
             this.context.Comments.Remove(comment);
             this.context.SaveChanges();
-
-            //return RedirectToAction(StaticConstants.Details, StaticConstants.Pets, new { Id = petId });
         }
 
         [HttpGet]
         public IActionResult PetFound(int id)
         {
-
             PetFoundBindingModel petFoundBindingModel = context.Pets.Select(p => new PetFoundBindingModel()
             {
                 Id = p.Id,
@@ -267,8 +259,7 @@ namespace FindMyPet.Web.Controllers
             }
 
             string content = "Your pet " + pet.Name + " was found by " + this.User.Identity.Name + " at " + DateTime.Now + ".";
-
-            //Send message to owner founder
+            
             Message foundMessage = new Message()
             {
                 CreationDate = DateTime.Now,
@@ -278,8 +269,7 @@ namespace FindMyPet.Web.Controllers
                 ReceverId = pet.Owner.Id,
                 SenderId = currentUser.Id
             };
-
-
+            
             this.context.Messages.Add(foundMessage);
             this.context.SaveChanges();
 
@@ -291,7 +281,6 @@ namespace FindMyPet.Web.Controllers
             if (pet == null)
                 return RedirectToAction(StaticConstants.All, StaticConstants.Pets, new { Id = id });
             
-
             currentUser.PetsFound.Add(pet);
             
             switch (pet.Type)

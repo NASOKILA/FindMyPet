@@ -6,8 +6,6 @@
     string petStyle = "petStyle";
 }
 
-
-
 @if (this.User.Identity.IsAuthenticated)
 {
     <div class="text-center revealOnScroll" data-animation="rollIn">
@@ -59,12 +57,10 @@
                         <p class="card-text">
                             <strong>Time Lost</strong> : @pet.TimeLost
                         </p>
-
                     </div>
                 </a>
 
                 <div class="classButtons">
-
                     <a class="btn btn-primary col-3" asp-controller="Pets" asp-action="Details" asp-route-id="@pet.Id">Details</a>
                     @if (pet.Status == "Lost")
                     {
@@ -77,9 +73,7 @@
                         <a class="btn btn-danger col-3" asp-route-id="@pet.Id" asp-page="/PetsPages/Delete">Delete</a>
                     }
                 </div>
-
             </div>
-
         }
 
     </div>
@@ -90,14 +84,11 @@
     }
     else
     {
-
-
+        
         int first = 0;
         int second = 0;
         int third = 0;
-
-
-
+        
         string active1 = "";
         string active2 = "";
         string active3 = "";
@@ -156,14 +147,10 @@
 }
 else
 {
-
     <h1>You must login first.</h1>
 }
 
 
 @section Scripts {
-
-
     <script src="~/js/scrolling-animations-functions.js"></script>
-
 }

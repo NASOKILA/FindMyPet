@@ -140,7 +140,6 @@ namespace FindMyPet.Web.Pages.PetsPages
                     {
                         context.Likes.Remove(like);
                     }
-                    context.SaveChanges();
 
                     context.Comments.Remove(comm);
                 }

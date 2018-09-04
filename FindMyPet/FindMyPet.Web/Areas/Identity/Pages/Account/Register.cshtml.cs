@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using FindMyPet.Data;
 using FindMyPet.Models;
 using FindMyPet.Web.Static;
 using Microsoft.AspNetCore.Authorization;
@@ -98,13 +96,9 @@ namespace FindMyPet.Web.Areas.Identity.Pages.Account
                 {
                     locationToUse = "/images/" + Input.Email + "-" + avatarUpload.FileName;
                     fullFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", Input.Email + "-" + avatarUpload.FileName);
-
                     var fileStream = new FileStream(fullFilePath, FileMode.Create);
-
                     await avatarUpload.CopyToAsync(fileStream);
                 }
-
-
 
                 var user = new User { FullName = Input.FullName, UserName = Input.Email, Email = Input.Email, AvatarUrl  = locationToUse, DateOfBirth = Input.DateOfBirth};
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -125,6 +119,7 @@ namespace FindMyPet.Web.Areas.Identity.Pages.Account
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);
                 }
+
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);

@@ -14,9 +14,7 @@
             </div>
             <br />
             <hr class="display-3" />
-
             <div>
-
                 <br />
                 <h2 class="display-4"><strong class="revealOnScroll" data-animation="right">Type</strong><span class="revealOnScroll" data-animation="forms"> : </span><i class="revealOnScroll" data-animation="left">@Model.Type</i></h2>
                 <br />
@@ -35,7 +33,6 @@
 
                 @if (Model.Age != null)
                 {
-
                     <h2>
                         <strong class="revealOnScroll" data-animation="left">Age</strong> <span class="revealOnScroll" data-animation="forms"> : </span><i class="revealOnScroll" data-animation="right">@Model.Age</i>
                     </h2>
@@ -51,7 +48,6 @@
 
                 @if (Model.Breed != null)
                 {
-
                     <h2>
                         <strong class="revealOnScroll" data-animation="left2">Breed</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right2">@Model.Breed</i>
                     </h2>
@@ -67,7 +63,6 @@
 
                 @if (Model.Color != null)
                 {
-
                     <h2>
                         <strong class="revealOnScroll" data-animation="left3">Color</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right3">@Model.Color</i>
                     </h2>
@@ -88,7 +83,6 @@
                 }
                 else
                 {
-
                     <h2>
                         <strong class="revealOnScroll" data-animation="left">Gender</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right">Not specified</i>
                     </h2>
@@ -113,7 +107,6 @@
 
                 @if (Model.TimeLost != null)
                 {
-
                     <h2>
                         <strong class="revealOnScroll" data-animation="left3">Time Lost</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="right3">@Model.TimeLost</i>
                     </h2>
@@ -125,12 +118,10 @@
                     </h2>
                 }
 
-
                 <br />
 
                 @if (Model.TimeFound != null && Model.TimeFound != new DateTime(0001, 01, 01, 0, 00, 00))
                 {
-
                     <h2>
                         <strong class="revealOnScroll" data-animation="left">Time Found</strong> <span class="revealOnScroll" data-animation="forms"> : </span>  <i class="revealOnScroll" data-animation="right">@Model.TimeFound</i>
                     </h2>
@@ -143,7 +134,6 @@
                 }
 
                 <br />
-
 
                 @if (Model.Founder != null)
                 {
@@ -173,11 +163,9 @@
                     </h2>
                 }
                 <br />
-
             </div>
 
             <div class="revealOnScroll" data-animation="left">
-
                 <h2>
                     <strong>Comments</strong>
                 </h2>
@@ -186,16 +174,14 @@
 
                     @if (Model.Comments.Count < 1)
                     {
-
                         <div>
-                            <h3>No comments posted for this pet.</h3>
+                            <h3 class="noCommentsPresent">No comments posted for this pet.</h3>
                             <br />
                             <br />
                         </div>
                     }
                     else
                     {
-
                         @foreach (var comment in ViewBag.Comments)
                         {
                             <div>
@@ -224,13 +210,11 @@
                                     }
                                     :
                                     <i class="commentLikes">@comment.Likes.Count</i>
-
                                 </span>
                                 <br />
                                 <br />
                                 @if (this.User.Identity.Name == comment.Creator.Email || ViewData["isAdmin"].ToString() == "True")
                                 {
-                                    //<a style="margin: 0 auto" class="deleteBtn btn btn-danger col-3" autocomplete="off" data-url="@Url.Action("RemoveCommentFromPet", "Pets", new {commentId = comment.Id} )">
                                     <a style="margin: 0 auto" class="deleteBtn btn btn-danger col-3" autocomplete="off" data-url="@Url.Action("RemoveCommentFromPet", "Pets", new {Area = "Admin", commentId = comment.Id} )">
                                         Delete Comment
                                     </a>
@@ -248,7 +232,6 @@
 
             <div class="revealOnScroll" data-animation="right">
                 <form>
-
                     <h2 class=""><strong>Add Comment</strong></h2>
                     <div class="form-group row">
                         <textarea class="form-control commentDescription" name="Description" placeholder="Enter Comment"
@@ -261,10 +244,7 @@
             <br />
             <br />
 
-
-
             <div class="revealOnScroll" data-animation="bottom">
-
                 <div class="card-footer text-center">
                     <h1 class="display-3">Actions</h1>
                     <hr />
@@ -273,22 +253,16 @@
                     {
                         <a class="btn btn-lg btn-success col-3" asp-area="Admin" asp-controller="Pets" asp-action="PetFound" asp-route-id="@Model.Id">Found</a>
                     }
-                    @if (Model.Status == "Lost")
-                    {
-
-                    }
 
                     @if (this.User.Identity.Name == Model.Owner.Email || ViewData["isAdmin"].ToString() == "True")
                     {
                         <a class="btn btn-lg btn-warning col-3" asp-area="Admin" asp-route-id="@Model.Id" asp-page="/PetsPages/Edit">Edit</a>
                         <a class="btn btn-lg btn-danger col-3" asp-area="Admin" asp-route-id="@Model.Id" asp-page="/PetsPages/Delete">Delete</a>
                     }
-
                 </div>
 
                 <br />
                 <br />
-
             </div>
         </div>
     </div>
@@ -306,11 +280,7 @@
             let id = Number(addCommentUrl.split("/").pop());
 
             let Description = $('.commentDescription').val();
-
-            console.log(addCommentUrl)
-            console.log(id)
-            console.log(Description)
-
+            
             $('.commentDescription').val('');
 
             $.get(addCommentUrl,
@@ -318,13 +288,7 @@
                     Description: Description,
                     id: id
                 }).then((res) => {
-
-                    console.log("SUCCESS !");
-                    console.log(res)
-
-
-                    console.log(Description);
-
+                    
                     let currentComment = "";
 
                     $.ajax({
@@ -332,14 +296,9 @@
                         method: 'GET',
                         dataType: "json",
                         success: function (currentComment) {
-
-                            console.log(currentComment)
-
-
-                            $(".noCommentsPresent").fadeOut();
-
-
-                     //APPEND TO
+                            
+                        $(".noCommentsPresent").fadeOut();
+                            
                     $('.commentsContainer')
                         .append(
                          "<div>"
@@ -372,19 +331,16 @@
     </script>
 
     <script>
-        //ADMIN
-
+        
         $("body").on("click", ".deleteBtn", function () {
             let deleteCommentUrl = $(this).data("url");
             $.get(deleteCommentUrl);
             $(this).parent().fadeOut();
         });
-
-
+        
     </script>
 
     <script>
-
 
         $("body").on("click", ".likeButton", function () {
             let addLikeUrl = $(this).data("url");
@@ -395,8 +351,7 @@
             let newLikes = currentLikes + 1;
 
             $(this).parent().next().replaceWith("<i class=\"commentLikes\">" + newLikes + "</i>");
-
-            //replace
+            
             $(this).fadeOut(() => {
                 $("<a class='btn btn-sm btn-danger removelikeButton' data-url='/Admin/Comments/RemoveLike/" + commentId + "'>Remove Like</a>").hide().appendTo($(this).parent()).fadeIn();
             });
@@ -409,20 +364,15 @@
         $("body").on("click", ".removelikeButton", function () {
 
             let removeLikeUrl = $(this).data("url");
+
             $.get(removeLikeUrl);
 
             let commentId = removeLikeUrl.split("/").slice(-1).pop()
-            console.log(commentId);
-
+            
             let currentLikes = Number($(this).parent().next()[0].innerText);
-            console.log(currentLikes)
-
+            
             let newLikes = currentLikes - 1;
-            console.log(newLikes)
-
-            console.log($(this).parent().next()[0]);
-
-            //replace
+            
             $(this).parent().next().replaceWith("<i class=\"commentLikes\">" + newLikes + "</i>");
 
             $(this).fadeOut(() => {
@@ -433,5 +383,4 @@
     </script>
 
     <script src="~/js/scrolling-animations-functions.js"></script>
-
 }

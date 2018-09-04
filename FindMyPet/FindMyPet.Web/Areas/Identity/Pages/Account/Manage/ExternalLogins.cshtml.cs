@@ -99,7 +99,6 @@ namespace FindMyPet.Web.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnPostLinkLoginAsync(string provider)
         {
-
             bool isLoggedIn = false;
             bool isAdmin = false;
 
