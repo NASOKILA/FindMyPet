@@ -28,8 +28,6 @@ a:hover {
 }
 
 .removelikeButton:hover {
-    color: red !important;
-    background-color: white !important;
     color: white !important;
     background-color: red !important;
 }
@@ -68,8 +66,7 @@ footer {
     color: black;
     margin: 5px 0px;
     padding: 25px;
-    border: 1px solid black;
-    height: 600px;
+    border: 1px solid black; 
     transition-duration: 0.5s;
     transition-delay: 0.5s;
     transition-timing-function: linear;

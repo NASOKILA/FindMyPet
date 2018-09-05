@@ -72,7 +72,7 @@ using FindMyPet.Web.Areas.Identity.Pages.Account.Manage;
             WriteLiteral("\r\n<div class=\"left\">\r\n    <h2>Manage your account</h2>\r\n    <h4>Change your account settings</h4>\r\n</div>\r\n\r\n<div>\r\n    <hr />\r\n    <div class=\"row\">\r\n        <div class=\"col-md-3\">\r\n            ");
             EndContext();
             BeginContext(249, 29, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "0fb5f11d4fa841f884bd7d1d806058af", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "32ce98c15ee94feaa7d00aedf00477ee", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper>();

@@ -49,12 +49,14 @@
 
                 <div class="form-group">
                     <label asp-for="Input.AvatarUpload">Avatar File Upload (optional)</label>
-                    <input asp-for="Input.AvatarUpload" class="form-control-file btn btn-block btn-lg" aria-describedby="fileHelp" />
+                    <input asp-for="Input.AvatarUpload" class="form-control-file btn btn-block btn-lg btn-light" aria-describedby="fileHelp" />
                     <span asp-validation-for="Input.AvatarUpload" class="text-danger"></span>
                     <br/>
                 </div>
 
-                <button type="submit" class="btn btn-success bottom">Register</button>
+                <div class="bottom ">
+                    <button type="submit" class="btn btn-lg btn-success">Register</button>
+                </div>
             </form>
         </div>
     </div>

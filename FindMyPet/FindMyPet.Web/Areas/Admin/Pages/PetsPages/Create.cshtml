@@ -55,7 +55,12 @@
     <div class="form-group row">
         <label asp-for="Gender">Gender (optional)</label>
         <div class="col-sm-6">
-            <input asp-for="Gender" type="text" class="form-control custom-input" placeholder="Gender">
+            <select asp-for="Gender" class="form-control custom-input" name="Gender">
+                <option disabled selected>Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
             <span asp-validation-for="Gender" class="text-danger"></span>
         </div>
     </div>
