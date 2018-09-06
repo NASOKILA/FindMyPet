@@ -13,6 +13,15 @@ namespace FindMyPet.Web.Views.Pages.Pets
 {
     public class CreateModel : PageModel
     {
+
+        public FindMyPetDbContext context { get; set; }
+
+        public CreateModel(FindMyPetDbContext context)
+        {
+            this.context = context;
+        }
+
+
         private const int zero = 0;
         private const int three = 3;
         private const int oneHundred = 100;
@@ -108,8 +117,6 @@ namespace FindMyPet.Web.Views.Pages.Pets
                 return Page();
             }
             
-            using (var context = new FindMyPetDbContext())
-            {
                 var petsExists = context.Pets.Any(p => p.Name == this.Name && p.Type == this.Type && p.ImageUrl == this.ImageUrl);
 
                 if (petsExists)
@@ -119,6 +126,8 @@ namespace FindMyPet.Web.Views.Pages.Pets
                 }
 
                 ViewData[StaticConstants.PetExists] = false;
+
+                var allUsers = context.Users.ToList();
 
                 User currentUser = context.Users.FirstOrDefault(u => u.Email == this.User.Identity.Name);
 
@@ -143,7 +152,7 @@ namespace FindMyPet.Web.Views.Pages.Pets
                 context.SaveChanges();
                 
                 return RedirectToAction(StaticConstants.Details, StaticConstants.Pets, new { Id = pet.Id });
-            }
+            
         }
     }
 }

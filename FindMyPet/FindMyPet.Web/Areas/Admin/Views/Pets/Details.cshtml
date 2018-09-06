@@ -27,7 +27,16 @@
                 <h2 class="display-5"><strong class="revealOnScroll" data-animation="right3">Status</strong><span class="revealOnScroll" data-animation="forms"> : </span><i class="revealOnScroll" data-animation="left3">@Model.Status</i></h2>
                 <br />
 
-                <img width="500" class="forms card-image-top img-fluid img-thumbnail" src="@Model.ImageUrl" />
+                @if (Model.ImageUrl != null && Model.ImageUrl != "")
+                {
+
+                    <img class="revealOnScroll card-image-top img-fluid img-thumbnail" data-animation="jackInTheBox" data-timeout="600" src="@Model.ImageUrl" />
+                }
+                else
+                {
+                    <img class="card-image-top img-fluid img-thumbnail" data-animation="jackInTheBox" data-timeout="600" src="~/images/pet-lost-avatar.png" />
+                }
+
                 <br />
                 <br />
 
@@ -307,7 +316,7 @@
                             + "</h2>"
                         + "<span> Created by "
                         + "<strong class=\"profile\">"
-                            + "<a class='profileLink' href='/Admin/Users/Profile/@context.Users.FirstOrDefault(u => u.Email == this.User.Identity.Name).Id'>@this.User.Identity.Name</a>"
+                            + "<a class='profileLink' href='/Admin/Users/Profile/@ViewData["CurrentUserId"]'>@this.User.Identity.Name</a>"
                         + "</strong> on "
                         + "<i>" + new Date().toLocaleDateString('en-gb') + " " + new Date().toLocaleTimeString('en-gb') + "</i><br/><br/>"
 

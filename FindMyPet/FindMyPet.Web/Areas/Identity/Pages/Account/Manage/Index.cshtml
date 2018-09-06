@@ -15,11 +15,6 @@
             <div asp-validation-summary="All" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="Username"></label>
-                <input asp-for="Username" class="form-control" disabled />
-            </div>
-
-            <div class="form-group">
                 <label asp-for="Input.FullName">Full name</label>
                 <input asp-for="Input.FullName" class="form-control" />
             </div>
@@ -51,9 +46,15 @@
                 <label asp-for="Input.AvatarUpload">Change Avatar File (optional)</label>
                 <input asp-for="Input.AvatarUpload" class="form-control-file btn btn-block btn-lg" aria-describedby="fileHelp" />
                 <span asp-validation-for="Input.AvatarUpload" class="text-danger"></span>
-                @if (ViewData["Image"] != null)
+                @if (ViewData["Image"] != null && ViewData["Image"] != "")
                 {
                     <img width="100" height="100" src="@ViewData["Image"]" />
+                    <br />
+                    <br />
+                }
+                else
+                {
+                    <img width="100" height="100" src="~/images/blank-avatar.png" />
                     <br />
                     <br />
                 }

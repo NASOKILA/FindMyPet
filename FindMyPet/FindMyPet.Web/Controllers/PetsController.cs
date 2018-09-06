@@ -78,6 +78,14 @@ namespace FindMyPet.Web.Controllers
 
 
             var allPets = context.Pets.ToList();
+            if (allPets.Count < 4)
+            {
+                ViewData["allPetsLessThanThree"] = "True";
+            }
+            else
+            {
+                ViewData["allPetsLessThanThree"] = "False";
+            }
 
             List<ListPetsBindingModel> pets = this.context.Pets
                 .Include(p => p.Owner)
@@ -108,6 +116,16 @@ namespace FindMyPet.Web.Controllers
             if (pets.Count == 0)
             {
                 page = (allPets.Count % DefaultResultsPerPage) + DefaultResultsPerPage;
+
+                if (allPets.Count < 4)
+                {
+                    page = 1;
+                }
+                else if (allPets.Count < 7)
+                {
+                    page = 2;
+                }
+
                 return new RedirectToActionResult(StaticConstants.All, StaticConstants.Pets, new { @area = StaticConstants.Empty, @page = page });
             }
 
@@ -164,6 +182,7 @@ namespace FindMyPet.Web.Controllers
             
             this.CommentsForPetDetails = pet.Comments.ToList();
             ViewBag.Comments = CommentsForPetDetails;
+            ViewData["CurrentUserId"] = context.Users.FirstOrDefault(u => u.Email == this.User.Identity.Name).Id;
             ViewData[StaticConstants.CurrentId] = id;
 
             bool isLoggedIn = false;
@@ -269,7 +288,20 @@ namespace FindMyPet.Web.Controllers
                 ReceverId = pet.Owner.Id,
                 SenderId = currentUser.Id
             };
-            
+
+            string contentForFounder = "You found pet " + pet.Name + " of type " + pet.Type + " on " + DateTime.Now + ".";
+
+            Message foundMessageForFounder = new Message()
+            {
+                CreationDate = DateTime.Now,
+                Content = contentForFounder,
+                LikeDisabled = false,
+                Likes = new List<Like>(),
+                ReceverId = currentUser.Id,
+                SenderId = currentUser.Id
+            };
+
+            this.context.Messages.Add(foundMessageForFounder);
             this.context.Messages.Add(foundMessage);
             this.context.SaveChanges();
 

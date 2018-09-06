@@ -66,6 +66,8 @@
 
         public const string FullName = "FullName";
 
+        public const string UserName = "UserName";
+
         public const string PhoneNumber = "Phone number";
 
         public const string DateOfBirth = "DateOfBirth";

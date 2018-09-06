@@ -12,6 +12,15 @@ namespace FindMyPet.Web.Pages.PetsPages
 {
     public class EditModel : PageModel
     {
+
+        public FindMyPetDbContext context { get; set; }
+
+        public EditModel(FindMyPetDbContext context)
+        {
+            this.context = context;
+        }
+
+
         private const int zero = 0;
         private const int three = 3;
         private const int oneHundred = 100;
@@ -82,8 +91,6 @@ namespace FindMyPet.Web.Pages.PetsPages
                 return Redirect(StaticConstants.LoginRedirect);
             }
             
-            using (var context = new FindMyPetDbContext())
-            {
                 CreatePetBindingModel pet = context.Pets
                     .Select(p => new CreatePetBindingModel()
                     {
@@ -113,7 +120,7 @@ namespace FindMyPet.Web.Pages.PetsPages
                 this.Gender = pet.Gender;
                 this.Breed = pet.Breed;
                 this.Color = pet.Color;
-            }
+            
 
             return Page();
         }
@@ -147,9 +154,7 @@ namespace FindMyPet.Web.Pages.PetsPages
                 return Page();
             }
 
-
-            using (var context = new FindMyPetDbContext())
-            {
+            
                 Pet pet = context.Pets.FirstOrDefault(p => p.Id == id);
 
                 if (pet == null)
@@ -169,7 +174,7 @@ namespace FindMyPet.Web.Pages.PetsPages
                 context.SaveChanges();
                 
                 return RedirectToAction(StaticConstants.Details, StaticConstants.Pets, new { Id = pet.Id });
-            }
+            
         }
     }
 }

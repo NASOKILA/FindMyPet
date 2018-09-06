@@ -42,6 +42,7 @@ namespace FindMyPet.Web.Common
                     {
                         UserName = "admin@abv.bg",
                         Email = "admin@abv.bg"
+                        
                     };
 
                     await userManager.CreateAsync(user, DefaultAdminPassword);

@@ -14,7 +14,14 @@
     {
         image = emptyAvatarImage;
     }
-    
+
+
+    if (image == null || image == "")
+    {
+        image = emptyAvatarImage;
+    }
+
+
     <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
             <li>

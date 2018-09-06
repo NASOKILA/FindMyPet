@@ -37,7 +37,16 @@
             <div class="classComix card col-sm-4 text-center @petStyle">
 
                 <a class="pageLink" asp-controller="Pets" asp-action="Details" asp-route-id="@pet.Id">
-                    <img class="revealOnScroll card-image-top img-fluid img-thumbnail" data-animation="jackInTheBox" data-timeout="600" src="@pet.ImageUrl" />
+                    @if (pet.ImageUrl != null && pet.ImageUrl != "")
+                    {
+
+                        <img class="revealOnScroll card-image-top img-fluid img-thumbnail" data-animation="jackInTheBox" data-timeout="600" src="@pet.ImageUrl" />
+                    }
+                    else
+                    {
+                        <img class="revealOnScroll card-image-top img-fluid img-thumbnail" data-animation="jackInTheBox" data-timeout="600" src="~/images/pet-lost-avatar.png" />
+                    }
+
                     <div class="card-body">
                         <h4 class="card-title"></h4>
                         <p class="card-text">
@@ -82,12 +91,14 @@
     {
         <h3 class="text-center">No pets in database.</h3>
     }
+    else if (ViewData["allPetsLessThanThree"].ToString() == "True")
+    { }
     else
     {
         int first = 0;
         int second = 0;
         int third = 0;
-        
+
         string active1 = "";
         string active2 = "";
         string active3 = "";

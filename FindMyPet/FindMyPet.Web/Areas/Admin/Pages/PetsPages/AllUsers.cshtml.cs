@@ -10,6 +10,12 @@ namespace FindMyPet.Web.Areas.Admin.Pages.PetsPages
 {
     public class AllUsersModel : PageModel
     {
+        public FindMyPetDbContext context { get; set; }
+        public AllUsersModel(FindMyPetDbContext context)
+        {
+            this.context = context;
+        }
+
         public List<User> AllUsers { get; set; }
 
         public IActionResult OnGet()
@@ -36,15 +42,14 @@ namespace FindMyPet.Web.Areas.Admin.Pages.PetsPages
             ViewData[StaticConstants.LoggedIn] = isLoggedIn.ToString();
             ViewData[StaticConstants.IsAdmin] = isAdmin.ToString();
             
-            using (var context = new FindMyPetDbContext())
-            {
+            
                 var users = context.Users
                     .ToList();
                 
                 this.AllUsers = users.Where(u => u.Email != this.User.Identity.Name).ToList();
                 ViewData[StaticConstants.UserList] = users;
                 return Page();
-            }
+            
         }
     }
 }

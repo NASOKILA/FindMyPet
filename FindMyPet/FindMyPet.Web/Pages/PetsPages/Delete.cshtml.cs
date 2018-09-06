@@ -13,6 +13,13 @@ namespace FindMyPet.Web.Pages.PetsPages
     public class DeleteModel : PageModel
     {
 
+        public FindMyPetDbContext context { get; set; }
+
+        public DeleteModel(FindMyPetDbContext context)
+        {
+            this.context = context;
+        }
+
         public int Id { get; set; }
 
         [BindProperty]
@@ -66,9 +73,7 @@ namespace FindMyPet.Web.Pages.PetsPages
                 return Redirect(StaticConstants.LoginRedirect);
             }
             
-
-            using (var context = new FindMyPetDbContext())
-            {
+            
                 CreatePetBindingModel pet = context.Pets
                     .Select(p => new CreatePetBindingModel()
                     {
@@ -98,7 +103,7 @@ namespace FindMyPet.Web.Pages.PetsPages
                 this.Gender = pet.Gender;
                 this.Breed = pet.Breed;
                 this.Color = pet.Color;
-            }
+            
 
             return Page();
         }
@@ -124,9 +129,7 @@ namespace FindMyPet.Web.Pages.PetsPages
             {
                 return Redirect(StaticConstants.LoginRedirect);
             }
-
-            using (var context = new FindMyPetDbContext())
-            {
+            
                 Pet pet = context.Pets
                     .Include(p => p.Comments)
                     .ThenInclude(c => c.Likes)
@@ -153,7 +156,7 @@ namespace FindMyPet.Web.Pages.PetsPages
                 context.SaveChanges();
 
                 return RedirectToAction(StaticConstants.All, StaticConstants.Pets);
-            }
+            
         }
     }
 }

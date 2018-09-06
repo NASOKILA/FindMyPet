@@ -16,6 +16,16 @@ namespace FindMyPet.Web.Admin.Pages.Pets
     [Authorize(Roles = StaticConstants.AdminRole)]
     public class CreateModel : PageModel
     {
+
+
+        public FindMyPetDbContext context { get; set; }
+
+        public CreateModel(FindMyPetDbContext context)
+        {
+            this.context = context;
+        }
+
+
         private const int numberZero = 0;
         private const int numberThree = 3;
         private const int numberOnehundred = 100;
@@ -86,8 +96,6 @@ namespace FindMyPet.Web.Admin.Pages.Pets
                 return Page();
             }
             
-            using (var context = new FindMyPetDbContext())
-            {
                 var petsExists = context.Pets.Any(p => p.Name == this.Name && p.Type == this.Type && p.ImageUrl == this.ImageUrl);
 
                 if (petsExists)
@@ -121,7 +129,7 @@ namespace FindMyPet.Web.Admin.Pages.Pets
                 context.SaveChanges();
                 
                 return RedirectToAction(StaticConstants.Details, StaticConstants.Pets, new { Id = pet.Id });
-            }
+            
         }
     }
 }

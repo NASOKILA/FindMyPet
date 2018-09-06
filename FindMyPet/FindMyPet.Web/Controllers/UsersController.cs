@@ -61,6 +61,7 @@ namespace FindMyPet.Web.Controllers
             }
             
             ViewBag.Messages = user.MessagesReceived.ToList();
+            ViewData["CurrentUserId"] = thisUserId;
             ViewData[StaticConstants.CurrentId] = id;
 
             bool isLoggedIn = false;

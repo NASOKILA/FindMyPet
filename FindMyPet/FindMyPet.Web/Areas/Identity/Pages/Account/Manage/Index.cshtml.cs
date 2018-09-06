@@ -45,7 +45,10 @@ namespace FindMyPet.Web.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]
+            
+            [Display(Name = StaticConstants.UserName)]
+            public string UserName { get; set; }
+
             [Display(Name = StaticConstants.FullName)]
             public string FullName { get; set; }
             
@@ -117,12 +120,15 @@ namespace FindMyPet.Web.Areas.Identity.Pages.Account.Manage
 
         public IActionResult OnPostAsync()
         {
+            Input.UserName = Input.Email;
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
             var avatarUpload = Input.AvatarUpload;
+            
 
             var fullFilePath = "";
             string locationToUse = "";

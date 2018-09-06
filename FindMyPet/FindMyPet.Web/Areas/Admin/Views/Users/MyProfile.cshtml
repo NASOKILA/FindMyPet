@@ -24,7 +24,7 @@
                 <h2 class="display-5"><strong class="revealOnScroll" data-animation="right3">FeedBack</strong> <span class="revealOnScroll" data-animation="forms"> : </span> <i class="revealOnScroll" data-animation="left3">@Model.FeedBack</i></h2>
                 <br />
 
-                @if (Model.AvatarUrl != null)
+                @if (Model.AvatarUrl != null && Model.AvatarUrl != "")
                 {
                     <img width="250" class="card-image-top img-fluid img-thumbnail forms" src="@Model.AvatarUrl" />
                 }
