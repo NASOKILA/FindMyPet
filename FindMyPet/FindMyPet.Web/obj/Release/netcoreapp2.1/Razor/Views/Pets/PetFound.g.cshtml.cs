@@ -159,7 +159,7 @@ WriteAttributeValue("", 570, Model.ImageUrl, 570, 15, false);
             WriteLiteral("</i>\r\n                </h2>\r\n\r\n                <br />\r\n                <br />\r\n\r\n                ");
             EndContext();
             BeginContext(2115, 456, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "89f5366a17094821a5d1e54a18bbb5d2", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b6691d91c9294682a791bd2b822c5f0d", async() => {
                 BeginContext(2208, 356, true);
                 WriteLiteral(@"
 
@@ -208,7 +208,7 @@ WriteAttributeValue("", 570, Model.ImageUrl, 570, 15, false);
                 WriteLiteral("\r\n    ");
                 EndContext();
                 BeginContext(2655, 62, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "03e3d43ffd99497fa00d55f9b43dd8c5", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "097443a9ae104c8b84d0f52c4a776dee", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

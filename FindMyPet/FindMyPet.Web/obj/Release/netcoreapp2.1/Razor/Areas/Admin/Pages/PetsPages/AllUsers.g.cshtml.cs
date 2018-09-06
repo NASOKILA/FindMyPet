@@ -167,7 +167,7 @@ WriteAttributeValue("", 1374, user.AvatarUrl, 1374, 15, false);
             WriteLiteral("                            \r\n                            <td class=\"tableDataRotate\">\r\n                                ");
             EndContext();
             BeginContext(1686, 122, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cf43301a330d4818a5fd557404741ae5", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "54d2718364e54da386554239c738505f", async() => {
                 BeginContext(1797, 7, true);
                 WriteLiteral("Details");
                 EndContext();
@@ -217,7 +217,7 @@ WriteAttributeValue("", 1374, user.AvatarUrl, 1374, 15, false);
             WriteLiteral("                                        ");
             EndContext();
             BeginContext(2066, 127, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "69603b0745414b06b26f03291e76ea24", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1c0ab1dd66984d038d553c566131c620", async() => {
                 BeginContext(2180, 9, true);
                 WriteLiteral("Free User");
                 EndContext();
@@ -265,7 +265,7 @@ WriteAttributeValue("", 1374, user.AvatarUrl, 1374, 15, false);
             WriteLiteral("                                        ");
             EndContext();
             BeginContext(2355, 124, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e1e6f7b4032a491a8d8956f9739de1fe", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a650e84e7aa248869ed31d2948def745", async() => {
                 BeginContext(2466, 9, true);
                 WriteLiteral("Lock User");
                 EndContext();
@@ -314,7 +314,7 @@ WriteAttributeValue("", 1374, user.AvatarUrl, 1374, 15, false);
             WriteLiteral("                                    ");
             EndContext();
             BeginContext(2664, 124, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "dad6d5922f444b3db48e1399e5988bf7", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6328a60e88394b73bb564f706b9b68fe", async() => {
                 BeginContext(2775, 9, true);
                 WriteLiteral("Lock User");
                 EndContext();
