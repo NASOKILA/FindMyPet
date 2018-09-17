@@ -27,15 +27,17 @@
                 <h2 class="display-5"><strong class="revealOnScroll" data-animation="right3">Status</strong><span class="revealOnScroll" data-animation="forms"> : </span><i class="revealOnScroll" data-animation="left3">@Model.Status</i></h2>
                 <br />
 
+                <div class="revealOnScroll" data-animation="right3">
+
                 @if (Model.ImageUrl != null && Model.ImageUrl != "")
                 {
-
                     <img class="revealOnScroll card-image-top img-fluid img-thumbnail" data-animation="jackInTheBox" data-timeout="600" src="@Model.ImageUrl" />
                 }
                 else
                 {
                     <img class="card-image-top img-fluid img-thumbnail" data-animation="jackInTheBox" data-timeout="600" src="~/images/pet-lost-avatar.png" />
                 }
+                </div>
 
                 <br />
                 <br />
@@ -258,7 +260,7 @@
                     <h1 class="display-3">Actions</h1>
                     <hr />
                     <a class="btn btn-lg btn-primary col-3" asp-area="Admin" asp-controller="Pets" asp-action="All">Back</a>
-                    @if (Model.Status == "Lost")
+                    @if (Model.Status == "Lost" && Model.Owner.Email != this.User.Identity.Name)
                     {
                         <a class="btn btn-lg btn-success col-3" asp-area="Admin" asp-controller="Pets" asp-action="PetFound" asp-route-id="@Model.Id">Found</a>
                     }

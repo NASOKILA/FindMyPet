@@ -12,12 +12,6 @@
 <div class="container">
     <div class="row right">
         <div class="col-12">
-
-            @if (ViewData["petExists"].ToString() == "True")
-            {
-                <span class="display-3 text-danger">Pet Already Exists !</span>
-            }
-
                 <form class="forms" method="post">
 
                     <div class="form-group row">
@@ -38,6 +32,10 @@
                         <div class="col-sm-6">
                             <input asp-for="Name" type="text" class="form-control custom-input" placeholder="Name">
                             <span asp-validation-for="Name" class="text-danger"></span>
+                            @if (ViewData["petExists"].ToString() == "True")
+                            {
+                                <span class="text-danger">Pet name already in use !</span>
+                            }
                         </div>
                     </div>
 

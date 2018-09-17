@@ -72,7 +72,7 @@
 
                 <div class="classButtons">
                     <a class="btn btn-primary col-3" asp-controller="Pets" asp-action="Details" asp-route-id="@pet.Id">Details</a>
-                    @if (pet.Status == "Lost")
+                    @if (pet.Status == "Lost" && pet.Owner.Email != this.User.Identity.Name)
                     {
                         <a class="btn btn-success col-3" asp-controller="Pets" asp-action="PetFound" asp-route-id="@pet.Id">Found</a>
                     }

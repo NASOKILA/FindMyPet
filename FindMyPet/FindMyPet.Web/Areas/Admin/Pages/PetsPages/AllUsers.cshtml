@@ -27,7 +27,7 @@
                             <td>@user.FullName</td>
                             <td>@user.FeedBack</td>
 
-                            @if (@user.AvatarUrl != null)
+                            @if (@user.AvatarUrl != null && user.AvatarUrl != "")
                             {
                                 <td><img class="tableAvatar" src="@user.AvatarUrl" alt="No Avatar" /></td>
                             }
