@@ -152,7 +152,7 @@ WriteAttributeValue("", 1523, Model.AvatarUrl, 1523, 16, false);
             WriteLiteral("                    ");
             EndContext();
             BeginContext(1625, 104, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "702246ade6e24639b40afcdc6685d499", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "b85a5f68095c4f1d8c43af3f22d71f7c", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -305,7 +305,7 @@ WriteAttributeValue("", 1523, Model.AvatarUrl, 1523, 16, false);
             WriteLiteral("\r\n                                </h2>\r\n                                <span>\r\n                                    Created by\r\n                                    <strong style=\"color: grey\">");
             EndContext();
             BeginContext(4297, 129, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b3aaa773b0c048d6b1973ad15fab7b32", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d2e4272ed9924a8a9706d8a44f0c87d8", async() => {
                 BeginContext(4402, 20, false);
 #line 93 "C:\Users\Asus\Desktop\FindMyPet\FindMyPet\FindMyPet.Web\Views\Users\Profile.cshtml"
                                                                                                                                                                    Write(message.Sender.Email);
@@ -456,7 +456,7 @@ WriteAttributeValue("", 1523, Model.AvatarUrl, 1523, 16, false);
             WriteLiteral("                    <br />\r\n                </div>\r\n            </div>\r\n            <br />\r\n            <div class=\"revealOnScroll\" data-animation=\"rotateInUpLeft\">\r\n            ");
             EndContext();
             BeginContext(6578, 533, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "dcbcc09860c8412d887ba0456c93d697", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3235270edfc24b068609f154529cdf3d", async() => {
                 BeginContext(6584, 385, true);
                 WriteLiteral(@"
                 <h2 class=""""><strong>Add Message</strong></h2>
@@ -503,7 +503,7 @@ WriteAttributeValue("", 1523, Model.AvatarUrl, 1523, 16, false);
                     ");
             EndContext();
             BeginContext(7414, 87, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0035989a52a04840bd5f9ea1d220f90a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4459d029ab5f4de19afe1e0c1e2f466e", async() => {
                 BeginContext(7493, 4, true);
                 WriteLiteral("Home");
                 EndContext();
@@ -663,7 +663,7 @@ WriteAttributeValue("", 1523, Model.AvatarUrl, 1523, 16, false);
     ");
                 EndContext();
                 BeginContext(11520, 62, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e0ceefd5fc404eee88040fca29daaccf", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "039d1bc23136484dbb0e0b3b7f08c7ee", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
