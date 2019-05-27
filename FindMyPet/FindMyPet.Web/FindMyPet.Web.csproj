@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Admin\Models\**" />
+    <Content Remove="Areas\Admin\Models\**" />
+    <EmbeddedResource Remove="Areas\Admin\Models\**" />
+    <None Remove="Areas\Admin\Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="wwwroot\css\animate-library.css" />
     <Content Remove="wwwroot\css\keyframes.css" />
     <Content Remove="wwwroot\css\MyStyles.css" />
@@ -32,10 +39,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FindMyPet.Data\FindMyPet.Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
 
   <ItemGroup>

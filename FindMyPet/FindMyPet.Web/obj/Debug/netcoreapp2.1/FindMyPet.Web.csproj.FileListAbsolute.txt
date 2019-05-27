@@ -140,6 +140,7 @@ C:\Users\Asus\Desktop\FindMyPet\FindMyPet\FindMyPet.Web\obj\Debug\netcoreapp2.1\
 C:\Users\Asus\Desktop\FindMyPet\FindMyPet\FindMyPet.Web\obj\Debug\netcoreapp2.1\FindMyPet.Web.TagHelpers.input.cache
 C:\Users\Asus\Desktop\FindMyPet\FindMyPet\FindMyPet.Web\obj\Debug\netcoreapp2.1\FindMyPet.Web.TagHelpers.output.cache
 C:\Users\Asus\Desktop\FindMyPet\FindMyPet\FindMyPet.Web\obj\Debug\netcoreapp2.1\FindMyPet.Web.RazorCoreGenerate.cache
+C:\Users\Asus\Desktop\FindMyPet\FindMyPet\FindMyPet.Web\obj\Debug\netcoreapp2.1\Razor\Areas\Admin\Pages\PetsPages\AllUsers.g.cshtml.cs
 C:\Users\Asus\Desktop\FindMyPet\FindMyPet\FindMyPet.Web\obj\Debug\netcoreapp2.1\Razor\Areas\Admin\Pages\PetsPages\Create.g.cshtml.cs
 C:\Users\Asus\Desktop\FindMyPet\FindMyPet\FindMyPet.Web\obj\Debug\netcoreapp2.1\Razor\Areas\Admin\Pages\PetsPages\Delete.g.cshtml.cs
 C:\Users\Asus\Desktop\FindMyPet\FindMyPet\FindMyPet.Web\obj\Debug\netcoreapp2.1\Razor\Areas\Admin\Pages\PetsPages\Edit.g.cshtml.cs
@@ -238,4 +239,3 @@ C:\Users\Asus\Desktop\FindMyPet\FindMyPet\FindMyPet.Web\obj\Debug\netcoreapp2.1\
 C:\Users\Asus\Desktop\FindMyPet\FindMyPet\FindMyPet.Web\obj\Debug\netcoreapp2.1\FindMyPet.Web.csproj.CopyComplete
 C:\Users\Asus\Desktop\FindMyPet\FindMyPet\FindMyPet.Web\obj\Debug\netcoreapp2.1\FindMyPet.Web.dll
 C:\Users\Asus\Desktop\FindMyPet\FindMyPet\FindMyPet.Web\obj\Debug\netcoreapp2.1\FindMyPet.Web.pdb
-C:\Users\Asus\Desktop\FindMyPet\FindMyPet\FindMyPet.Web\obj\Debug\netcoreapp2.1\Razor\Areas\Admin\Pages\PetsPages\AllUsers.g.cshtml.cs

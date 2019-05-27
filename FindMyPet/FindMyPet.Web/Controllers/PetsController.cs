@@ -126,7 +126,7 @@ namespace FindMyPet.Web.Controllers
                     page = 2;
                 }
 
-                return new RedirectToActionResult(StaticConstants.All, StaticConstants.Pets, new { @area = StaticConstants.Empty, @page = page });
+                //return new RedirectToActionResult(StaticConstants.All, StaticConstants.Pets, new { @area = StaticConstants.Empty, @page = page });
             }
 
             PaginationViewModel pagination = new PaginationViewModel()

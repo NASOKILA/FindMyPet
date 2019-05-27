@@ -20,15 +20,13 @@ namespace FindMyPet.Web
 {
     public class Startup
     {
-        private const string findMyPetConnection = "FindMyPetConnection";
-
         public IConfiguration Configuration { get; }
 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-        
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
@@ -36,15 +34,15 @@ namespace FindMyPet.Web
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            
+
             services.AddDbContext<FindMyPetDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString(findMyPetConnection)));
-            
+                Configuration.GetConnectionString("FindMyPetConnection")));
+
             services.AddIdentity<User, IdentityRole>()
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<FindMyPetDbContext>();
-            
+
             services
                 .AddAuthentication()
                 .AddFacebook(options =>
@@ -57,40 +55,42 @@ namespace FindMyPet.Web
                     options.ClientId = ExternalLoginIds.GoogleClientId;
                     options.ClientSecret = ExternalLoginIds.GoogleClientSecret;
                 });
-                
+
             services.AddSingleton<IEmailSender, EmailSender>();
-            
-            services.Configure<IdentityOptions>(options => {
+
+            services.Configure<IdentityOptions>(options =>
+            {
                 options.Password.RequireDigit = false;
                 options.Password.RequiredLength = 6;
-                options.Password.RequiredUniqueChars = 1; 
+                options.Password.RequiredUniqueChars = 1;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
-                
+
                 options.Lockout.MaxFailedAccessAttempts = 3;
                 options.Lockout.AllowedForNewUsers = true;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(20);
 
             });
-            
+
             services.AddSession();
-            
+
             services.AddScoped<Stopwatch>();
-            
-            services.AddMvc(options => {
+
+            services.AddMvc(options =>
+            {
                 options.Filters.Add<LogExecutionFIlter>();
             });
-            
+
             services.ConfigureApplicationCookie(options => options.LoginPath = "/Identity/Account/LogIn");
-            
+
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
-        
+
         public void Configure(
-            IApplicationBuilder app, 
+            IApplicationBuilder app,
             IHostingEnvironment env,
             UserManager<User> userManager,
             RoleManager<IdentityRole> roleManager)
@@ -111,7 +111,7 @@ namespace FindMyPet.Web
             app.UseCookiePolicy();
             app.UseSession();
             app.UseAuthentication();
-            app.SeedDatabase(); 
+            app.SeedDatabase();
 
             app.UseMvc(routes =>
             {
